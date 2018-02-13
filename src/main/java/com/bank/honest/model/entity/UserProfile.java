@@ -1,5 +1,6 @@
 package com.bank.honest.model.entity;
 
+import com.bank.honest.model.dto.UserProfileDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,4 +34,20 @@ public class UserProfile {
 
     @Column(name="user_lastname")
     private String lastName;
+
+    public UserProfileDTO toDTO() {
+        return UserProfileDTO.builder()
+                .email(email)
+                .firstName(firstName)
+                .lastName(lastName)
+                .build();
+    }
+
+    public static UserProfile fromDTO(UserProfileDTO dto) {
+        return UserProfile.builder()
+                .email(dto.getEmail())
+                .firstName(dto.getFirstName())
+                .lastName(dto.getLastName())
+                .build();
+    }
 }

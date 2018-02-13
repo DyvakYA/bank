@@ -36,18 +36,21 @@ public class Product {
     @Column(name="description")
     private String description;
 
-    public Product(String name, long buyCourse, long sellCourse, String description) {
-        this.name = name;
-        this.buyCourse = buyCourse;
-        this.sellCourse = sellCourse;
-        this.description = description;
-    }
-
     public ProductDTO toDTO() {
-        return new ProductDTO(name, buyCourse, sellCourse, description);
+        return ProductDTO.builder()
+                .name(name)
+                .buyCourse(buyCourse)
+                .sellCourse(sellCourse)
+                .description(description)
+                .build();
     }
 
     public static Product fromDTO(ProductDTO dto) {
-        return new Product(dto.getName(), dto.getBuyCourse(), dto.getSellCourse(), dto.getDescription());
+        return Product.builder()
+                .name(dto.getName())
+                .buyCourse(dto.getBuyCourse())
+                .sellCourse(dto.getSellCourse())
+                .description(dto.getDescription())
+                .build();
     }
 }

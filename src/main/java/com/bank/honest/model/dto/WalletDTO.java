@@ -8,15 +8,13 @@ import lombok.Setter;
  * Created by User on 2/11/2018.
  */
 
-
 @Getter
 @Setter
 @Builder
-public class ProductDTO {
+public class WalletDTO {
 
     private String name;
-    private long buyCourse;
-    private long sellCourse;
-    private String description;
-
+    private String number;
+    private String expired;
+    private boolean status;
 }

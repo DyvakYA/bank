@@ -43,27 +43,30 @@ public class CustomUser {
     @OneToMany(mappedBy="customUser", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Account> accounts = new ArrayList<>();
 
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="user_profile_id")
+    private UserProfile userProfile;
+
     @PreRemove
     public void nullableContacts(){
         accounts.forEach(c->c.setCustomUser(null));
     }
 
-    @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="user_profile_id")
-    private UserProfile userProfile;
-
-    public CustomUser(String phone, String password, UserRole role, List<Account> accounts) {
-        this.phone = phone;
-        this.password = password;
-        this.role = role;
-        this.accounts = accounts;
-    }
-
     public UserDTO toDTO() {
-        return new UserDTO(phone, password, role, accounts);
+        return UserDTO.builder()
+                .phone(phone)
+                .password(password)
+                .role(role)
+                .accounts(accounts)
+                .build();
     }
 
     public static CustomUser fromDTO(UserDTO dto) {
-        return new CustomUser(dto.getPhone(), dto.getPassword(), dto.getRole(), dto.getAccounts());
+        return CustomUser.builder()
+                .phone(dto.getPhone())
+                .password(dto.getPassword())
+                .role(dto.getRole())
+                .accounts(dto.getAccounts())
+                .build();
     }
 }

@@ -4,6 +4,8 @@ import com.bank.honest.model.dto.AccountDTO;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by User on 2/10/2018.
@@ -30,21 +32,32 @@ public class Account {
     @Column(name="user_account_amount")
     private long amount;
 
+    @Column(name="user_account_currency")
+    private Currency currency;
+
     @ManyToOne
     @JoinColumn(name="user_id")
     private CustomUser customUser;
 
-    public Account(String accountNumber, long amount, CustomUser customUser) {
-        this.number = accountNumber;
-        this.amount = amount;
-        this.customUser = customUser;
-    }
+    @OneToMany(mappedBy="account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Transaction> transactions = new ArrayList<>();
+
+    @OneToMany(mappedBy="account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Wallet> wallet = new ArrayList<>();
 
     public AccountDTO toDTO() {
-        return new AccountDTO(number, amount, null);
+        return AccountDTO.builder()
+                .number(number)
+                .amount(amount)
+                .customUser(null)
+                .build();
     }
 
     public static Account fromDTO(AccountDTO dto) {
-        return new Account(dto.getAccountNumber(), dto.getAmount(), dto.getCustomUser());
+        return Account.builder()
+                .number(dto.getNumber())
+                .amount(dto.getAmount())
+                .customUser(dto.getCustomUser())
+                .build();
     }
 }

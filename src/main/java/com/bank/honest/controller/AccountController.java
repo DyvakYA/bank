@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static com.bank.honest.controller.BaseController.ITEMS_PER_PAGE;
-
 /**
  * Created by User on 2/11/2018.
  */
 @RestController
 public class AccountController {
+
+    final int DEFAULT_GROUP_ID = -1;
+    final int ITEMS_PER_PAGE = 6;
 
     @Autowired
     protected AccountService accountService;
@@ -30,7 +31,7 @@ public class AccountController {
         return result;
     }
 
-    @RequestMapping("/account/{id}")
+    @RequestMapping("/accounts/{id}")
     public AccountDTO accountById(
             @PathVariable(value = "id") long productId) {
         AccountDTO result = accountService.findAccount(productId);
@@ -43,6 +44,4 @@ public class AccountController {
         List<AccountDTO> result = accountService.findAccount(name);
         return result;
     }
-
-
 }

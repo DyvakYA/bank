@@ -1,7 +1,7 @@
 package com.bank.honest.model.dto;
 
 import com.bank.honest.model.entity.CustomUser;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,19 +11,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@JsonSerialize(include= JsonSerialize.Inclusion.NON_NULL)
+@Builder
 public class AccountDTO {
 
-    private String accountNumber;
+    private String number;
     private long amount;
     private CustomUser customUser;
 
-    public AccountDTO() {
-    }
-
-    public AccountDTO(String accountNumber, long amount, CustomUser customUser) {
-        this.accountNumber = accountNumber;
-        this.amount = amount;
-        this.customUser = customUser;
-    }
 }

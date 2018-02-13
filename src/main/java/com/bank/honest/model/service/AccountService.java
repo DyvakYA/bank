@@ -1,8 +1,11 @@
 package com.bank.honest.model.service;
 
+import com.bank.honest.model.dao.AccountRepository;
+import com.bank.honest.model.dao.UserRepository;
 import com.bank.honest.model.dto.AccountDTO;
 import com.bank.honest.model.entity.Account;
 import com.bank.honest.model.entity.CustomUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AccountService extends BaseService {
+public class AccountService {
+
+    @Autowired
+    AccountRepository accountRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Transactional(readOnly = true)
     public AccountDTO findAccount(long accountId) {
@@ -28,6 +37,11 @@ public class AccountService extends BaseService {
             result.add(account.toDTO());
         }
         return result;
+    }
+
+    @Transactional
+    public void createAccount(Account account) {
+        accountRepository.save(account);
     }
 
     @Transactional
@@ -53,6 +67,11 @@ public class AccountService extends BaseService {
             result.add(account.toDTO());
         return result;
     }
+
+//    @Transactional(readOnly = true)
+//    public long countByUser(User user) {
+//        return accountRepository.countByUser(user);
+//    }
 
 //    @Transactional
 //    public void addContact(Contact contact) {

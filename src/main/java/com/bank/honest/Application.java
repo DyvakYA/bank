@@ -1,5 +1,6 @@
 package com.bank.honest;
 
+import com.bank.honest.model.entity.Account;
 import com.bank.honest.model.entity.UserRole;
 import com.bank.honest.model.service.AccountService;
 import com.bank.honest.model.service.ProductService;
@@ -28,13 +29,19 @@ public class Application {
                 userService.addUser("0938412040", "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8", UserRole.ADMIN);
                 userService.addUser("user", "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8", UserRole.USER);
 
-                accountService.addAccount("228", 100500, userService.findByPhone("0938412040"));
-                accountService.addAccount("666", 1, userService.findByPhone("user"));
-
                 productService.addProduct("USD", 1000, 1200, "");
                 productService.addProduct("EUR", 1200, 1600, "");
                 productService.addProduct("RUB", 2, 3, "");
                 productService.addProduct("Bitcoin", 100500, 100501, "");
+
+                for (int i = 0; i < 10; i++) {
+                    Account account = Account.builder()
+                            .number("number" + i)
+                            .amount(100500 + i)
+                            .customUser(userService.findByPhone("0938412040"))
+                            .build();
+                    accountService.createAccount(account);
+                }
             }
         };
     }

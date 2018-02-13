@@ -15,20 +15,10 @@ import java.util.List;
  * Created by User on 2/11/2018.
  */
 @Service
-public class ProductService extends BaseService {
+public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
-
-
-    public List<ProductDTO> findAll(Pageable pageable) {
-        List<Product> products = productRepository.findAll(pageable).getContent();
-        List<ProductDTO> result = new ArrayList<>();
-        for (Product product : products) {
-            result.add(product.toDTO());
-        }
-        return result;
-    }
 
     @Transactional
     public boolean addProduct(String name, long buyCourse, long sellCourse, String description) {
@@ -46,9 +36,24 @@ public class ProductService extends BaseService {
         return true;
     }
 
+    public List<ProductDTO> findAll(Pageable pageable) {
+        List<Product> products = productRepository.findAll(pageable).getContent();
+        List<ProductDTO> result = new ArrayList<>();
+        for (Product product : products) {
+            result.add(product.toDTO());
+        }
+        return result;
+    }
+
     @Transactional(readOnly = true)
     public ProductDTO findProduct(long productId) {
         Product product = productRepository.findOne(productId);
+        ProductDTO result = product.toDTO();
+        return result;
+    }
+
+    public ProductDTO findProducts(String name) {
+        Product product = productRepository.findByName(name);
         ProductDTO result = product.toDTO();
         return result;
     }
