@@ -24,9 +24,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
-        CustomUser customUser = userService.findByPhone(phone);
+        CustomUser customUser = userService.findUser(phone);
         if (customUser == null) {
-            System.out.println("11111");
             throw new UsernameNotFoundException(phone + " not found");
         }
         System.out.println("22222");

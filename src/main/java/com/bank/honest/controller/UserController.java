@@ -38,8 +38,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
-    public UserDTO accountById(
-            @PathVariable(value = "id") long userId) {
+    public UserDTO userById(
+            @PathVariable(value = "id") Long userId) {
         UserDTO result = userService.findUser(userId);
         return result;
     }
@@ -51,8 +51,6 @@ public class UserController {
                                            @RequestParam String email,
                                            @RequestParam String firstName,
                                            @RequestParam String lastName) {
-
-        //Group group = (groupId != DEFAULT_GROUP_ID) ? groupService.findGroup(groupId) : null;
 
         UserRole userRole = (role != UserRole.ADMIN.toString()) ? UserRole.USER : UserRole.ADMIN;
 
@@ -72,11 +70,16 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/contact/delete", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteUser(@RequestParam(value = "toDeleteUser[]", required = false) long[] toDelete) {
-        if (toDelete != null && toDelete.length > 0)
-            userService.deleteUsers(toDelete);
+    @RequestMapping(value = "/users/{id[]}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteUsers(@RequestParam(value = "id[]", required = false) Long[] ids) {
+        if (ids != null && ids.length > 0)
+            userService.deleteUsers(ids);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteUser(@RequestParam(value = "id", required = false) Long id) {
+        userService.deleteUsers(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -87,8 +90,6 @@ public class UserController {
                                            @RequestParam String email,
                                            @RequestParam String firstName,
                                            @RequestParam String lastName) {
-
-        //Group group = (groupId != DEFAULT_GROUP_ID) ? groupService.findGroup(groupId) : null;
 
         UserRole userRole = (role != UserRole.ADMIN.toString()) ? UserRole.USER : UserRole.ADMIN;
 
@@ -106,6 +107,13 @@ public class UserController {
                 .build();
         userProfileService.addUserProfile(userProfile);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/users/phone/{phone}", method = RequestMethod.GET)
+    public UserDTO userByPhone(
+            @PathVariable(value = "phone") String phone) {
+        UserDTO result = userService.findByPhone(phone);
+        return result;
     }
 
     protected long getPageCount() {

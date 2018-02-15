@@ -26,25 +26,6 @@ public class UserService {
         userRepository.save(customUser);
     }
 
-    @Transactional(readOnly = true)
-    public List<CustomUser> findAll() {
-        return userRepository.findAll();
-    }
-
-    public List<UserDTO> findAll(Pageable pageable) {
-        List<CustomUser> customUsers = userRepository.findAll(pageable).getContent();
-        List<UserDTO> result = new ArrayList<>();
-        for (CustomUser customUser : customUsers) {
-            result.add(customUser.toDTO());
-        }
-        return result;
-    }
-
-    @Transactional(readOnly = true)
-    public CustomUser findByPhone(String phone) {
-        return userRepository.findByPhone(phone);
-    }
-
     @Transactional
     public boolean addUser(String phone, String passHash, UserRole role) {
         if (userRepository.existsByPhone(phone))
@@ -60,7 +41,33 @@ public class UserService {
         return true;
     }
 
-    public UserDTO findUser(long userId) {
+    @Transactional(readOnly = true)
+    public CustomUser findUser(String phone) {
+        return userRepository.findByPhone(phone);
+    }
+
+    @Transactional(readOnly = true)
+    public UserDTO findByPhone(String phone) {
+        CustomUser user = userRepository.findByPhone(phone);
+        UserDTO result = user.toDTO();
+        return result;
+    }
+
+    @Transactional(readOnly = true)
+    public List<CustomUser> findAll() {
+        return userRepository.findAll();
+    }
+
+    public List<UserDTO> findAll(Pageable pageable) {
+        List<CustomUser> customUsers = userRepository.findAll(pageable).getContent();
+        List<UserDTO> result = new ArrayList<>();
+        for (CustomUser customUser : customUsers) {
+            result.add(customUser.toDTO());
+        }
+        return result;
+    }
+
+    public UserDTO findUser(Long userId) {
         CustomUser user = userRepository.findOne(userId);
         UserDTO result = user.toDTO();
         return result;
@@ -71,9 +78,13 @@ public class UserService {
         return userRepository.count();
     }
 
-    public void deleteUsers(long[] toDelete) {
+    public void deleteUsers(Long[] toDelete) {
         for (long id : toDelete)
             userRepository.delete(id);
+    }
+
+    public void deleteUsers(Long id) {
+        userRepository.delete(id);
     }
 
     //    @Transactional

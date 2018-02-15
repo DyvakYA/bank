@@ -38,7 +38,7 @@ public class Application {
                     Account account = Account.builder()
                             .number("number" + i)
                             .amount(100500 + i)
-                            .customUser(userService.findByPhone("0938412040"))
+                            .customUser(userService.findUser("0938412040"))
                             .build();
                     accountService.createAccount(account);
                 }

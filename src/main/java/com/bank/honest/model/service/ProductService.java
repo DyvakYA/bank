@@ -21,6 +21,11 @@ public class ProductService {
     private ProductRepository productRepository;
 
     @Transactional
+    public void addProduct(Product product) {
+        productRepository.save(product);
+    }
+
+    @Transactional
     public boolean addProduct(String name, long buyCourse, long sellCourse, String description) {
         if (productRepository.existsByName(name))
             return false;
@@ -46,15 +51,26 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public ProductDTO findProduct(long productId) {
+    public ProductDTO findProduct(Long productId) {
         Product product = productRepository.findOne(productId);
         ProductDTO result = product.toDTO();
         return result;
     }
 
-    public ProductDTO findProducts(String name) {
+    public ProductDTO findProduct(String name) {
         Product product = productRepository.findByName(name);
         ProductDTO result = product.toDTO();
         return result;
     }
+
+
+    public void deleteProducts(Long id) {
+        productRepository.delete(id);
+    }
+
+    public void deleteProducts(Long[] toDelete) {
+        for (long id : toDelete)
+            productRepository.delete(id);
+    }
+
 }
