@@ -17,4 +17,12 @@ public class UserProfileService {
     public void addUserProfile(UserProfile userProfile) {
         userProfileRepository.save(userProfile);
     }
+
+    public UserProfile findUserProfile(long id) {
+        return userProfileRepository.findOne(id);
+    }
+
+
+
+
 }

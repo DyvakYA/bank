@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by User on 2/10/2018.
@@ -57,7 +58,10 @@ public class CustomUser {
                 .phone(phone)
                 .password(password)
                 .role(role)
-                .accounts(accounts)
+                .accounts(accounts
+                        .stream()
+                        .map(p->p.getNumber())
+                        .collect(Collectors.toList()))
                 .build();
     }
 
@@ -66,7 +70,7 @@ public class CustomUser {
                 .phone(dto.getPhone())
                 .password(dto.getPassword())
                 .role(dto.getRole())
-                .accounts(dto.getAccounts())
+                //.accounts(dto.getAccounts().stream().map(p->accounts.))
                 .build();
     }
 }

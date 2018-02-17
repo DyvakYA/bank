@@ -57,8 +57,8 @@ public class ProductService {
         return result;
     }
 
-    public ProductDTO findProduct(String name) {
-        Product product = productRepository.findByName(name);
+    public ProductDTO findProduct(String phone) {
+        Product product = productRepository.findByName(phone);
         ProductDTO result = product.toDTO();
         return result;
     }
@@ -72,5 +72,4 @@ public class ProductService {
         for (long id : toDelete)
             productRepository.delete(id);
     }
-
 }

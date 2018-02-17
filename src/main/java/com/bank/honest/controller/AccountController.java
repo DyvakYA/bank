@@ -18,7 +18,6 @@ import java.util.List;
 @RestController
 public class AccountController {
 
-    final int DEFAULT_GROUP_ID = -1;
     final int ITEMS_PER_PAGE = 6;
 
     @Autowired
@@ -32,16 +31,15 @@ public class AccountController {
     }
 
     @RequestMapping("/accounts/{id}")
-    public AccountDTO accountById(
-            @PathVariable(value = "id") long productId) {
-        AccountDTO result = accountService.findAccount(productId);
+    public AccountDTO accountById(@PathVariable(value = "id") long productId) {
+        AccountDTO result = accountService.findByPattern(productId);
         return result;
     }
 
-    @RequestMapping("/accounts/{name}")
-    public List<AccountDTO> accountByName(
-            @PathVariable(value = "name") String name) {
-        List<AccountDTO> result = accountService.findAccount(name);
+    @RequestMapping("/accounts/search/{pattern}")
+    public List<AccountDTO> accountByPattern(@PathVariable(value = "pattern") String pattern, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<AccountDTO> result = accountService.findByPattern(pattern, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         return result;
     }
 }

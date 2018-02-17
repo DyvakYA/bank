@@ -23,7 +23,7 @@ public class AccountService {
     UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public AccountDTO findAccount(long accountId) {
+    public AccountDTO findByPattern(long accountId) {
         Account account = accountRepository.findOne(accountId);
         AccountDTO result = account.toDTO();
         return result;
@@ -59,11 +59,19 @@ public class AccountService {
     }
 
     @Transactional(readOnly = true)
-    public List<AccountDTO> findAccount(String phone) {
+    public List<AccountDTO> findUserAccounts(String phone) {
         CustomUser user = userRepository.findByPhone(phone);
         List<Account> accounts = user.getAccounts();
         List<AccountDTO> result = new ArrayList<>();
-        for(Account account: accounts)
+        for (Account account : accounts)
+            result.add(account.toDTO());
+        return result;
+    }
+
+    public List<AccountDTO> findByPattern(String pattern, Pageable pageable) {
+        List<AccountDTO> result = new ArrayList<>();
+        List<Account> accounts = accountRepository.findByPattern(pattern, pageable);
+        for (Account account : accounts)
             result.add(account.toDTO());
         return result;
     }
