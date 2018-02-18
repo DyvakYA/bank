@@ -21,7 +21,7 @@ public class ProductService {
     private ProductRepository productRepository;
 
     @Transactional
-    public void addProduct(Product product) {
+    public void createProduct(Product product) {
         productRepository.save(product);
     }
 

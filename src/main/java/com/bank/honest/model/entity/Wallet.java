@@ -33,7 +33,7 @@ public class Wallet {
     private String expired;
 
     @Column(name = "user_wallet_status")
-    private boolean status;
+    private WalletStatus status;
     @ManyToOne
     @JoinColumn(name="account_id")
     private Account account;
@@ -52,7 +52,7 @@ public class Wallet {
                 .name(dto.getName())
                 .number(dto.getNumber())
                 .expired(dto.getExpired())
-                .status(dto.isStatus())
+                .status(dto.getStatus())
                 .build();
     }
 }
