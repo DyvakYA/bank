@@ -15,7 +15,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 //    @Query("SELECT COUNT(c) FROM Account c WHERE c.user = :user")
 //    long countByUser(@Param("user") CustomUser customUser);
 
-    @Query("SELECT c FROM Account c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :pattern, '%'))")
+    @Query("SELECT c FROM Account c WHERE LOWER(c.number) LIKE LOWER(CONCAT('%', :pattern, '%'))")
     List<Account> findByPattern(@Param("pattern") String pattern, Pageable pageable);
 
     @Query("SELECT CASE WHEN COUNT(u) > 0 THEN true ELSE false END FROM Account u WHERE u.number = :number")

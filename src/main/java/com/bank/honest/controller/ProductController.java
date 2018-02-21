@@ -37,10 +37,10 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/products", method = RequestMethod.POST)
-    public ResponseEntity<Void> createProduct(@RequestParam String name,
-                                              @RequestParam Long buyCourse,
-                                              @RequestParam Long sellCourse,
-                                              @RequestParam String description) {
+    public ResponseEntity<Void> create(@RequestParam String name,
+                                       @RequestParam Long buyCourse,
+                                       @RequestParam Long sellCourse,
+                                       @RequestParam String description) {
 
         Product product = Product.builder()
                 .name(name)
@@ -53,22 +53,22 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteProduct(@RequestParam(value = "id", required = false) Long id) {
+    public ResponseEntity<Void> delete(@RequestParam(value = "id", required = false) Long id) {
         productService.deleteProducts(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/products/{id[]}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteProduct(@RequestParam(value = "id[]", required = false) Long[] ids) {
+    public ResponseEntity<Void> delete(@RequestParam(value = "id[]", required = false) Long[] ids) {
         productService.deleteProducts(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/products", method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateProduct(@RequestParam String name,
-                                           @RequestParam Long buyCourse,
-                                           @RequestParam Long sellCourse,
-                                           @RequestParam String description) {
+    public ResponseEntity<Void> update(@RequestParam String name,
+                                       @RequestParam Long buyCourse,
+                                       @RequestParam Long sellCourse,
+                                       @RequestParam String description) {
 
         Product product = Product.builder()
                 .name(name)

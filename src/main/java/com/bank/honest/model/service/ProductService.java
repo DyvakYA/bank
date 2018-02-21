@@ -41,6 +41,7 @@ public class ProductService {
         return true;
     }
 
+    @Transactional
     public List<ProductDTO> findAll(Pageable pageable) {
         List<Product> products = productRepository.findAll(pageable).getContent();
         List<ProductDTO> result = new ArrayList<>();
@@ -63,11 +64,12 @@ public class ProductService {
         return result;
     }
 
-
+    @Transactional
     public void deleteProducts(Long id) {
         productRepository.delete(id);
     }
 
+    @Transactional
     public void deleteProducts(Long[] toDelete) {
         for (long id : toDelete)
             productRepository.delete(id);

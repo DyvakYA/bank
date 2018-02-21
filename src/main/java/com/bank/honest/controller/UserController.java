@@ -21,7 +21,6 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    final int DEFAULT_GROUP_ID = -1;
     final int ITEMS_PER_PAGE = 6;
 
     @Autowired
@@ -38,19 +37,18 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
-    public UserDTO userById(
-            @PathVariable(value = "id") Long userId) {
+    public UserDTO user(@PathVariable(value = "id") Long userId) {
         UserDTO result = userService.findUser(userId);
         return result;
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public ResponseEntity<Void> userCreate(@RequestParam String phone,
-                                           @RequestParam String password,
-                                           @RequestParam String role,
-                                           @RequestParam String email,
-                                           @RequestParam String firstName,
-                                           @RequestParam String lastName) {
+    public ResponseEntity<Void> create(@RequestParam String phone,
+                                       @RequestParam String password,
+                                       @RequestParam String role,
+                                       @RequestParam String email,
+                                       @RequestParam String firstName,
+                                       @RequestParam String lastName) {
 
         UserRole userRole = (role != UserRole.ADMIN.toString()) ? UserRole.USER : UserRole.ADMIN;
 
@@ -70,16 +68,16 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/users/{id[]}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteUsers(@RequestParam(value = "id[]", required = false) Long[] ids) {
-        if (ids != null && ids.length > 0)
-            userService.deleteUsers(ids);
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@RequestParam(value = "id", required = false) Long id) {
+        userService.deleteUsers(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteUser(@RequestParam(value = "id", required = false) Long id) {
-        userService.deleteUsers(id);
+    @RequestMapping(value = "/users/{id[]}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@RequestParam(value = "id[]", required = false) Long[] ids) {
+        if (ids != null && ids.length > 0)
+            userService.deleteUsers(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

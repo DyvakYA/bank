@@ -28,7 +28,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (customUser == null) {
             throw new UsernameNotFoundException(phone + " not found");
         }
-        System.out.println("22222");
         Set<GrantedAuthority> roles = new HashSet<>();
         roles.add(new SimpleGrantedAuthority(customUser.getRole().toString()));
 

@@ -1,15 +1,16 @@
 package com.bank.honest;
 
-import com.bank.honest.model.entity.Account;
-import com.bank.honest.model.entity.UserRole;
+import com.bank.honest.model.entity.*;
 import com.bank.honest.model.service.AccountService;
 import com.bank.honest.model.service.ProductService;
+import com.bank.honest.model.service.TransactionService;
 import com.bank.honest.model.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Date;
 import java.util.TimeZone;
 
 @SpringBootApplication
@@ -22,6 +23,7 @@ public class Application {
     @Bean
     public CommandLineRunner demo(final UserService userService,
                                   final ProductService productService,
+                                  final TransactionService transactionService,
                                   final AccountService accountService) {
         return new CommandLineRunner() {
             @Override
@@ -42,6 +44,27 @@ public class Application {
                             .build();
                     accountService.createAccount(account);
                 }
+
+                Account account = Account.builder()
+                        .number("Special Account")
+                        .amount(1012)
+                        .customUser(userService.findUser("user"))
+                        .build();
+                accountService.createAccount(account);
+
+                for(int i = 0; i < 10; i ++){
+                    Transaction transaction = Transaction.builder()
+                            .number("1215G-" + (1*12))
+                            .date(new Date())
+                            .currency(Currency.BITCOIN)
+                            .account(account)
+                            .amount(12000)
+                            .status(TransactionStatus.GOOD)
+                            .type(TransactionType.SEND)
+                            .build();
+                    transactionService.createTransaction(transaction);
+                }
+
             }
         };
     }

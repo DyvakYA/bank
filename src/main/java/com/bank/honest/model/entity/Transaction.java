@@ -29,7 +29,10 @@ public class Transaction {
     private Date date = new Date();
 
     @Column(name = "account_transaction_status")
-    private boolean status;
+    private TransactionStatus status;
+
+    @Column(name="account_transaction_number")
+    private String number;
 
     @Column(name = "account_transaction_type")
     private TransactionType type;
@@ -57,7 +60,7 @@ public class Transaction {
     public static Transaction fromDTO(TransactionDTO dto) {
         return Transaction.builder()
                 .date(dto.getDate())
-                .status(dto.isStatus())
+                .status(dto.getStatus())
                 .type(dto.getType())
                 .amount(dto.getAmount())
                 .currency(dto.getCurrency())

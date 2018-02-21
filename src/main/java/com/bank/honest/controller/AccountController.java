@@ -42,10 +42,10 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/accounts", method = RequestMethod.POST)
-    public ResponseEntity<Void> createAccount(@RequestParam String number,
-                                              @RequestParam Long amount,
-                                              @RequestParam String currency,
-                                              @RequestParam String user_id) {
+    public ResponseEntity<Void> create(@RequestParam String number,
+                                       @RequestParam Long amount,
+                                       @RequestParam String currency,
+                                       @RequestParam String user_id) {
 
         Account account = Account.builder()
                 .number(number)
@@ -57,23 +57,23 @@ public class AccountController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteProduct(@RequestParam(value = "id", required = false) Long id) {
+    @RequestMapping(value = "/accounts/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@RequestParam(value = "id", required = false) Long id) {
         accountService.deleteAccount(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/products/{id[]}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteAcounts(@RequestParam(value = "id[]", required = false) Long[] ids) {
+    @RequestMapping(value = "/accounts/{id[]}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@RequestParam(value = "id[]", required = false) Long[] ids) {
         accountService.deleteAccount(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/accounts", method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateAccount(@RequestParam String number,
-                                              @RequestParam Long amount,
-                                              @RequestParam String currency,
-                                              @RequestParam String user_id) {
+    public ResponseEntity<Void> update(@RequestParam String number,
+                                       @RequestParam Long amount,
+                                       @RequestParam String currency,
+                                       @RequestParam String user_id) {
 
         Account account = Account.builder()
                 .number(number)

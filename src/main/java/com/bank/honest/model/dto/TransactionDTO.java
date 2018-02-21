@@ -1,6 +1,7 @@
 package com.bank.honest.model.dto;
 
 import com.bank.honest.model.entity.Currency;
+import com.bank.honest.model.entity.TransactionStatus;
 import com.bank.honest.model.entity.TransactionType;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,7 +19,7 @@ import java.util.Date;
 public class TransactionDTO {
 
     private Date date;
-    private boolean status;
+    private TransactionStatus status;
     private TransactionType type;
     private long amount;
     private Currency currency;

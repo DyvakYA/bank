@@ -52,9 +52,11 @@ public class WalletService {
         return null;
     }
 
-    public WalletDTO findWallet(String pattern) {
-        Wallet wallet = walletRepository.findByPattern(pattern);
-        WalletDTO result = wallet.toDTO();
+    public List<WalletDTO> findWallet(String pattern, Pageable pageable) {
+        List<WalletDTO> result = new ArrayList<>();
+        List<Wallet> wallets = walletRepository.findByPattern(pattern, pageable);
+        for (Wallet wallet : wallets)
+            result.add(wallet.toDTO());
         return result;
     }
 }

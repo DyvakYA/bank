@@ -19,7 +19,7 @@ public class UserProfileController {
     UserProfileService userProfileService;
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public UserProfileDTO getProfile(@RequestParam("id") long id){
+    public UserProfileDTO profile(@RequestParam("id") long id){
         UserProfile profile = userProfileService.findUserProfile(id);
         UserProfileDTO result = profile.toDTO();
         return result;

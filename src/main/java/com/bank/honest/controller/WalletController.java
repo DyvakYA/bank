@@ -32,16 +32,16 @@ public class WalletController {
     }
 
     @RequestMapping(value = "/wallets/{id}", method = RequestMethod.GET)
-    public WalletDTO product(@PathVariable(value = "id") long wallet_id) {
+    public WalletDTO wallet(@PathVariable(value = "id") long wallet_id) {
         WalletDTO result = walletService.findWallet(wallet_id);
         return result;
     }
 
     @RequestMapping(value = "/wallets", method = RequestMethod.POST)
-    public ResponseEntity<Void> createWallet(@RequestParam String name,
-                                              @RequestParam String number,
-                                              @RequestParam String expired,
-                                              @RequestParam WalletStatus status) {
+    public ResponseEntity<Void> create(@RequestParam String name,
+                                       @RequestParam String number,
+                                       @RequestParam String expired,
+                                       @RequestParam WalletStatus status) {
 
         Wallet wallet = Wallet.builder()
                 .name(name)
@@ -54,22 +54,22 @@ public class WalletController {
     }
 
     @RequestMapping(value = "/wallets/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteWallet(@RequestParam(value = "id", required = false) Long id) {
+    public ResponseEntity<Void> delete(@RequestParam(value = "id", required = false) Long id) {
         walletService.deleteWallet(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/wallets/{id[]}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteWallet(@RequestParam(value = "id[]", required = false) Long[] ids) {
+    public ResponseEntity<Void> delete(@RequestParam(value = "id[]", required = false) Long[] ids) {
         walletService.deleteWallets(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/wallets", method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateWallet(@RequestParam String name,
-                                              @RequestParam String number,
-                                              @RequestParam String expired,
-                                              @RequestParam String status) {
+    public ResponseEntity<Void> update(@RequestParam String name,
+                                       @RequestParam String number,
+                                       @RequestParam String expired,
+                                       @RequestParam String status) {
 
         Wallet wallet = Wallet.builder()
                 .name(name)
@@ -82,8 +82,9 @@ public class WalletController {
     }
 
     @RequestMapping(value = "/wallets/search/{pattern}", method = RequestMethod.GET)
-    public WalletDTO walletByPattern(@PathVariable(value = "pattern") String pattern) {
-        WalletDTO result = walletService.findWallet(pattern);
+    public List<WalletDTO> walletByPattern(@PathVariable(value = "pattern") String pattern, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<WalletDTO> result = walletService.findWallet(pattern, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         return result;
     }
 
