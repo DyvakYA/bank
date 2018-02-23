@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * Created by User on 2/10/2018.
  */
 @Entity
-@Table(name = "user")
+@Table(name = "custom_user")
 @Builder
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @ToString(exclude = "id")
 public class CustomUser {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
     @Column(name="user_phone")

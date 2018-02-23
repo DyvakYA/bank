@@ -20,7 +20,7 @@ import javax.persistence.*;
 public class Wallet {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
     @Column(name = "user_wallet_name")

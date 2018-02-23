@@ -22,7 +22,7 @@ import javax.validation.constraints.Email;
 public class UserProfile {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
     @Column(name="user_email")

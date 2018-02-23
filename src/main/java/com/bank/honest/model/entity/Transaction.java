@@ -21,7 +21,7 @@ import java.util.Date;
 public class Transaction {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
     @Column(name = "account_transaction_date", insertable = false, updatable = false)

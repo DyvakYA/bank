@@ -23,8 +23,8 @@ import java.util.List;
 public class Account {
 
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Long id;
 
     @Column(name="user_account_number")
     private String number;
