@@ -32,7 +32,7 @@ public class WalletController {
     }
 
     @RequestMapping(value = "/wallets/{id}", method = RequestMethod.GET)
-    public WalletDTO wallet(@PathVariable(value = "id") long wallet_id) {
+    public WalletDTO wallet(@PathVariable(value = "id") Long wallet_id) {
         WalletDTO result = walletService.findWallet(wallet_id);
         return result;
     }
@@ -66,12 +66,14 @@ public class WalletController {
     }
 
     @RequestMapping(value = "/wallets", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestParam String name,
+    public ResponseEntity<Void> update(@RequestParam Long id,
+                                       @RequestParam String name,
                                        @RequestParam String number,
                                        @RequestParam String expired,
                                        @RequestParam String status) {
 
         Wallet wallet = Wallet.builder()
+                .id(id)
                 .name(name)
                 .number(number)
                 .expired(expired)
@@ -81,10 +83,10 @@ public class WalletController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/wallets/search/{pattern}", method = RequestMethod.GET)
-    public List<WalletDTO> walletByPattern(@PathVariable(value = "pattern") String pattern, @RequestParam(required = false, defaultValue = "0") Integer page) {
+    @RequestMapping(value = "/wallets/search/{account_number}", method = RequestMethod.GET)
+    public List<WalletDTO> walletByPattern(@PathVariable(value = "account_number") String account_number, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
-        List<WalletDTO> result = walletService.findWallet(pattern, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        List<WalletDTO> result = walletService.findWallet(account_number, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         return result;
     }
 

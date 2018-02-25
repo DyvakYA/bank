@@ -14,6 +14,6 @@ import java.util.List;
 @Repository
 public interface WalletRepository extends JpaRepository<Wallet, Long>{
 
-    @Query("SELECT c FROM Wallet c WHERE LOWER(c.number) LIKE LOWER(CONCAT('%', :pattern, '%'))")
-    List<Wallet> findByPattern(String pattern, Pageable pageable);
+    @Query("SELECT * FROM Wallet w INNER JOIN Account a ON a.id=w.account_id WHERE a.number=:number")
+    List<Wallet> findByPattern(String number, Pageable pageable);
 }

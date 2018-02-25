@@ -52,9 +52,9 @@ public class WalletService {
         return result;
     }
 
-    public List<WalletDTO> findWallet(String pattern, Pageable pageable) {
+    public List<WalletDTO> findWallet(String account_number, Pageable pageable) {
         List<WalletDTO> result = new ArrayList<>();
-        List<Wallet> wallets = walletRepository.findByPattern(pattern, pageable);
+        List<Wallet> wallets = walletRepository.findByPattern(account_number, pageable);
         for (Wallet wallet : wallets)
             result.add(wallet.toDTO());
         return result;
