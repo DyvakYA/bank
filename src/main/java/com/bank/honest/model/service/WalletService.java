@@ -49,7 +49,7 @@ public class WalletService {
         List<Wallet> wallets = walletRepository.findAll(pageable).getContent();
         for (Wallet wallet : wallets)
             result.add(wallet.toDTO());
-        return null;
+        return result;
     }
 
     public List<WalletDTO> findWallet(String pattern, Pageable pageable) {
