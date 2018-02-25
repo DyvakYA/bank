@@ -64,9 +64,6 @@ public class Application {
                         .build();
                 accountService.createAccount(account);
 
-
-
-
                 for(int i = 0; i < 10; i ++){
                     Transaction transaction = Transaction.builder()
                             .number("1215G-" + (1*12))
