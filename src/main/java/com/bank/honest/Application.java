@@ -1,16 +1,14 @@
 package com.bank.honest;
 
 import com.bank.honest.model.entity.*;
-import com.bank.honest.model.service.AccountService;
-import com.bank.honest.model.service.ProductService;
-import com.bank.honest.model.service.TransactionService;
-import com.bank.honest.model.service.UserService;
+import com.bank.honest.model.service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 @SpringBootApplication
@@ -24,7 +22,8 @@ public class Application {
     public CommandLineRunner demo(final UserService userService,
                                   final ProductService productService,
                                   final TransactionService transactionService,
-                                  final AccountService accountService) {
+                                  final AccountService accountService,
+                                  final WalletService walletService) {
         return new CommandLineRunner() {
             @Override
             public void run(String... strings) throws Exception {
@@ -45,12 +44,28 @@ public class Application {
                     accountService.createAccount(account);
                 }
 
+                List<Account> list = accountService.findAll();
+                for(Account account: list){
+                    Wallet wallet = Wallet.builder()
+                            .number("1234567890"+list.indexOf(account))
+                            .status(WalletStatus.TRUE)
+                            .account(account)
+                            .expired("2050")
+                            .name("myCard" + list.indexOf(account))
+                            .build();
+                    walletService.createWallet(wallet);
+                }
+
+
                 Account account = Account.builder()
                         .number("Special Account")
                         .amount(1012)
                         .customUser(userService.findUser("user"))
                         .build();
                 accountService.createAccount(account);
+
+
+
 
                 for(int i = 0; i < 10; i ++){
                     Transaction transaction = Transaction.builder()
@@ -64,6 +79,10 @@ public class Application {
                             .build();
                     transactionService.createTransaction(transaction);
                 }
+
+
+
+
 
             }
         };
