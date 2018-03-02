@@ -1,5 +1,6 @@
 package com.bank.honest.model.dto;
 
+import com.bank.honest.model.entity.Account;
 import com.bank.honest.model.entity.WalletStatus;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,4 +19,5 @@ public class WalletDTO {
     private String number;
     private String expired;
     private WalletStatus status;
+    private Account account;
 }

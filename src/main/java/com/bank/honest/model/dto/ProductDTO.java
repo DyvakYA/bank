@@ -1,5 +1,6 @@
 package com.bank.honest.model.dto;
 
+import com.bank.honest.model.entity.Currency;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,7 @@ import lombok.Setter;
 @Builder
 public class ProductDTO {
 
-    private String name;
+    private Currency currency;
     private long buyCourse;
     private long sellCourse;
     private String description;

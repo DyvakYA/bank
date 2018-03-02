@@ -1,10 +1,14 @@
 package com.bank.honest.model.entity;
 
 import com.bank.honest.model.dto.TransactionDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+
 
 /**
  * Created by User on 2/12/2018.
@@ -18,15 +22,18 @@ import java.util.Date;
 @Getter
 @EqualsAndHashCode
 @ToString(exclude = "id")
+@JsonIgnoreProperties({"account"})
 public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
-    @Column(name = "account_transaction_date", insertable = false, updatable = false)
-    @Temporal(TemporalType.DATE)
-    private Date date = new Date();
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
+    @Column(name = "DATETIME_FIELD", updatable = false)
+    private Date date;
 
     @Column(name = "account_transaction_status")
     private TransactionStatus status;

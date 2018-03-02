@@ -25,7 +25,7 @@ public class Product {
     private long id;
 
     @Column(name="product_name")
-    private String name;
+    private Currency currency;
 
     @Column(name="buy_course")
     private long buyCourse;
@@ -38,7 +38,7 @@ public class Product {
 
     public ProductDTO toDTO() {
         return ProductDTO.builder()
-                .name(name)
+                .currency(currency)
                 .buyCourse(buyCourse)
                 .sellCourse(sellCourse)
                 .description(description)
@@ -47,7 +47,7 @@ public class Product {
 
     public static Product fromDTO(ProductDTO dto) {
         return Product.builder()
-                .name(dto.getName())
+                .currency(dto.getCurrency())
                 .buyCourse(dto.getBuyCourse())
                 .sellCourse(dto.getSellCourse())
                 .description(dto.getDescription())

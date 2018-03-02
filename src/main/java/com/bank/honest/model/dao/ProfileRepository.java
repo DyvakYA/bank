@@ -16,6 +16,6 @@ import java.util.List;
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
-    @Query("SELECT p FROM Profile p JOIN CustomUser c ON p.id=c.user_profile_id WHERE c.phone = :phone")
+    @Query("SELECT p FROM Profile p JOIN CustomUser c ON p.id=c.profile WHERE c.phone = :phone")
     Profile findByPhone(@Param("phone") String phone);
 }

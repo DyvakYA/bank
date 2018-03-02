@@ -2,6 +2,7 @@ package com.bank.honest.model.service;
 
 import com.bank.honest.model.dao.ProductRepository;
 import com.bank.honest.model.dto.ProductDTO;
+import com.bank.honest.model.entity.Currency;
 import com.bank.honest.model.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -26,12 +27,12 @@ public class ProductService {
     }
 
     @Transactional
-    public boolean createProduct(String name, long buyCourse, long sellCourse, String description) {
-        if (productRepository.existsByName(name))
+    public boolean createProduct(Currency currency, long buyCourse, long sellCourse, String description) {
+        if (productRepository.existsByName(currency))
             return false;
 
         Product product = Product.builder()
-                .name(name)
+                .currency(currency)
                 .buyCourse(buyCourse)
                 .sellCourse(sellCourse)
                 .description(description)
@@ -58,8 +59,8 @@ public class ProductService {
         return result;
     }
 
-    public ProductDTO findProduct(String phone) {
-        Product product = productRepository.findByName(phone);
+    public ProductDTO findProduct(String name) {
+        Product product = productRepository.findByName(Currency.valueOf(name));
         ProductDTO result = product.toDTO();
         return result;
     }

@@ -1,7 +1,6 @@
 package com.bank.honest.controller;
 
 import com.bank.honest.model.dto.ProfileDTO;
-import com.bank.honest.model.dto.UserDTO;
 import com.bank.honest.model.entity.Profile;
 import com.bank.honest.model.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,9 +79,9 @@ public class ProfileController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/profiles/search/{name}", method = RequestMethod.GET)
-    public UserDTO userByPhone(@PathVariable(value = "name") String name) {
-        UserDTO result = profileService.findByName(name);
+    @RequestMapping(value = "/profiles/search/{phone}", method = RequestMethod.GET)
+    public ProfileDTO userByPhone(@PathVariable(value = "phone") String phone) {
+        ProfileDTO result = profileService.findByPhone(phone);
         return result;
     }
 }

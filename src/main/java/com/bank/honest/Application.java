@@ -30,15 +30,16 @@ public class Application {
                 userService.createUser("0938412040", "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8", UserRole.ADMIN);
                 userService.createUser("user", "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8", UserRole.USER);
 
-                productService.createProduct("USD", 1000, 1200, "");
-                productService.createProduct("EUR", 1200, 1600, "");
-                productService.createProduct("RUB", 2, 3, "");
-                productService.createProduct("Bitcoin", 100500, 100501, "");
+                productService.createProduct(Currency.USD, 1000, 1200, "");
+                productService.createProduct(Currency.UAH, 1200, 1600, "");
+                productService.createProduct(Currency.EUR, 2, 3, "");
+                productService.createProduct(Currency.BITCOIN, 100500, 100501, "");
 
                 for (int i = 0; i < 10; i++) {
                     Account account = Account.builder()
                             .number("number" + i)
                             .amount(100500 + i)
+                            .currency(Currency.USD)
                             .customUser(userService.findUser("0938412040"))
                             .build();
                     accountService.createAccount(account);
@@ -60,6 +61,7 @@ public class Application {
                 Account account = Account.builder()
                         .number("Special Account")
                         .amount(1012)
+                        .currency(Currency.BITCOIN)
                         .customUser(userService.findUser("user"))
                         .build();
                 accountService.createAccount(account);

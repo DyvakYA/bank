@@ -1,6 +1,7 @@
 package com.bank.honest.controller;
 
 import com.bank.honest.model.dto.ProductDTO;
+import com.bank.honest.model.entity.Currency;
 import com.bank.honest.model.entity.Product;
 import com.bank.honest.model.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +38,13 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/products", method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestParam String name,
+    public ResponseEntity<Void> create(@RequestParam String currency,
                                        @RequestParam Long buyCourse,
                                        @RequestParam Long sellCourse,
                                        @RequestParam String description) {
 
         Product product = Product.builder()
-                .name(name)
+                .currency(Currency.valueOf(currency))
                 .buyCourse(buyCourse)
                 .sellCourse(sellCourse)
                 .description(description)
@@ -65,13 +66,13 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/products", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestParam String name,
+    public ResponseEntity<Void> update(@RequestParam String currency,
                                        @RequestParam Long buyCourse,
                                        @RequestParam Long sellCourse,
                                        @RequestParam String description) {
 
         Product product = Product.builder()
-                .name(name)
+                .currency(Currency.valueOf(currency))
                 .buyCourse(buyCourse)
                 .sellCourse(sellCourse)
                 .description(description)

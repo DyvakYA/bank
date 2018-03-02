@@ -1,6 +1,7 @@
 package com.bank.honest.model.entity;
 
 import com.bank.honest.model.dto.WalletDTO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ import javax.persistence.*;
 @Getter
 @EqualsAndHashCode
 @ToString(exclude = "id")
+@JsonIgnoreProperties({"account"})
 public class Wallet {
 
     @Id
@@ -44,6 +46,7 @@ public class Wallet {
                 .number(number)
                 .expired(expired)
                 .status(status)
+                .account(account)
                 .build();
     }
 

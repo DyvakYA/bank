@@ -23,6 +23,7 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode
 @ToString(exclude = "id")
+@JsonIgnoreProperties({"accounts", "profile"})
 public class CustomUser {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -41,7 +42,7 @@ public class CustomUser {
     @Valid
     private UserRole role;
 
-    @JsonIgnoreProperties("customUser")
+
     @OneToMany(mappedBy="customUser", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Account> accounts = new ArrayList<>();
 
@@ -60,6 +61,7 @@ public class CustomUser {
                 .password(password)
                 .role(role)
                 .accounts(accounts)
+                .profile(profile)
                 .build();
     }
 
