@@ -58,6 +58,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public List<UserDTO> findAll(Pageable pageable) {
         List<CustomUser> customUsers = userRepository.findAll(pageable).getContent();
         List<UserDTO> result = new ArrayList<>();
@@ -67,6 +68,7 @@ public class UserService {
         return result;
     }
 
+    @Transactional(readOnly = true)
     public UserDTO findUser(Long userId) {
         CustomUser user = userRepository.findOne(userId);
         UserDTO result = user.toDTO();
@@ -78,11 +80,13 @@ public class UserService {
         return userRepository.count();
     }
 
+    @Transactional
     public void deleteUsers(Long[] toDelete) {
         for (long id : toDelete)
             userRepository.delete(id);
     }
 
+    @Transactional
     public void deleteUsers(Long id) {
         userRepository.delete(id);
     }

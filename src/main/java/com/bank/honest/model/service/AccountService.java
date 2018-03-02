@@ -73,6 +73,7 @@ public class AccountService {
         return result;
     }
 
+    @Transactional(readOnly = true)
     public List<AccountDTO> findByPattern(String pattern, Pageable pageable) {
         List<AccountDTO> result = new ArrayList<>();
         List<Account> accounts = accountRepository.findByPattern(pattern, pageable);
@@ -81,10 +82,12 @@ public class AccountService {
         return result;
     }
 
+    @Transactional
     public void deleteAccount(Long id) {
         accountRepository.delete(id);
     }
 
+    @Transactional
     public void deleteAccount(Long[] ids) {
         for (Long id : ids)
             accountRepository.delete(id);

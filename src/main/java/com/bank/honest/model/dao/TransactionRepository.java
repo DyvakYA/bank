@@ -4,6 +4,7 @@ import com.bank.honest.model.entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by User on 2/21/2018.
  */
+@Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
     @Query("SELECT u FROM Transaction u where u.date = :date")

@@ -1,6 +1,7 @@
 package com.bank.honest.model.entity;
 
 import com.bank.honest.model.dto.AccountDTO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,6 +38,7 @@ public class Account {
 
     @ManyToOne
     @JoinColumn(name="user_id")
+    @JsonIgnoreProperties("profile")
     private CustomUser customUser;
 
     @OneToMany(mappedBy="account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
@@ -49,7 +51,7 @@ public class Account {
         return AccountDTO.builder()
                 .number(number)
                 .amount(amount)
-                .customUser(null)
+                .customUser(customUser)
                 .build();
     }
 
