@@ -26,7 +26,7 @@ public class ProductService {
     }
 
     @Transactional
-    public boolean addProduct(String name, long buyCourse, long sellCourse, String description) {
+    public boolean createProduct(String name, long buyCourse, long sellCourse, String description) {
         if (productRepository.existsByName(name))
             return false;
 

@@ -1,6 +1,6 @@
 package com.bank.honest.model.entity;
 
-import com.bank.honest.model.dto.UserProfileDTO;
+import com.bank.honest.model.dto.ProfileDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,7 +19,7 @@ import javax.validation.constraints.Email;
 @Getter
 @EqualsAndHashCode
 @ToString(exclude = "id")
-public class UserProfile {
+public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -35,16 +35,16 @@ public class UserProfile {
     @Column(name="user_lastname")
     private String lastName;
 
-    public UserProfileDTO toDTO() {
-        return UserProfileDTO.builder()
+    public ProfileDTO toDTO() {
+        return ProfileDTO.builder()
                 .email(email)
                 .firstName(firstName)
                 .lastName(lastName)
                 .build();
     }
 
-    public static UserProfile fromDTO(UserProfileDTO dto) {
-        return UserProfile.builder()
+    public static Profile fromDTO(ProfileDTO dto) {
+        return Profile.builder()
                 .email(dto.getEmail())
                 .firstName(dto.getFirstName())
                 .lastName(dto.getLastName())

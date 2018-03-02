@@ -2,9 +2,9 @@ package com.bank.honest.controller;
 
 import com.bank.honest.model.dto.UserDTO;
 import com.bank.honest.model.entity.CustomUser;
-import com.bank.honest.model.entity.UserProfile;
+import com.bank.honest.model.entity.Profile;
 import com.bank.honest.model.entity.UserRole;
-import com.bank.honest.model.service.UserProfileService;
+import com.bank.honest.model.service.ProfileService;
 import com.bank.honest.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -27,7 +27,7 @@ public class UserController {
     protected UserService userService;
 
     @Autowired
-    protected UserProfileService userProfileService;
+    protected ProfileService profileService;
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public List<UserDTO> users(@RequestParam(required = false, defaultValue = "0") Integer page) {
@@ -57,14 +57,14 @@ public class UserController {
                 .password(password)
                 .role(userRole)
                 .build();
-        userService.addUser(user);
+        userService.createUser(user);
 
-        UserProfile userProfile = UserProfile.builder()
+        Profile profile = Profile.builder()
                 .email(email)
                 .firstName(firstName)
                 .lastName(lastName)
                 .build();
-        userProfileService.addUserProfile(userProfile);
+        profileService.createProfile(profile);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -96,18 +96,18 @@ public class UserController {
                 .password(password)
                 .role(userRole)
                 .build();
-        userService.addUser(user);
+        userService.createUser(user);
 
-        UserProfile userProfile = UserProfile.builder()
+        Profile profile = Profile.builder()
                 .email(email)
                 .firstName(firstName)
                 .lastName(lastName)
                 .build();
-        userProfileService.addUserProfile(userProfile);
+        profileService.createProfile(profile);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/users/phone/{phone}", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/search/{phone}", method = RequestMethod.GET)
     public UserDTO userByPhone(
             @PathVariable(value = "phone") String phone) {
         UserDTO result = userService.findByPhone(phone);

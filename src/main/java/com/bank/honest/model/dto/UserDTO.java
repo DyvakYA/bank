@@ -1,5 +1,6 @@
 package com.bank.honest.model.dto;
 
+import com.bank.honest.model.entity.Account;
 import com.bank.honest.model.entity.UserRole;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,6 +19,6 @@ public class UserDTO {
     private String phone;
     private String password;
     private UserRole role;
-    private List<String> accounts;
+    private List<Account> accounts;
 
 }

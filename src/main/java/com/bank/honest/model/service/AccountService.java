@@ -50,7 +50,7 @@ public class AccountService {
     }
 
     @Transactional
-    public boolean addAccount(String number, long amount, CustomUser customUser) {
+    public boolean createAccount(String number, long amount, CustomUser customUser) {
         if (accountRepository.existsByAccountNumber(number))
             return false;
 

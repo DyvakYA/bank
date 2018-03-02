@@ -27,13 +27,13 @@ public class Application {
         return new CommandLineRunner() {
             @Override
             public void run(String... strings) throws Exception {
-                userService.addUser("0938412040", "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8", UserRole.ADMIN);
-                userService.addUser("user", "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8", UserRole.USER);
+                userService.createUser("0938412040", "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8", UserRole.ADMIN);
+                userService.createUser("user", "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8", UserRole.USER);
 
-                productService.addProduct("USD", 1000, 1200, "");
-                productService.addProduct("EUR", 1200, 1600, "");
-                productService.addProduct("RUB", 2, 3, "");
-                productService.addProduct("Bitcoin", 100500, 100501, "");
+                productService.createProduct("USD", 1000, 1200, "");
+                productService.createProduct("EUR", 1200, 1600, "");
+                productService.createProduct("RUB", 2, 3, "");
+                productService.createProduct("Bitcoin", 100500, 100501, "");
 
                 for (int i = 0; i < 10; i++) {
                     Account account = Account.builder()

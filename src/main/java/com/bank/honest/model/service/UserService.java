@@ -22,12 +22,12 @@ public class UserService {
     UserRepository userRepository;
 
     @Transactional
-    public void addUser(CustomUser customUser) {
+    public void createUser(CustomUser customUser) {
         userRepository.save(customUser);
     }
 
     @Transactional
-    public boolean addUser(String phone, String passHash, UserRole role) {
+    public boolean createUser(String phone, String passHash, UserRole role) {
         if (userRepository.existsByPhone(phone))
             return false;
 

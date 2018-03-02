@@ -1,6 +1,7 @@
 package com.bank.honest.model.entity;
 
 import com.bank.honest.model.dto.UserDTO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by User on 2/10/2018.
@@ -41,12 +41,13 @@ public class CustomUser {
     @Valid
     private UserRole role;
 
+    @JsonIgnoreProperties("customUser")
     @OneToMany(mappedBy="customUser", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Account> accounts = new ArrayList<>();
 
     @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="user_profile_id")
-    private UserProfile userProfile;
+    private Profile profile;
 
     @PreRemove
     public void nullableContacts(){
@@ -58,10 +59,7 @@ public class CustomUser {
                 .phone(phone)
                 .password(password)
                 .role(role)
-                .accounts(accounts
-                        .stream()
-                        .map(p->p.getNumber())
-                        .collect(Collectors.toList()))
+                .accounts(accounts)
                 .build();
     }
 

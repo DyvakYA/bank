@@ -30,7 +30,7 @@ public class TransactionService {
     }
 
     @Transactional
-    public boolean addTransaction(String number, TransactionStatus status, TransactionType type, Long amount, Currency currency) {
+    public boolean createTransaction(String number, TransactionStatus status, TransactionType type, Long amount, Currency currency) {
         if (transactionRepository.existsByNumber(number))
             return false;
 
