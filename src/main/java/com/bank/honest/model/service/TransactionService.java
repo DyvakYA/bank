@@ -5,7 +5,6 @@ import com.bank.honest.model.dto.TransactionDTO;
 import com.bank.honest.model.entity.Currency;
 import com.bank.honest.model.entity.Transaction;
 import com.bank.honest.model.entity.TransactionStatus;
-import com.bank.honest.model.entity.TransactionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -30,17 +29,16 @@ public class TransactionService {
     }
 
     @Transactional
-    public boolean createTransaction(String number, TransactionStatus status, TransactionType type, Long amount, Currency currency) {
+    public boolean createTransaction(String number, Long sum, Currency currency, TransactionStatus status) {
         if (transactionRepository.existsByNumber(number))
             return false;
 
         Transaction transaction = Transaction.builder()
                 .date(new Date())
                 .number(number)
-                .status(status)
-                .type(type)
-                .amount(amount)
+                .sum(sum)
                 .currency(currency)
+                .status(status)
                 .build();
         transactionRepository.save(transaction);
 

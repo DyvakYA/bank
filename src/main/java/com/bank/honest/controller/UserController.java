@@ -2,22 +2,25 @@ package com.bank.honest.controller;
 
 import com.bank.honest.model.dto.UserDTO;
 import com.bank.honest.model.entity.CustomUser;
-import com.bank.honest.model.entity.Profile;
 import com.bank.honest.model.entity.UserRole;
 import com.bank.honest.model.service.ProfileService;
 import com.bank.honest.model.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
  * Created by User on 1/21/2018.
  */
+@Slf4j
 @RestController
 public class UserController {
 
@@ -28,6 +31,33 @@ public class UserController {
 
     @Autowired
     protected ProfileService profileService;
+
+    @Autowired
+    private ShaPasswordEncoder passwordEncoder;
+
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public String index(@Valid @RequestBody CustomUser user ) {
+//
+//        CustomUser user = (CustomUser) SecurityContextHolder
+//                .getContext()
+//                .getAuthentication()
+//                .getPrincipal();
+//
+//        String login = user.getUsername();
+//        CustomUser dbUser = userService.findByLogin(login);
+//        model.addAttribute("login", login);
+//        model.addAttribute("roles", user.getAuthorities());
+//        model.addAttribute("email", dbUser.getEmail());
+//        model.addAttribute("phone", dbUser.getPhone());
+//        if (dbUser.getRole().equals(UserRole.ADMIN)) {
+//            model.addAttribute("contacts_link", "/admin/contacts");
+//            model.addAttribute("users_link", "/admin/users");
+//            return "admin";
+//        }
+//        return "index";
+//    }
+
+
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public List<UserDTO> users(@RequestParam(required = false, defaultValue = "0") Integer page) {
@@ -43,28 +73,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestParam String phone,
-                                       @RequestParam String password,
-                                       @RequestParam String role,
-                                       @RequestParam String email,
-                                       @RequestParam String firstName,
-                                       @RequestParam String lastName) {
+    public ResponseEntity<Object> create(@Valid @RequestBody CustomUser user) {
 
-        UserRole userRole = (role != UserRole.ADMIN.toString()) ? UserRole.USER : UserRole.ADMIN;
-
-        CustomUser user = CustomUser.builder()
-                .phone(phone)
-                .password(password)
-                .role(userRole)
-                .build();
+        UserRole userRole = (user.getRole() != UserRole.ADMIN) ? UserRole.USER : UserRole.ADMIN;
         userService.createUser(user);
-
-        Profile profile = Profile.builder()
-                .email(email)
-                .firstName(firstName)
-                .lastName(lastName)
-                .build();
-        profileService.createProfile(profile);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -82,28 +94,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> userUpdate(@RequestParam String phone,
-                                           @RequestParam String password,
-                                           @RequestParam String role,
-                                           @RequestParam String email,
-                                           @RequestParam String firstName,
-                                           @RequestParam String lastName) {
+    public ResponseEntity<Void> userUpdate(@Valid @RequestBody CustomUser user) {
 
-        UserRole userRole = (role != UserRole.ADMIN.toString()) ? UserRole.USER : UserRole.ADMIN;
-
-        CustomUser user = CustomUser.builder()
-                .phone(phone)
-                .password(password)
-                .role(userRole)
-                .build();
+        UserRole userRole = (user.getRole() != UserRole.ADMIN) ? UserRole.USER : UserRole.ADMIN;
         userService.createUser(user);
-
-        Profile profile = Profile.builder()
-                .email(email)
-                .firstName(firstName)
-                .lastName(lastName)
-                .build();
-        profileService.createProfile(profile);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -23,19 +23,30 @@ public class Wallet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(name = "user_wallet_name")
+    @Column(name = "wallet_name", nullable = false)
     private String name;
 
-    @Column(name = "user_wallet_number")
+    @Column(name = "wallet_number", nullable = false)
     private String number;
 
-    @Column(name = "user_wallet_expired")
+    @Column(name = "wallet_limit")
+    private Long limit;
+
+    @Column(name = "wallet_expired")
     private String expired;
+
+    @Column(name = "wallet_is_blocked")
+    private boolean isBlocked;
+
+    @Column(name = "wallet_sms_inform")
+    private boolean smsInform;
 
     @Column(name = "user_wallet_status")
     private WalletStatus status;
+
     @ManyToOne
     @JoinColumn(name="account_id")
     private Account account;
@@ -44,9 +55,11 @@ public class Wallet {
         return WalletDTO.builder()
                 .name(name)
                 .number(number)
+                .limit(limit)
                 .expired(expired)
+                .isBlocked(isBlocked)
+                .smsInform(smsInform)
                 .status(status)
-                .account(account)
                 .build();
     }
 

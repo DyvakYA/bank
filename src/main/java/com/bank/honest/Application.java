@@ -1,19 +1,30 @@
 package com.bank.honest;
 
+import com.bank.honest.config.ApplicationSecurity;
 import com.bank.honest.model.entity.*;
 import com.bank.honest.model.service.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
 @SpringBootApplication
+@Slf4j
 public class Application {
+
+    @Bean
+    public WebSecurityConfigurerAdapter webSecurityConfigurerAdapter() {
+        return new ApplicationSecurity();
+    }
+
     public static void main(String[] args) {
+        log.debug("--Application Started--");
         TimeZone.setDefault(TimeZone.getTimeZone("Etc/UTC"));
         SpringApplication.run(Application.class, args);
     }
@@ -68,20 +79,16 @@ public class Application {
 
                 for(int i = 0; i < 10; i ++){
                     Transaction transaction = Transaction.builder()
-                            .number("1215G-" + (1*12))
                             .date(new Date())
+                            .number("1215G-" + (1*12))
+                            .sourceName("123")
+                            .destinationName("321")
                             .currency(Currency.BITCOIN)
-                            .account(account)
-                            .amount(12000)
+                            .sum((long) 12000)
                             .status(TransactionStatus.GOOD)
-                            .type(TransactionType.SEND)
                             .build();
                     transactionService.createTransaction(transaction);
                 }
-
-
-
-
 
             }
         };

@@ -60,4 +60,13 @@ public class WalletService {
             result.add(wallet.toDTO());
         return result;
     }
+
+    @Transactional(readOnly = true)
+    public List<WalletDTO> findWalletsByAccountId(Long id) {
+        List<Wallet> wallets = walletRepository.findOneByAccountId(id);
+        List<WalletDTO> result = new ArrayList<>();
+        for(Wallet wallet: wallets)
+            result.add(wallet.toDTO());
+        return result;
+    }
 }

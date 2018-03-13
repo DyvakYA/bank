@@ -32,6 +32,7 @@ public class AccountController {
     public List<AccountDTO> accounts(@RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<AccountDTO> result = accountService.findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+
         return result;
     }
 

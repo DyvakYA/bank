@@ -21,20 +21,21 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode
 @ToString(exclude="id")
-@JsonIgnoreProperties({"transactions", "wallet", "customUser"})
+@JsonIgnoreProperties({"transactions", "wallets", "customUser"})
 public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name="user_account_number")
+    @Column(name="user_account_number", nullable = false)
     private String number;
 
-    @Column(name="user_account_amount")
+    @Column(name="user_account_amount", nullable = true)
     private long amount;
 
-    @Column(name="user_account_currency")
+    @Column(name="user_account_currency", nullable = false)
     private Currency currency;
 
     @ManyToOne
@@ -45,7 +46,7 @@ public class Account {
     private List<Transaction> transactions = new ArrayList<>();
 
     @OneToMany(mappedBy="account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Wallet> wallet = new ArrayList<>();
+    private List<Wallet> wallets = new ArrayList<>();
 
     public AccountDTO toDTO() {
         return AccountDTO.builder()

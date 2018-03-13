@@ -2,7 +2,6 @@ package com.bank.honest.model.dto;
 
 import com.bank.honest.model.entity.Currency;
 import com.bank.honest.model.entity.TransactionStatus;
-import com.bank.honest.model.entity.TransactionType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,10 +21,10 @@ public class TransactionDTO {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
     private Date date;
-    private TransactionStatus status;
-    private TransactionType type;
-    private long amount;
+    private String number;
+    private String sourceName;
+    private String destinationName;
+    private Long sum;
     private Currency currency;
-    private long wallet_id;
-
+    private TransactionStatus status;
 }

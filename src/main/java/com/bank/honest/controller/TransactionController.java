@@ -4,7 +4,6 @@ import com.bank.honest.model.dto.TransactionDTO;
 import com.bank.honest.model.entity.Currency;
 import com.bank.honest.model.entity.Transaction;
 import com.bank.honest.model.entity.TransactionStatus;
-import com.bank.honest.model.entity.TransactionType;
 import com.bank.honest.model.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -45,18 +44,16 @@ public class TransactionController {
 
     @RequestMapping(value = "/transactions", method = RequestMethod.POST)
     public ResponseEntity<Void> create(@RequestParam String number,
-                                       @RequestParam TransactionStatus status,
-                                       @RequestParam TransactionType type,
-                                       @RequestParam Long amount,
-                                       @RequestParam Currency currency) {
+                                       @RequestParam Long sum,
+                                       @RequestParam Currency currency,
+                                       @RequestParam TransactionStatus status){
 
         Transaction transaction = Transaction.builder()
                 .date(new Date())
                 .number(number)
-                .status(status)
-                .type(type)
-                .amount(amount)
+                .sum(sum)
                 .currency(currency)
+                .status(status)
                 .build();
         transactionService.createTransaction(transaction);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -76,18 +73,16 @@ public class TransactionController {
 
     @RequestMapping(value = "/transactions", method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@RequestParam String number,
-                                       @RequestParam TransactionStatus status,
-                                       @RequestParam TransactionType type,
-                                       @RequestParam Long amount,
-                                       @RequestParam Currency currency) {
+                                       @RequestParam Long sum,
+                                       @RequestParam Currency currency,
+                                       @RequestParam TransactionStatus status) {
 
         Transaction transaction = Transaction.builder()
                 .date(new Date())
                 .number(number)
-                .status(status)
-                .type(type)
-                .amount(amount)
+                .sum(sum)
                 .currency(currency)
+                .status(status)
                 .build();
         transactionService.createTransaction(transaction);
         return new ResponseEntity<>(HttpStatus.OK);

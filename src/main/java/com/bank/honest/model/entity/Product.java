@@ -22,18 +22,19 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(name="product_name")
+    @Column(name="product_name", nullable = false)
     private Currency currency;
 
-    @Column(name="buy_course")
+    @Column(name="buy_course", nullable = true)
     private long buyCourse;
 
-    @Column(name="sell_course")
+    @Column(name="sell_course", nullable = true)
     private long sellCourse;
 
-    @Column(name="description")
+    @Column(name="description", nullable = true)
     private String description;
 
     public ProductDTO toDTO() {

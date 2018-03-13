@@ -23,6 +23,7 @@ public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id")
     private long id;
 
     @Column(name="user_email")

@@ -27,13 +27,14 @@ import java.util.List;
 public class CustomUser {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(name="user_phone")
+    @Column(name="user_phone", nullable = false)
     @NotNull(message = "Not null")
     private String phone;
 
-    @Column(name="user_password")
+    @Column(name="user_password", nullable = false)
     @NotNull(message = "not null")
     @Size(min = 5, max = 50)
     private String password;
@@ -41,7 +42,6 @@ public class CustomUser {
     @Enumerated(EnumType.STRING)
     @Valid
     private UserRole role;
-
 
     @OneToMany(mappedBy="customUser", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Account> accounts = new ArrayList<>();
@@ -60,8 +60,6 @@ public class CustomUser {
                 .phone(phone)
                 .password(password)
                 .role(role)
-                .accounts(accounts)
-                .profile(profile)
                 .build();
     }
 
@@ -70,7 +68,6 @@ public class CustomUser {
                 .phone(dto.getPhone())
                 .password(dto.getPassword())
                 .role(dto.getRole())
-                //.accounts(dto.getAccounts().stream().map(p->accounts.))
                 .build();
     }
 }

@@ -27,50 +27,58 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id", nullable = false)
     private long id;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
-    @Column(name = "DATETIME_FIELD", updatable = false)
+    @Column(name = "DATETIME_FIELD", nullable = false, updatable = false)
     private Date date;
+
+    @Column(name = "transaction_number", nullable = false)
+    private String number;
+
+    @Column(name = "transaction_source_name", nullable = false)
+    private String sourceName;
+
+    @Column(name = "transaction_destination_name", nullable = false)
+    private String destinationName;
+
+    @Column(name = "account_transaction_amount")
+    private Long sum;
+
+    @Column(name = "account_transaction_currency", nullable = false)
+    private Currency currency;
 
     @Column(name = "account_transaction_status")
     private TransactionStatus status;
 
-    @Column(name="account_transaction_number")
-    private String number;
-
-    @Column(name = "account_transaction_type")
-    private TransactionType type;
-
-    @Column(name = "account_transaction_amount")
-    private long amount;
-
-    @Column(name = "account_transaction_currency")
-    private Currency currency;
-
     @ManyToOne
-    @JoinColumn(name="account_id")
+    @JoinColumn(name = "account_id")
     private Account account;
 
     public TransactionDTO toDTO() {
         return TransactionDTO.builder()
                 .date(date)
-                .status(status)
-                .type(type)
-                .amount(amount)
+                .number(number)
+                .sourceName(sourceName)
+                .destinationName(destinationName)
+                .sum(sum)
                 .currency(currency)
+                .status(status)
                 .build();
     }
 
     public static Transaction fromDTO(TransactionDTO dto) {
         return Transaction.builder()
                 .date(dto.getDate())
-                .status(dto.getStatus())
-                .type(dto.getType())
-                .amount(dto.getAmount())
+                .number(dto.getNumber())
+                .sourceName(dto.getSourceName())
+                .destinationName(dto.getDestinationName())
+                .sum(dto.getSum())
                 .currency(dto.getCurrency())
+                .status(dto.getStatus())
                 .build();
     }
 }
