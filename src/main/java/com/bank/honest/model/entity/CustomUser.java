@@ -57,6 +57,7 @@ public class CustomUser {
 
     public UserDTO toDTO() {
         return UserDTO.builder()
+                .id(id)
                 .phone(phone)
                 .password(password)
                 .role(role)
