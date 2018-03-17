@@ -22,7 +22,7 @@ import java.util.List;
 @Setter
 @Getter
 @EqualsAndHashCode
-@ToString(exclude = "id")
+@ToString(exclude = {"id","accounts","profile"})
 @JsonIgnoreProperties({"accounts", "profile"})
 public class CustomUser {
     @Id
