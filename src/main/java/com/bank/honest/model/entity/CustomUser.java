@@ -60,6 +60,7 @@ public class CustomUser {
                 .id(id)
                 .phone(phone)
                 .password(password)
+                .profile(profile)
                 .build();
     }
 
