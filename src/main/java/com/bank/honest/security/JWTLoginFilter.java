@@ -29,6 +29,8 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
             throws AuthenticationException, IOException, ServletException {
 
         BufferedReader reader = request.getReader();
+        System.out.println(request.getMethod());
+        System.out.println(request.getRequestURI());
         System.out.println(reader.toString()+"123123123123123");
 //        Gson gson = new Gson();
 //        UserDTO user = gson.fromJson(reader, UserDTO.class);
