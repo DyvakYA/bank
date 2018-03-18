@@ -1,6 +1,5 @@
 package com.bank.honest;
 
-import com.bank.honest.config.ApplicationSecurity;
 import com.bank.honest.model.entity.*;
 import com.bank.honest.model.service.*;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -20,11 +18,6 @@ import java.util.TimeZone;
 @SpringBootApplication
 @Slf4j
 public class Application {
-
-    @Bean
-    public WebSecurityConfigurerAdapter webSecurityConfigurerAdapter() {
-        return new ApplicationSecurity();
-    }
 
     public static void main(String[] args) {
         log.debug("--Application Started--");
