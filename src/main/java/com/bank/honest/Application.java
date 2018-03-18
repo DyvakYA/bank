@@ -69,7 +69,7 @@ public class Application {
                             .status(WalletStatus.TRUE)
                             .account(account)
                             .expired("2050")
-                            .name("myCard" + list.indexOf(account))
+                            .name("VISA")
                             .build();
                     walletService.createWallet(wallet);
                 }
