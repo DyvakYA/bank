@@ -10,8 +10,8 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.stream.Collectors;
 
 /**
  * Created by User on 3/18/2018.
@@ -28,8 +28,17 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
                                                 HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
 
-        String test = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        System.out.println(test);
+        StringBuilder sb = new StringBuilder();
+        BufferedReader reader = request.getReader();
+        try {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append('\n');
+            }
+        } finally {
+            reader.close();
+        }
+        System.out.println(sb.toString());
         //@Valid @RequestBody UserDTO user
 
 
