@@ -33,6 +33,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
         UserDTO user = new ObjectMapper().readValue(request.getInputStream(), UserDTO.class);
         System.out.println(user.toString());
+        System.out.println(request.getInputStream().toString());
 
         return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(
                         user.getPhone(),
