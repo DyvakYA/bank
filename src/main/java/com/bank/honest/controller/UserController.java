@@ -37,7 +37,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<Void> index(@Valid @RequestBody UserDTO user) {
-        System.out.println(user);
+        log.info(user.toString());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
