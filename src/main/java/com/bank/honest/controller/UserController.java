@@ -5,6 +5,7 @@ import com.bank.honest.model.entity.CustomUser;
 import com.bank.honest.model.entity.UserRole;
 import com.bank.honest.model.service.ProfileService;
 import com.bank.honest.model.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -35,10 +38,18 @@ public class UserController {
     @Autowired
     private ShaPasswordEncoder passwordEncoder;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<Void> index(@Valid @RequestBody UserDTO user) {
-        log.debug("123123", user);
-        System.out.println("123"+user.toString());
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public ResponseEntity<Void> index(@Valid @RequestBody UserDTO user) {
+//        log.debug("123123", user);
+//        System.out.println("123"+user.toString());
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
+
+    @RequestMapping(value = "/login", method = RequestMethod.OPTIONS)
+    public ResponseEntity<Void> index(HttpServletRequest request) throws IOException {
+        UserDTO user = new ObjectMapper().readValue(request.getInputStream(), UserDTO.class);
+        System.out.println(user.toString());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
