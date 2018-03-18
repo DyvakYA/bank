@@ -60,7 +60,6 @@ public class CustomUser {
                 .id(id)
                 .phone(phone)
                 .password(password)
-                .role(role)
                 .build();
     }
 
@@ -68,7 +67,6 @@ public class CustomUser {
         return CustomUser.builder()
                 .phone(dto.getPhone())
                 .password(dto.getPassword())
-                .role(dto.getRole())
                 .build();
     }
 }

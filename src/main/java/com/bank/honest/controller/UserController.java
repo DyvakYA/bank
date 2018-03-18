@@ -35,28 +35,11 @@ public class UserController {
     @Autowired
     private ShaPasswordEncoder passwordEncoder;
 
-//    @RequestMapping(value = "/login", method = RequestMethod.POST)
-//    public String index(@Valid @RequestBody CustomUser user ) {
-//
-//        CustomUser user = (CustomUser) SecurityContextHolder
-//                .getContext()
-//                .getAuthentication()
-//                .getPrincipal();
-//
-//        String login = user.getUsername();
-//        CustomUser dbUser = userService.findByLogin(login);
-//        model.addAttribute("login", login);
-//        model.addAttribute("roles", user.getAuthorities());
-//        model.addAttribute("email", dbUser.getEmail());
-//        model.addAttribute("phone", dbUser.getPhone());
-//        if (dbUser.getRole().equals(UserRole.ADMIN)) {
-//            model.addAttribute("contacts_link", "/admin/contacts");
-//            model.addAttribute("users_link", "/admin/users");
-//            return "admin";
-//        }
-//        return "index";
-//    }
-
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity<Void> index(@Valid @RequestBody UserDTO user) {
+        System.out.println(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
