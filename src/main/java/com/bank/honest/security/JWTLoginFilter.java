@@ -1,6 +1,6 @@
 package com.bank.honest.security;
 
-import com.bank.honest.model.dto.AuthenticateDTO;
+import com.bank.honest.model.dto.UserDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,7 +31,8 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
                                                 HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
 
-        AuthenticateDTO user = new ObjectMapper().readValue(request.getInputStream(), AuthenticateDTO.class);
+        UserDTO user = new ObjectMapper().readValue(request.getInputStream(), UserDTO.class);
+        System.out.println(user.toString());
 
         return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(
                         user.getPhone(),
