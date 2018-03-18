@@ -1,9 +1,6 @@
 package com.bank.honest.security;
 
-import com.bank.honest.model.dto.UserDTO;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
@@ -14,7 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collections;
 
 /**
  * Created by User on 3/18/2018.
@@ -34,8 +30,8 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
         System.out.println(request.getHeader("user") + "user from header");
 
-        UserDTO user = new ObjectMapper().readValue(request.getInputStream(), UserDTO.class);
-        System.out.println(user.toString() + "user from input stream");
+//        UserDTO user = new ObjectMapper().readValue(request.getInputStream(), UserDTO.class);
+//        System.out.println(user.toString() + "user from input stream");
 
 //        if (email != null && password != null) {
 //            Optional<User> optionalUser = userService.login(email, password);
@@ -49,21 +45,21 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 //            }
 //        }
 
+        return null;
 
-
-        return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(
-                        user.getPhone(),
-                        user.getPassword(),
-                        Collections.emptyList()
-                )
-        );
+//        return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(
+//                        user.getPhone(),
+//                        user.getPassword(),
+//                        Collections.emptyList()
+//                )
+//        );
     }
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,
                                             FilterChain chain,
-                                            Authentication auth) throws IOException, ServletException{
+                                            Authentication auth) throws IOException, ServletException {
         TokenAuthentificationService.addAuthentication(response, auth.getName());
     }
 }
