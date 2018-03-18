@@ -1,5 +1,7 @@
 package com.bank.honest.security;
 
+import com.bank.honest.model.dto.AuthenticateDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -28,6 +30,10 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
                                                 HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
 
+        AuthenticateDTO user = new ObjectMapper().readValue(request.getInputStream(), AuthenticateDTO.class);
+        System.out.println(user.toString()+"1234567890");
+
+
         BufferedReader reader = request.getReader();
         System.out.println(request.getMethod());
         System.out.println(request.getRequestURI());
@@ -54,6 +60,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 //                destinationPage = getDestinationPageByUserRole(user, request);
 //            }
 //        }
+
 
         return null;
 
