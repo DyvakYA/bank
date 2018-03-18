@@ -40,12 +40,30 @@ public class Application {
                                   final ProductService productService,
                                   final TransactionService transactionService,
                                   final AccountService accountService,
-                                  final WalletService walletService) {
+                                  final WalletService walletService,
+                                  final ProfileService profileService) {
         return new CommandLineRunner() {
             @Override
             public void run(String... strings) throws Exception {
                 userService.createUser("0938412040", "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8", UserRole.ADMIN);
                 userService.createUser("user", "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8", UserRole.USER);
+
+                profileService.createProfile("best@gala.net", "Vasya", "Pupkin");
+                profileService.createProfile("fast@gala.net", "Viktor", "Ivanov");
+
+                CustomUser user1 = CustomUser.builder()
+                        .phone("admin")
+                        .password("admin")
+                        .profile(Profile.fromDTO(profileService.findProfile(Long.valueOf(1))))
+                        .build();
+                userService.createUser(user1);
+
+                CustomUser user2 = CustomUser.builder()
+                        .phone("username")
+                        .password("user_lol")
+                        .profile(Profile.fromDTO(profileService.findProfile(Long.valueOf(2))))
+                        .build();
+                userService.createUser(user2);
 
                 productService.createProduct(Currency.USD, 1000, 1200, "");
                 productService.createProduct(Currency.UAH, 1200, 1600, "");
