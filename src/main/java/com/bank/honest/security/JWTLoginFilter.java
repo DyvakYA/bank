@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 /**
  * Created by User on 3/18/2018.
@@ -26,6 +27,11 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
+
+        String test = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        System.out.println(test);
+        //@Valid @RequestBody UserDTO user
+
 
 
         System.out.println(request.getHeader("user") + "user from header");
