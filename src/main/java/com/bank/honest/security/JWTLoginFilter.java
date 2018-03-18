@@ -32,10 +32,10 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
             throws AuthenticationException, IOException, ServletException {
 
 
-        System.out.println(request.getHeader("user"));
+        System.out.println(request.getHeader("user") + "user from header");
 
         UserDTO user = new ObjectMapper().readValue(request.getInputStream(), UserDTO.class);
-        System.out.println(user.toString());
+        System.out.println(user.toString() + "user from input stream");
 
 //        if (email != null && password != null) {
 //            Optional<User> optionalUser = userService.login(email, password);
