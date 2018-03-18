@@ -1,5 +1,7 @@
 package com.bank.honest.security;
 
+import com.bank.honest.model.dto.UserDTO;
+import com.google.gson.Gson;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -28,18 +30,11 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
                                                 HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
 
-        StringBuilder sb = new StringBuilder();
         BufferedReader reader = request.getReader();
-        try {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line).append('\n');
-            }
-        } finally {
-            reader.close();
-        }
-        System.out.println(sb.toString());
-        //@Valid @RequestBody UserDTO user
+
+        Gson gson = new Gson();
+        UserDTO user = gson.fromJson(reader, UserDTO.class);
+        System.out.println(user.toString());
 
 
 
