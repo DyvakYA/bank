@@ -22,8 +22,8 @@ import java.util.List;
 @Setter
 @Getter
 @EqualsAndHashCode
-@ToString(exclude = {"id","accounts","profile"})
-@JsonIgnoreProperties({"accounts", "profile"})
+@ToString(exclude = {"id","accounts"})
+@JsonIgnoreProperties({"accounts"})
 public class CustomUser {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -46,7 +46,7 @@ public class CustomUser {
     @OneToMany(mappedBy="customUser", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Account> accounts = new ArrayList<>();
 
-    @OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_profile_id")
     private Profile profile;
 
