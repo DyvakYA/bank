@@ -51,17 +51,20 @@ public class Application {
                 profileService.createProfile("best@gala.net", "Vasya", "Pupkin");
                 profileService.createProfile("fast@gala.net", "Viktor", "Ivanov");
 
+                Profile profile1 = Profile.fromDTO(profileService.findProfile(Long.valueOf(1)));
+                Profile profile2 = Profile.fromDTO(profileService.findProfile(Long.valueOf(2)));
+
                 CustomUser user1 = CustomUser.builder()
                         .phone("admin")
                         .password("admin")
-                        .profile(Profile.fromDTO(profileService.findProfile(Long.valueOf(1))))
+                        .profile(profile1)
                         .build();
                 userService.createUser(user1);
 
                 CustomUser user2 = CustomUser.builder()
                         .phone("username")
                         .password("user_lol")
-                        .profile(Profile.fromDTO(profileService.findProfile(Long.valueOf(2))))
+                        .profile(profile2)
                         .build();
                 userService.createUser(user2);
 
