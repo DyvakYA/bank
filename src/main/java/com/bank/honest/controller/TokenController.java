@@ -38,6 +38,7 @@ public class TokenController {
                 .phone(user.getPhone())
                 .role(user.getRole())
                 .build();
+        System.out.println(jwtUser);
 
         JWTGenerator jwtGenerator = new JWTGenerator();
         return jwtGenerator.generate(jwtUser);
