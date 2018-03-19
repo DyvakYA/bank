@@ -26,12 +26,12 @@ public class JWTValidator {
                     .parseClaimsJws(token)
                     .getBody();
 
-            jwtUser = new JWTUser();
-
-            jwtUser.setPhone(body.getSubject());
-            jwtUser.setId(Long.parseLong((String) body.get("userId")));
-            jwtUser.setRole(UserRole.valueOf((String) body.get("role")));
-        }catch(Exception e) {
+            jwtUser = JWTUser.builder()
+                    .phone(body.getSubject())
+                    .id(Long.parseLong((String) body.get("userId")))
+                    .role(UserRole.valueOf((String) body.get("role")))
+                    .build();
+        } catch (Exception e) {
             System.out.println(e);
         }
         return jwtUser;

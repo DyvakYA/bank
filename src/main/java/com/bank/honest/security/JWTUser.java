@@ -10,7 +10,6 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
 @ToString
 public class JWTUser {
 
