@@ -1,7 +1,10 @@
 package com.bank.honest.controller;
 
 import com.bank.honest.model.dto.AuthenticateDTO;
+import com.bank.honest.model.entity.CustomUser;
+import com.bank.honest.model.service.UserService;
 import com.bank.honest.security.JWTGenerator;
+import com.bank.honest.security.JWTUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,9 @@ public class TokenController {
     @Autowired
     private JWTGenerator jwtGenerator;
 
+    @Autowired
+    private UserService userService;
+
     public TokenController(JWTGenerator jwtGenerator){
         this.jwtGenerator = jwtGenerator;
     }
@@ -26,7 +32,14 @@ public class TokenController {
 
         System.out.println(authenticateDTO.toString());
 
+        CustomUser user = userService.findUserByPhone(authenticateDTO.getPhone());
+        JWTUser jwtUser = JWTUser.builder()
+                .id(user.getId())
+                .phone(user.getPhone())
+                .role(user.getRole())
+                .build();
+
         JWTGenerator jwtGenerator = new JWTGenerator();
-        return jwtGenerator.generate(null);
+        return jwtGenerator.generate(jwtUser);
     }
 }

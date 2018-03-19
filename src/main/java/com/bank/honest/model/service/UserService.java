@@ -54,6 +54,12 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
+    public CustomUser findUserByPhone(String phone) {
+        CustomUser user = userRepository.findByPhone(phone);
+        return user;
+    }
+
+    @Transactional(readOnly = true)
     public List<CustomUser> findAll() {
         return userRepository.findAll();
     }

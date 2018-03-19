@@ -31,6 +31,7 @@ public class JWTValidator {
                     .id(Long.parseLong((String) body.get("userId")))
                     .role(UserRole.valueOf((String) body.get("role")))
                     .build();
+
         } catch (Exception e) {
             System.out.println(e);
         }
