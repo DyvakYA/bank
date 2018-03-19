@@ -1,9 +1,12 @@
 package com.bank.honest.controller;
 
+import com.bank.honest.model.dto.AuthenticateDTO;
 import com.bank.honest.security.JWTGenerator;
-import com.bank.honest.security.JWTUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by User on 3/19/2018.
@@ -18,12 +21,12 @@ public class TokenController {
         this.jwtGenerator = jwtGenerator;
     }
 
-    @PostMapping("/login")
-    public String generate(@RequestBody final JWTUser jwtUser){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String generate(@RequestBody AuthenticateDTO authenticateDTO){
 
-        System.out.println(jwtUser.toString());
+        System.out.println(authenticateDTO.toString());
 
         JWTGenerator jwtGenerator = new JWTGenerator();
-        return jwtGenerator.generate(jwtUser);
+        return jwtGenerator.generate(null);
     }
 }

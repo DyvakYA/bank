@@ -16,7 +16,7 @@ import java.io.IOException;
 public class JWTAuthenticationTokenFilter extends AbstractAuthenticationProcessingFilter {
 
     protected JWTAuthenticationTokenFilter() {
-        super("/**");
+        super("/users/*");
     }
 
     @Override

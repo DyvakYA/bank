@@ -14,6 +14,7 @@ import lombok.ToString;
 @ToString
 public class AuthenticateDTO {
 
+    private Long id;
     private String phone;
     private String password;
 }
