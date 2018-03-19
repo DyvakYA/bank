@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class TokenController {
 
+    private JWTGenerator jwtGenerator;
+
+    public TokenController(JWTGenerator jwtGenerator){
+        this.jwtGenerator = jwtGenerator;
+    }
+
     @PostMapping("/login")
     public String generate(@RequestBody final JWTUser jwtUser){
 

@@ -21,10 +21,10 @@ import java.util.Collections;
 public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private JWTAuthenticationProvider authenticationProvider;
+    JWTAuthenticationProvider authenticationProvider;
 
     @Autowired
-    private JWTAuthenticationEntryPoint entryPoint;
+    JWTAuthenticationEntryPoint entryPoint;
 
     @Bean
     public AuthenticationManager authenticationManager(){
