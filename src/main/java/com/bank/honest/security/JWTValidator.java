@@ -1,0 +1,39 @@
+package com.bank.honest.security;
+
+import com.bank.honest.model.entity.UserRole;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import org.springframework.stereotype.Component;
+
+/**
+ * Created by User on 3/19/2018.
+ */
+@Component
+public class JWTValidator {
+
+    static final long EXPIRATION_TIME = 864_000_000; //10 days
+    static final String SECRET_KEY = "youtube";
+    static final String TOKEN_PREFIX = "Bearer";
+    static final String HEADER_STRING = "Authorization";
+
+
+    public JWTUser validate(String token) {
+
+        JWTUser jwtUser = null;
+        try {
+            Claims body = Jwts.parser()
+                    .setSigningKey(SECRET_KEY)
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            jwtUser = new JWTUser();
+
+            jwtUser.setPhone(body.getSubject());
+            jwtUser.setId(Long.parseLong((String) body.get("userId")));
+            jwtUser.setRole(UserRole.valueOf((String) body.get("role")));
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        return jwtUser;
+    }
+}

@@ -11,7 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,15 +30,6 @@ public class UserController {
 
     @Autowired
     protected ProfileService profileService;
-
-    @Autowired
-    private ShaPasswordEncoder passwordEncoder;
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<Void> index(@Valid @RequestBody UserDTO user) {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public List<UserDTO> users(@RequestParam(required = false, defaultValue = "0") Integer page) {
