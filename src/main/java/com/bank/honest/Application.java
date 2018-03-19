@@ -58,6 +58,7 @@ public class Application {
                         .phone("admin")
                         .password("admin")
                         .profile(profile1)
+                        .role(UserRole.ADMIN)
                         .build();
                 userService.createUser(user1);
 
