@@ -3,10 +3,12 @@ package com.bank.honest.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by User on 3/19/2018.
  */
+@Component
 public class JWTGenerator {
 
     public String generate(JWTUser jwtUser) {

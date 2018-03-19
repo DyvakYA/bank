@@ -2,6 +2,7 @@ package com.bank.honest.controller;
 
 import com.bank.honest.security.JWTGenerator;
 import com.bank.honest.security.JWTUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class TokenController {
 
+    @Autowired
     private JWTGenerator jwtGenerator;
 
     public TokenController(JWTGenerator jwtGenerator){

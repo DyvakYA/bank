@@ -1,6 +1,5 @@
 package com.bank.honest.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -20,10 +19,9 @@ import java.util.Collections;
 @Configuration
 public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+
     JWTAuthenticationProvider authenticationProvider;
 
-    @Autowired
     JWTAuthenticationEntryPoint entryPoint;
 
     @Bean
