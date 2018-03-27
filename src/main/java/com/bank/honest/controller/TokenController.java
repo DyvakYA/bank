@@ -32,11 +32,11 @@ public class TokenController {
     public String generate(@RequestBody AuthenticateDTO authenticateDTO) {
 
         System.out.println(authenticateDTO.toString());
-        CustomUser user = userService.findUserByPhone(authenticateDTO.getPhone());
-        if (user == null) {
+
+        if (!userService.existByPhone(authenticateDTO.getPhone())) {
             throw new UserNotFoundException("User not find");
         } else {
-
+            CustomUser user = userService.findUserByPhone(authenticateDTO.getPhone());
             JWTUser jwtUser = JWTUser.builder()
                     .id(user.getId())
                     .phone(user.getPhone())
