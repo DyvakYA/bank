@@ -46,9 +46,10 @@ public class UserController {
         if (userService.existByPhone(registrationDTO.getPhone())) {
             System.out.println("qweqweqwe");
             throw new LoginAlreadyExistException("User with this phone number already exist");
+        }else {
+            userService.registration(registrationDTO);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }
-        userService.registration(registrationDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/check", method = RequestMethod.POST)
