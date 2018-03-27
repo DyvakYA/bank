@@ -34,9 +34,9 @@ public class TokenController {
         System.out.println(authenticateDTO.toString());
         CustomUser user = userService.findUserByPhone(authenticateDTO.getPhone());
         if (user == null) {
-            throw new UserNotFoundException();
+            throw new UserNotFoundException("User not find");
         } else {
-            
+
             JWTUser jwtUser = JWTUser.builder()
                     .id(user.getId())
                     .phone(user.getPhone())
