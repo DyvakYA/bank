@@ -29,7 +29,7 @@ public class Account {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name="user_account_number", nullable = false, unique = true)
+    @Column(name="user_account_number", nullable = false)
     private String number;
 
     @Column(name="user_account_amount", nullable = true)
