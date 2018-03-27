@@ -3,6 +3,7 @@ package com.bank.honest.controller;
 import com.bank.honest.exception.UserNotFoundException;
 import com.bank.honest.model.dto.AuthenticateDTO;
 import com.bank.honest.model.entity.CustomUser;
+import com.bank.honest.model.entity.UserRole;
 import com.bank.honest.model.service.UserService;
 import com.bank.honest.security.JWTGenerator;
 import com.bank.honest.security.JWTUser;
@@ -40,7 +41,7 @@ public class TokenController {
             JWTUser jwtUser = JWTUser.builder()
                     .id(user.getId())
                     .phone(user.getPhone())
-                    .role(user.getRole())
+                    .role(user.getRole()==null ? UserRole.USER : user.getRole())
                     .build();
 
             return jwtGenerator.generate(jwtUser);
