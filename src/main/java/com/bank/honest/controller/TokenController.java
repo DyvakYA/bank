@@ -1,5 +1,6 @@
 package com.bank.honest.controller;
 
+import com.bank.honest.exception.UserNotFoundException;
 import com.bank.honest.model.dto.AuthenticateDTO;
 import com.bank.honest.model.entity.CustomUser;
 import com.bank.honest.model.service.UserService;
@@ -23,24 +24,26 @@ public class TokenController {
     @Autowired
     private UserService userService;
 
-    public TokenController(JWTGenerator jwtGenerator){
+    public TokenController(JWTGenerator jwtGenerator) {
         this.jwtGenerator = jwtGenerator;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String generate(@RequestBody AuthenticateDTO authenticateDTO){
+    public String generate(@RequestBody AuthenticateDTO authenticateDTO) {
 
         System.out.println(authenticateDTO.toString());
-
         CustomUser user = userService.findUserByPhone(authenticateDTO.getPhone());
-        JWTUser jwtUser = JWTUser.builder()
-                .id(user.getId())
-                .phone(user.getPhone())
-                .role(user.getRole())
-                .build();
-        System.out.println(jwtUser);
+        if (user == null) {
+            throw new UserNotFoundException();
+        } else {
+            
+            JWTUser jwtUser = JWTUser.builder()
+                    .id(user.getId())
+                    .phone(user.getPhone())
+                    .role(user.getRole())
+                    .build();
 
-        JWTGenerator jwtGenerator = new JWTGenerator();
-        return jwtGenerator.generate(jwtUser);
+            return jwtGenerator.generate(jwtUser);
+        }
     }
 }
