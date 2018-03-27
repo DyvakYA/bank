@@ -121,23 +121,4 @@ public class Application {
             }
         };
     }
-
-
-//    @Bean
-//    public UrlBasedViewResolver setupViewResolver() {
-//        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-//        resolver.setPrefix("/WEB-INF/pages/");
-//        resolver.setSuffix(".jsp");
-//        resolver.setContentType("text/html;charset=UTF-8");
-//        resolver.setViewClass(JstlView.class);
-//
-//        return resolver;
-//    }
-
-//    @Bean
-//    public ResourceBundleMessageSource setupMessageSource() {
-//        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-//        messageSource.addBasenames("messages");
-//        return messageSource;
-//    }
 }

@@ -1,4 +1,4 @@
-package com.bank.honest.security;
+package com.bank.honest;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
