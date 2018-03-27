@@ -1,5 +1,7 @@
 package com.bank.honest.controller;
 
+import com.bank.honest.exception.LoginAlreadyExistException;
+import com.bank.honest.model.dto.RegistrationDTO;
 import com.bank.honest.model.dto.UserDTO;
 import com.bank.honest.model.entity.CustomUser;
 import com.bank.honest.model.entity.UserRole;
@@ -38,6 +40,15 @@ public class UserController {
         return users;
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ResponseEntity<Void> register(@Valid @RequestBody RegistrationDTO registrationDTO) {
+        if (userService.existByPhone(registrationDTO.getPhone())) {
+            throw new LoginAlreadyExistException("Login already exist");
+        }
+        userService.registration(registrationDTO);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
     public UserDTO user(@PathVariable(value = "id") Long userId) {
         UserDTO result = userService.findUser(userId);
@@ -45,7 +56,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public ResponseEntity<Object> create(@Valid @RequestBody CustomUser user) {
+    public ResponseEntity<Void> create(@Valid @RequestBody CustomUser user) {
 
         UserRole userRole = (user.getRole() != UserRole.ADMIN) ? UserRole.USER : UserRole.ADMIN;
         userService.createUser(user);
@@ -74,8 +85,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/search/{phone}", method = RequestMethod.GET)
-    public UserDTO userByPhone(
-            @PathVariable(value = "phone") String phone) {
+    public UserDTO userByPhone(@PathVariable(value = "phone") String phone) {
         UserDTO result = userService.findByPhone(phone);
         return result;
     }

@@ -1,8 +1,10 @@
 package com.bank.honest.model.service;
 
 import com.bank.honest.model.dao.UserRepository;
+import com.bank.honest.model.dto.RegistrationDTO;
 import com.bank.honest.model.dto.UserDTO;
 import com.bank.honest.model.entity.CustomUser;
+import com.bank.honest.model.entity.Profile;
 import com.bank.honest.model.entity.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +26,11 @@ public class UserService {
     @Transactional
     public void createUser(CustomUser customUser) {
         userRepository.save(customUser);
+    }
+
+    @Transactional
+    public boolean existByPhone(String phone) {
+        return userRepository.existsByPhone(phone);
     }
 
     @Transactional
@@ -96,6 +103,21 @@ public class UserService {
     @Transactional
     public void deleteUsers(Long id) {
         userRepository.delete(id);
+    }
+
+    @Transactional
+    public void registration(RegistrationDTO registrationDTO) {
+        Profile profile = Profile.builder()
+                .firstName(registrationDTO.getFirstName())
+                .lastName(registrationDTO.getLastName())
+                .build();
+        CustomUser user = CustomUser.builder()
+                .phone(registrationDTO.getPhone())
+                .password(registrationDTO.getPassword())
+                .profile(profile)
+                .role(UserRole.USER)
+                .build();
+        userRepository.save(user);
     }
 
     //    @Transactional
