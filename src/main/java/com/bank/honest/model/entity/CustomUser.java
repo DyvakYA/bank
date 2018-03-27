@@ -3,6 +3,7 @@ package com.bank.honest.model.entity;
 import com.bank.honest.model.dto.UserDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -30,8 +31,9 @@ public class CustomUser {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(name="user_phone", nullable = false)
+    @Column(name="user_phone", nullable = false, unique = true)
     @NotNull(message = "Not null")
+    @UniqueElements
     private String phone;
 
     @Column(name="user_password", nullable = false)

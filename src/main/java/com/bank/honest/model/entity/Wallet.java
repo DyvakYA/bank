@@ -29,7 +29,7 @@ public class Wallet {
     @Column(name = "wallet_name", nullable = false)
     private String name;
 
-    @Column(name = "wallet_number", nullable = false)
+    @Column(name = "wallet_number", nullable = false, unique = true)
     private String number;
 
     @Column(name = "wallet_limit")

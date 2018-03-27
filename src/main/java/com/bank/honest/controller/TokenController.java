@@ -1,6 +1,5 @@
 package com.bank.honest.controller;
 
-import com.bank.honest.exception.UserNotFoundException;
 import com.bank.honest.model.dto.AuthenticateDTO;
 import com.bank.honest.model.entity.CustomUser;
 import com.bank.honest.model.entity.UserRole;
@@ -34,9 +33,9 @@ public class TokenController {
 
         System.out.println(authenticateDTO.toString());
 
-        if (!userService.existByPhone(authenticateDTO.getPhone())) {
-            throw new UserNotFoundException("User not find");
-        } else {
+//        if (!userService.existByPhone(authenticateDTO.getPhone())) {
+//            throw new UserNotFoundException("User not find");
+//        } else {
             CustomUser user = userService.findUserByPhone(authenticateDTO.getPhone());
             JWTUser jwtUser = JWTUser.builder()
                     .id(user.getId())
@@ -45,6 +44,6 @@ public class TokenController {
                     .build();
 
             return jwtGenerator.generate(jwtUser);
-        }
+//        }
     }
 }
