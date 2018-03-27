@@ -43,7 +43,7 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<Void> register(@Valid @RequestBody RegistrationDTO registrationDTO) {
         if (userService.existByPhone(registrationDTO.getPhone())) {
-            throw new LoginAlreadyExistException("Login already exist");
+            throw new LoginAlreadyExistException("User with this phone number already exist");
         }
         userService.registration(registrationDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
