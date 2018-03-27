@@ -1,5 +1,6 @@
 package com.bank.honest.model.service;
 
+import com.bank.honest.model.dao.ProfileRepository;
 import com.bank.honest.model.dao.UserRepository;
 import com.bank.honest.model.dto.RegistrationDTO;
 import com.bank.honest.model.dto.UserDTO;
@@ -22,6 +23,9 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ProfileRepository profileRepository;
 
     @Transactional
     public void createUser(CustomUser customUser) {
@@ -111,6 +115,7 @@ public class UserService {
                 .firstName(registrationDTO.getFirstName())
                 .lastName(registrationDTO.getLastName())
                 .build();
+        profileRepository.save(profile);
         CustomUser user = CustomUser.builder()
                 .phone(registrationDTO.getPhone())
                 .password(registrationDTO.getPassword())
