@@ -1,6 +1,5 @@
 package com.bank.honest.controller;
 
-import com.bank.honest.exception.LoginAlreadyExistException;
 import com.bank.honest.model.dto.RegistrationDTO;
 import com.bank.honest.model.dto.UserDTO;
 import com.bank.honest.model.entity.CustomUser;
@@ -42,9 +41,9 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<Void> register(@Valid @RequestBody RegistrationDTO registrationDTO) {
-        if (userService.existByPhone(registrationDTO.getPhone())) {
-            throw new LoginAlreadyExistException("User with this phone number already exist");
-        }
+//        if (userService.existByPhone(registrationDTO.getPhone())) {
+//            throw new LoginAlreadyExistException("User with this phone number already exist");
+//        }
         userService.registration(registrationDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
