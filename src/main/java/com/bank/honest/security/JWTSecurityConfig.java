@@ -42,18 +42,26 @@ public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/*").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
+
+
+
+
 //                .antMatchers("/*").hasAnyRole("USER", "ADMIN")
 //                .antMatchers("/users/*").hasRole("ADMIN")
 //                .antMatchers("/register").permitAll()
 //                .anyRequest().authenticated()
-                .and()
 
+
+
+
+                .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(entryPoint)
                 .and()
-
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+
+        
 //                .logout()
 //                .permitAll()
 //                .logoutUrl("/logout")
@@ -63,7 +71,6 @@ public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //We filter the api/login requests
                 http.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
                 http.headers().cacheControl();
 //
 //
@@ -77,33 +84,6 @@ public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
 //                        UsernamePasswordAuthenticationFilter.class);
     }
 
-
-
-//    @Autowired
-//    private UserDetailsService userDetailsService;
-//
-//    @Autowired
-//    public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .userDetailsService(userDetailsService)
-//                .passwordEncoder(passwordEncoder());
-//    }
-
-
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //Create a default account
-//        auth.inMemoryAuthentication()
-//                .withUser("admin12")
-//                .password("password")
-//                .roles(String.valueOf(UserRole.ADMIN));
-//    }
-
-//    @Bean
-//    public ShaPasswordEncoder passwordEncoder() {
-//        return new ShaPasswordEncoder();
-//    }
 
 //
 //    @Override

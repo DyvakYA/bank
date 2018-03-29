@@ -1,6 +1,6 @@
 package com.bank.honest.controller;
 
-import com.bank.honest.exception.LoginAlreadyExistException;
+import com.bank.honest.exception.UserAlreadyExistException;
 import com.bank.honest.model.dto.PhoneNumberCheckDTO;
 import com.bank.honest.model.dto.RegistrationDTO;
 import com.bank.honest.model.dto.UserDTO;
@@ -42,13 +42,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<Void> register(@Valid @RequestBody RegistrationDTO registrationDTO) {
-        if (userService.existByPhone(registrationDTO.getPhone())) {
-            System.out.println("111111");
-            throw new LoginAlreadyExistException("User with this phone number already exist");
+    public ResponseEntity<Void> register(@Valid @RequestBody RegistrationDTO dto) {
+        if (userService.existByPhone(dto.getPhone())) {
+            throw new UserAlreadyExistException("User with this phone number already exist");
         }else {
-            System.out.println("222222");
-            userService.registration(registrationDTO);
+            userService.registration(dto);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }
@@ -56,7 +54,7 @@ public class UserController {
     @RequestMapping(value = "/check", method = RequestMethod.POST)
     public ResponseEntity<Void> numberCheck(@Valid @RequestBody PhoneNumberCheckDTO dto) {
         if (userService.existByPhone(dto.getPhone())) {
-            throw new LoginAlreadyExistException("User with this phone number already exist");
+            throw new UserAlreadyExistException("User with this phone number already exist");
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -68,10 +66,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@Valid @RequestBody CustomUser user) {
+    public ResponseEntity<Void> create(@Valid @RequestBody CustomUser dto) {
 
-        UserRole userRole = (user.getRole() != UserRole.ADMIN) ? UserRole.USER : UserRole.ADMIN;
-        userService.createUser(user);
+        UserRole userRole = (dto.getRole() != UserRole.ADMIN) ? UserRole.USER : UserRole.ADMIN;
+        userService.createUser(dto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -89,10 +87,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> userUpdate(@Valid @RequestBody CustomUser user) {
+    public ResponseEntity<Void> userUpdate(@Valid @RequestBody CustomUser dto) {
 
-        UserRole userRole = (user.getRole() != UserRole.ADMIN) ? UserRole.USER : UserRole.ADMIN;
-        userService.createUser(user);
+        UserRole userRole = (dto.getRole() != UserRole.ADMIN) ? UserRole.USER : UserRole.ADMIN;
+        userService.createUser(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

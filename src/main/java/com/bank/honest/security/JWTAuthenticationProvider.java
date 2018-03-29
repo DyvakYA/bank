@@ -1,5 +1,6 @@
 package com.bank.honest.security;
 
+import com.bank.honest.exception.TokenIsIncorrectException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by User on 3/19/2018.
  */
 @Component
-public class JWTAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider{
+public class JWTAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
     @Autowired
     private JWTValidator validator;
@@ -37,8 +38,8 @@ public class JWTAuthenticationProvider extends AbstractUserDetailsAuthentication
         String token = jwtAuthenticationToken.getToken();
 
         JWTUser jwtUser = validator.validate(token);
-        if(jwtUser == null){
-            throw new RuntimeException("JWT Token is incorrect");
+        if (jwtUser == null) {
+            throw new TokenIsIncorrectException("JWT Token is incorrect");
         }
 
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils

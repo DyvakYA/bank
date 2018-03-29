@@ -1,9 +1,7 @@
 package com.bank.honest.controller;
 
 import com.bank.honest.model.dto.TransactionDTO;
-import com.bank.honest.model.entity.Currency;
 import com.bank.honest.model.entity.Transaction;
-import com.bank.honest.model.entity.TransactionStatus;
 import com.bank.honest.model.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,17 +42,14 @@ public class TransactionController {
     }
 
     @RequestMapping(value = "/transactions", method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestParam String number,
-                                       @RequestParam Long sum,
-                                       @RequestParam Currency currency,
-                                       @RequestParam TransactionStatus status){
+    public ResponseEntity<Void> create(@Valid @RequestBody TransactionDTO dto) {
 
         Transaction transaction = Transaction.builder()
                 .date(new Date())
-                .number(number)
-                .sum(sum)
-                .currency(currency)
-                .status(status)
+                .number(dto.getNumber())
+                .sum(dto.getSum())
+                .currency(dto.getCurrency())
+                .status(dto.getStatus())
                 .build();
         transactionService.createTransaction(transaction);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -72,17 +68,14 @@ public class TransactionController {
     }
 
     @RequestMapping(value = "/transactions", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestParam String number,
-                                       @RequestParam Long sum,
-                                       @RequestParam Currency currency,
-                                       @RequestParam TransactionStatus status) {
+    public ResponseEntity<Void> update(@Valid @RequestBody TransactionDTO dto) {
 
         Transaction transaction = Transaction.builder()
                 .date(new Date())
-                .number(number)
-                .sum(sum)
-                .currency(currency)
-                .status(status)
+                .number(dto.getNumber())
+                .sum(dto.getSum())
+                .currency(dto.getCurrency())
+                .status(dto.getStatus())
                 .build();
         transactionService.createTransaction(transaction);
         return new ResponseEntity<>(HttpStatus.OK);

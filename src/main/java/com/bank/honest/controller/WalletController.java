@@ -2,7 +2,6 @@ package com.bank.honest.controller;
 
 import com.bank.honest.model.dto.WalletDTO;
 import com.bank.honest.model.entity.Wallet;
-import com.bank.honest.model.entity.WalletStatus;
 import com.bank.honest.model.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -11,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -39,16 +39,13 @@ public class WalletController {
     }
 
     @RequestMapping(value = "/wallets", method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestParam String name,
-                                       @RequestParam String number,
-                                       @RequestParam String expired,
-                                       @RequestParam WalletStatus status) {
+    public ResponseEntity<Void> create(@Valid @RequestBody WalletDTO dto) {
 
         Wallet wallet = Wallet.builder()
-                .name(name)
-                .number(number)
-                .expired(expired)
-                .status(status)
+                .name(dto.getName())
+                .number(dto.getNumber())
+                .expired(dto.getExpired())
+                .status(dto.getStatus())
                 .build();
         walletService.createWallet(wallet);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -67,18 +64,14 @@ public class WalletController {
     }
 
     @RequestMapping(value = "/wallets", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestParam Long id,
-                                       @RequestParam String name,
-                                       @RequestParam String number,
-                                       @RequestParam String expired,
-                                       @RequestParam String status) {
+    public ResponseEntity<Void> update(@Valid @RequestBody WalletDTO dto, @RequestParam Long id) {
 
         Wallet wallet = Wallet.builder()
                 .id(id)
-                .name(name)
-                .number(number)
-                .expired(expired)
-                .status(WalletStatus.valueOf(status))
+                .name(dto.getName())
+                .number(dto.getNumber())
+                .expired(dto.getExpired())
+                .status(dto.getStatus())
                 .build();
         walletService.createWallet(wallet);
         return new ResponseEntity<>(HttpStatus.OK);

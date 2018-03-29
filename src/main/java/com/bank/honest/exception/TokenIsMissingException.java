@@ -3,29 +3,30 @@ package com.bank.honest.exception;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Created by User on 3/8/2018.
+ * Created by User on 3/27/2018.
  */
 @Slf4j
-public class UserNotFoundException extends RuntimeException{
+public class TokenIsMissingException extends RuntimeException {
 
     private static final long serialVersionUID = 5861310537366287163L;
 
-    public UserNotFoundException() {
+    public TokenIsMissingException() {
         super();
     }
 
-    public UserNotFoundException(final String message, final Throwable cause) {
+    public TokenIsMissingException(final String message, final Throwable cause) {
         super(message, cause);
         log.debug(message);
     }
 
-    public UserNotFoundException(final String message) {
+    public TokenIsMissingException(final String message) {
         super(message);
         log.debug(message);
     }
 
-    public UserNotFoundException(final Throwable cause) {
+    public TokenIsMissingException(final Throwable cause) {
         super(cause);
         log.debug(cause.toString());
     }
+
 }

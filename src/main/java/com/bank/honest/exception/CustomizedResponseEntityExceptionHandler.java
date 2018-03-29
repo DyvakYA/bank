@@ -1,7 +1,5 @@
-package com.bank.honest.controller;
+package com.bank.honest.exception;
 
-import com.bank.honest.exception.LoginAlreadyExistException;
-import com.bank.honest.exception.UserNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,15 +35,41 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(value = UserNotFoundException.class)
     public final ResponseEntity<ErrorDetails> handleUserNotFoundException(UserNotFoundException ex, WebRequest request) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(),
-                request.getDescription(false));
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .timestamp(new Date())
+                .message(ex.getMessage())
+                .details(request.getDescription(false))
+                .build();
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(value = LoginAlreadyExistException.class)
-    public final ResponseEntity<ErrorDetails> handleLoginAlreadyExistException(LoginAlreadyExistException ex, WebRequest request) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(),
-                request.getDescription(false));
+    @ExceptionHandler(value = UserAlreadyExistException.class)
+    public final ResponseEntity<ErrorDetails> handleUserAlreadyExistException(UserAlreadyExistException ex, WebRequest request) {
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .timestamp(new Date())
+                .message(ex.getMessage())
+                .details(request.getDescription(false))
+                .build();
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = TokenIsMissingException.class)
+    public final ResponseEntity<ErrorDetails> handleTokenIsMissingException(TokenIsMissingException ex, WebRequest request) {
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .timestamp(new Date())
+                .message(ex.getMessage())
+                .details(request.getDescription(false))
+                .build();
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = TokenIsIncorrectException.class)
+    public final ResponseEntity<ErrorDetails> handleTokenIsIncorrectException(TokenIsIncorrectException ex, WebRequest request) {
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .timestamp(new Date())
+                .message(ex.getMessage())
+                .details(request.getDescription(false))
+                .build();
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 }

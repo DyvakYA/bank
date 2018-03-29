@@ -1,7 +1,6 @@
 package com.bank.honest.controller;
 
 import com.bank.honest.model.dto.ProductDTO;
-import com.bank.honest.model.entity.Currency;
 import com.bank.honest.model.entity.Product;
 import com.bank.honest.model.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -38,16 +38,13 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/products", method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestParam String currency,
-                                       @RequestParam Long buyCourse,
-                                       @RequestParam Long sellCourse,
-                                       @RequestParam String description) {
+    public ResponseEntity<Void> create(@Valid @RequestBody ProductDTO dto) {
 
         Product product = Product.builder()
-                .currency(Currency.valueOf(currency))
-                .buyCourse(buyCourse)
-                .sellCourse(sellCourse)
-                .description(description)
+                .currency(dto.getCurrency())
+                .buyCourse(dto.getBuyCourse())
+                .sellCourse(dto.getSellCourse())
+                .description(dto.getDescription())
                 .build();
         productService.createProduct(product);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -66,16 +63,13 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/products", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestParam String currency,
-                                       @RequestParam Long buyCourse,
-                                       @RequestParam Long sellCourse,
-                                       @RequestParam String description) {
+    public ResponseEntity<Void> update(@Valid @RequestBody ProductDTO dto) {
 
         Product product = Product.builder()
-                .currency(Currency.valueOf(currency))
-                .buyCourse(buyCourse)
-                .sellCourse(sellCourse)
-                .description(description)
+                .currency(dto.getCurrency())
+                .buyCourse(dto.getBuyCourse())
+                .sellCourse(dto.getSellCourse())
+                .description(dto.getDescription())
                 .build();
         productService.createProduct(product);
         return new ResponseEntity<>(HttpStatus.OK);

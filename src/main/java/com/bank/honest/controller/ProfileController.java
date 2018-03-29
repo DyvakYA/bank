@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -37,14 +38,12 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "/profiles", method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestParam String firstName,
-                                       @RequestParam String lastName,
-                                       @RequestParam String email) {
+    public ResponseEntity<Void> create(@Valid @RequestBody ProfileDTO dto) {
 
         Profile profile = Profile.builder()
-                .firstName(firstName)
-                .lastName(lastName)
-                .email(email)
+                .firstName(dto.getFirstName())
+                .lastName(dto.getLastName())
+                .email(dto.getEmail())
                 .build();
         profileService.createProfile(profile);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -64,16 +63,13 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "/profiles/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> userUpdate(@RequestParam Long id,
-                                           @RequestParam String firstName,
-                                           @RequestParam String lastName,
-                                           @RequestParam String email) {
+    public ResponseEntity<Void> userUpdate(@Valid @RequestBody ProfileDTO dto, @RequestParam Long id) {
 
         Profile profile = Profile.builder()
                 .id(id)
-                .firstName(firstName)
-                .lastName(lastName)
-                .email(email)
+                .firstName(dto.getFirstName())
+                .lastName(dto.getLastName())
+                .email(dto.getEmail())
                 .build();
         profileService.createProfile(profile);
         return new ResponseEntity<>(HttpStatus.OK);

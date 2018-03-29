@@ -1,4 +1,4 @@
-package com.bank.honest.controller;
+package com.bank.honest.exception;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -17,6 +17,5 @@ public class ErrorDetails {
     private Date timestamp;
     private String message;
     private String details;
-
 
 }

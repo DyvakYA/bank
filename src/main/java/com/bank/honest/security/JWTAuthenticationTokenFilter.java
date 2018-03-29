@@ -1,5 +1,6 @@
 package com.bank.honest.security;
 
+import com.bank.honest.exception.TokenIsMissingException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
@@ -27,7 +28,7 @@ public class JWTAuthenticationTokenFilter extends AbstractAuthenticationProcessi
         String header = request.getHeader("Authorisation");
 
         if(header == null || !header.startsWith("Token ")){
-            throw  new RuntimeException("Token is missing");
+            throw new TokenIsMissingException("Token is missing");
         }
 
         String authenticationToken = header.substring(6);

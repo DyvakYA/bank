@@ -2,7 +2,6 @@ package com.bank.honest.controller;
 
 import com.bank.honest.model.dto.AccountDTO;
 import com.bank.honest.model.entity.Account;
-import com.bank.honest.model.entity.Currency;
 import com.bank.honest.model.service.AccountService;
 import com.bank.honest.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -32,7 +32,6 @@ public class AccountController {
     public List<AccountDTO> accounts(@RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<AccountDTO> result = accountService.findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
-
         return result;
     }
 
@@ -43,16 +42,13 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/accounts", method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestParam String number,
-                                       @RequestParam Long amount,
-                                       @RequestParam String currency,
-                                       @RequestParam String user_id) {
+    public ResponseEntity<Void> create(@Valid @RequestBody AccountDTO dto) {
 
         Account account = Account.builder()
-                .number(number)
-                .amount(amount)
-                .currency(Currency.valueOf(currency))
-                .customUser(userService.findUser(user_id))
+                .number(dto.getNumber())
+                .amount(dto.getAmount())
+                .currency(dto.getCurrency())
+                .customUser(dto.getCustomUser())
                 .build();
         accountService.createAccount(account);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -71,16 +67,13 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/accounts", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestParam String number,
-                                       @RequestParam Long amount,
-                                       @RequestParam String currency,
-                                       @RequestParam String user_id) {
+    public ResponseEntity<Void> update(@Valid @RequestBody AccountDTO dto) {
 
         Account account = Account.builder()
-                .number(number)
-                .amount(amount)
-                .currency(Currency.valueOf(currency))
-                .customUser(userService.findUser(user_id))
+                .number(dto.getNumber())
+                .amount(dto.getAmount())
+                .currency(dto.getCurrency())
+                .customUser(dto.getCustomUser())
                 .build();
         accountService.createAccount(account);
         return new ResponseEntity<>(HttpStatus.OK);
