@@ -41,7 +41,7 @@ public class TokenController {
             JWTUser jwtUser = JWTUser.builder()
                     .id(user.getId())
                     .phone(user.getPhone())
-                    .role(user.getRole()==null ? UserRole.USER : user.getRole())
+                    .role(user.getRole() == null ? UserRole.USER : user.getRole())
                     .build();
 
             return jwtGenerator.generate(jwtUser);

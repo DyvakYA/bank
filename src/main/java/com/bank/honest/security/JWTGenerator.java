@@ -5,11 +5,16 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 /**
  * Created by User on 3/19/2018.
  */
 @Component
 public class JWTGenerator {
+
+    static final long EXPIRATION_TIME = 600_000; //10 min
+    static final String SECRET_KEY = "youtube";
 
     public String generate(JWTUser jwtUser) {
 
@@ -20,7 +25,8 @@ public class JWTGenerator {
 
         return Jwts.builder()
                 .setClaims(claims)
-                .signWith(SignatureAlgorithm.HS512, "youtube")
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
 }
