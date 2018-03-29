@@ -1,7 +1,7 @@
 package com.bank.honest.model.dto;
 
-import com.bank.honest.model.entity.Currency;
-import com.bank.honest.model.entity.TransactionStatus;
+import com.bank.honest.model.entity.enums.Currency;
+import com.bank.honest.model.entity.enums.TransactionStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Getter;

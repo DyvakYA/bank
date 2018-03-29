@@ -1,6 +1,7 @@
 package com.bank.honest.model.entity;
 
 import com.bank.honest.model.dto.UserDTO;
+import com.bank.honest.model.entity.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 

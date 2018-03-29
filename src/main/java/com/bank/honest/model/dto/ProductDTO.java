@@ -1,6 +1,6 @@
 package com.bank.honest.model.dto;
 
-import com.bank.honest.model.entity.Currency;
+import com.bank.honest.model.entity.enums.Currency;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
 package com.bank.honest.model.dto;
 
-import com.bank.honest.model.entity.WalletStatus;
+import com.bank.honest.model.entity.enums.WalletStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

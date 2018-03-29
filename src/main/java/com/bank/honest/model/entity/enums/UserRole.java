@@ -1,4 +1,4 @@
-package com.bank.honest.model.entity;
+package com.bank.honest.model.entity.enums;
 
 public enum UserRole {
     ADMIN, USER;

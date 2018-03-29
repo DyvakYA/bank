@@ -2,7 +2,7 @@ package com.bank.honest.model.service;
 
 import com.bank.honest.model.dao.ProductRepository;
 import com.bank.honest.model.dto.ProductDTO;
-import com.bank.honest.model.entity.Currency;
+import com.bank.honest.model.entity.enums.Currency;
 import com.bank.honest.model.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;

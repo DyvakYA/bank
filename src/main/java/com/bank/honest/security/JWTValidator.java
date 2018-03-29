@@ -1,6 +1,6 @@
 package com.bank.honest.security;
 
-import com.bank.honest.model.entity.UserRole;
+import com.bank.honest.model.entity.enums.UserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.stereotype.Component;

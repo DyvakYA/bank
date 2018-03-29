@@ -1,6 +1,10 @@
 package com.bank.honest;
 
 import com.bank.honest.model.entity.*;
+import com.bank.honest.model.entity.enums.Currency;
+import com.bank.honest.model.entity.enums.TransactionStatus;
+import com.bank.honest.model.entity.enums.UserRole;
+import com.bank.honest.model.entity.enums.WalletStatus;
 import com.bank.honest.model.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;

@@ -1,7 +1,7 @@
 package com.bank.honest.model.dto;
 
 import com.bank.honest.model.entity.Profile;
-import com.bank.honest.model.entity.UserRole;
+import com.bank.honest.model.entity.enums.UserRole;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

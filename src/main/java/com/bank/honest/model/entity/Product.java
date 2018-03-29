@@ -1,6 +1,7 @@
 package com.bank.honest.model.entity;
 
 import com.bank.honest.model.dto.ProductDTO;
+import com.bank.honest.model.entity.enums.Currency;
 import lombok.*;
 
 import javax.persistence.*;

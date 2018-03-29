@@ -1,6 +1,7 @@
 package com.bank.honest.model.entity;
 
 import com.bank.honest.model.dto.AccountDTO;
+import com.bank.honest.model.entity.enums.Currency;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 

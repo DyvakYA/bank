@@ -2,9 +2,9 @@ package com.bank.honest.model.service;
 
 import com.bank.honest.model.dao.TransactionRepository;
 import com.bank.honest.model.dto.TransactionDTO;
-import com.bank.honest.model.entity.Currency;
+import com.bank.honest.model.entity.enums.Currency;
 import com.bank.honest.model.entity.Transaction;
-import com.bank.honest.model.entity.TransactionStatus;
+import com.bank.honest.model.entity.enums.TransactionStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

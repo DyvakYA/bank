@@ -5,7 +5,7 @@ import com.bank.honest.model.dto.PhoneNumberCheckDTO;
 import com.bank.honest.model.dto.RegistrationDTO;
 import com.bank.honest.model.dto.UserDTO;
 import com.bank.honest.model.entity.CustomUser;
-import com.bank.honest.model.entity.UserRole;
+import com.bank.honest.model.entity.enums.UserRole;
 import com.bank.honest.model.service.ProfileService;
 import com.bank.honest.model.service.UserService;
 import lombok.extern.slf4j.Slf4j;
