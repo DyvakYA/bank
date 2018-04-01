@@ -54,6 +54,7 @@ public class Wallet {
 
     public WalletDTO toDTO() {
         return WalletDTO.builder()
+                .id(id)
                 .name(name)
                 .number(number)
                 .limit(limit)

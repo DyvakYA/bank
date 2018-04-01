@@ -14,6 +14,7 @@ import lombok.Setter;
 @Builder
 public class WalletDTO {
 
+    private long id;
     private String name;
     private String number;
     private Long limit;

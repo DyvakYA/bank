@@ -26,7 +26,6 @@ public class WalletController {
 
     @RequestMapping(value = "/wallets", method = RequestMethod.GET)
     public List<WalletDTO> wallets(@RequestParam(required = false, defaultValue = "0") Integer page) {
-        System.out.println("wallets");
         if (page < 0) page = 0;
         List<WalletDTO> result = walletService.findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         return result;

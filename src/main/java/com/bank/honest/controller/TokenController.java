@@ -25,10 +25,6 @@ public class TokenController {
     @Autowired
     private UserService userService;
 
-    public TokenController(JWTGenerator jwtGenerator) {
-        this.jwtGenerator = jwtGenerator;
-    }
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String generate(@RequestBody AuthenticateDTO authenticateDTO) {
 
