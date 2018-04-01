@@ -27,11 +27,9 @@ public class TokenController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String generate(@RequestBody AuthenticateDTO authenticateDTO) {
-
-        System.out.println(authenticateDTO.toString());
-
+        System.out.println(userService.existByPhone(authenticateDTO.getPhone()));
         if (!userService.existByPhone(authenticateDTO.getPhone())) {
-            throw new UserNotFoundException("User not find");
+            throw new UserNotFoundException("User not found");
         } else {
             CustomUser user = userService.findUserByPhone(authenticateDTO.getPhone());
             JWTUser jwtUser = JWTUser.builder()

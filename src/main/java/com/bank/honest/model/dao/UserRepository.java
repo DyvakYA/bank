@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<CustomUser, Long> {
 
-    @Query("SELECT CASE WHEN COUNT(u) > 0 THEN true ELSE false END FROM CustomUser u WHERE u.phone = :phone")
+    @Query(name = "existsByLogin", value = "SELECT CASE WHEN COUNT(u) > 0 THEN 'true' ELSE 'false' END FROM CustomUser u WHERE u.phone = :phone")
     boolean existsByPhone(@Param("phone") String phone);
 
     @Query("SELECT u FROM CustomUser u where u.phone = :phone")

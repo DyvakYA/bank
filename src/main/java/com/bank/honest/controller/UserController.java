@@ -41,8 +41,9 @@ public class UserController {
         return users;
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<Void> register(@Valid @RequestBody RegistrationDTO dto) {
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public ResponseEntity<Void> registration(@Valid @RequestBody RegistrationDTO dto) {
+
         if (userService.existByPhone(dto.getPhone())) {
             throw new UserAlreadyExistException("User with this phone number already exist");
         }else {
@@ -66,10 +67,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@Valid @RequestBody CustomUser dto) {
+    public ResponseEntity<Void> create(@Valid @RequestBody UserDTO dto) {
+        CustomUser user = CustomUser.fromDTO(dto);
 
         UserRole userRole = (dto.getRole() != UserRole.ADMIN) ? UserRole.USER : UserRole.ADMIN;
-        userService.createUser(dto);
+        userService.createUser(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

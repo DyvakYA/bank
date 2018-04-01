@@ -31,7 +31,7 @@ public class CustomUser {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(name="user_phone", nullable = false, unique = true)
+    @Column(name="user_phone", nullable = false)
     @NotNull(message = "Not null")
     private String phone;
 

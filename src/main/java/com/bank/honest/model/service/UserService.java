@@ -34,6 +34,7 @@ public class UserService {
 
     @Transactional
     public boolean existByPhone(String phone) {
+        System.out.println(phone);
         return userRepository.existsByPhone(phone);
     }
 
