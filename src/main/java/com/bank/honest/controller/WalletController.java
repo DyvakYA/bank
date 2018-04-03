@@ -17,6 +17,7 @@ import java.util.List;
  * Created by User on 2/13/2018.
  */
 @RestController
+@RequestMapping("/wallets")
 public class WalletController {
 
     final int ITEMS_PER_PAGE = 6;
@@ -24,20 +25,20 @@ public class WalletController {
     @Autowired
     protected WalletService walletService;
 
-    @RequestMapping(value = "/wallets", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<WalletDTO> wallets(@RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<WalletDTO> result = walletService.findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         return result;
     }
 
-    @RequestMapping(value = "/wallets/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public WalletDTO wallet(@PathVariable(value = "id") Long wallet_id) {
         WalletDTO result = walletService.findWallet(wallet_id);
         return result;
     }
 
-    @RequestMapping(value = "/wallets", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> create(@Valid @RequestBody WalletDTO dto) {
 
         Wallet wallet = Wallet.builder()
@@ -50,19 +51,19 @@ public class WalletController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/wallets/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@RequestParam(value = "id", required = false) Long id) {
         walletService.deleteWallet(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/wallets/{id[]}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@RequestParam(value = "id[]", required = false) Long[] ids) {
         walletService.deleteWallets(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/wallets", method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody WalletDTO dto, @RequestParam Long id) {
 
         Wallet wallet = Wallet.builder()
@@ -76,14 +77,14 @@ public class WalletController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/wallets/search/{account_number}", method = RequestMethod.GET)
+    @RequestMapping(value = "/search/{account_number}", method = RequestMethod.GET)
     public List<WalletDTO> walletByPattern(@PathVariable(value = "account_number") String account_number, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<WalletDTO> result = walletService.findWallet(account_number, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         return result;
     }
 
-    @RequestMapping(value = "/wallets/account/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
     public List<WalletDTO> walletsqwe(@PathVariable(value = "id") Long id) {
         List<WalletDTO> result = walletService.findWalletsByAccountId(id);
         return result;

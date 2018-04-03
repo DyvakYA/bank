@@ -17,6 +17,7 @@ import java.util.List;
  * Created by User on 2/17/2018.
  */
 @RestController
+@RequestMapping("/profiles")
 public class ProfileController {
 
     final int ITEMS_PER_PAGE = 6;
@@ -24,20 +25,20 @@ public class ProfileController {
     @Autowired
     ProfileService profileService;
 
-    @RequestMapping(value = "/profiles", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<ProfileDTO> profiles(@RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<ProfileDTO> profiles = profileService.findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         return profiles;
     }
 
-    @RequestMapping(value = "/profiles/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ProfileDTO user(@PathVariable(value = "id") Long profile_id) {
         ProfileDTO profile = profileService.findProfile(profile_id);
         return profile;
     }
 
-    @RequestMapping(value = "/profiles", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> create(@Valid @RequestBody ProfileDTO dto) {
 
         Profile profile = Profile.builder()
@@ -49,20 +50,20 @@ public class ProfileController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/profiles/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@RequestParam(value = "id", required = false) Long id) {
         profileService.deleteProfiles(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/profiles/{id[]}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@RequestParam(value = "id[]", required = false) Long[] ids) {
         if (ids != null && ids.length > 0)
             profileService.deleteProfiles(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/profiles/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> userUpdate(@Valid @RequestBody ProfileDTO dto, @RequestParam Long id) {
 
         Profile profile = Profile.builder()
@@ -75,7 +76,7 @@ public class ProfileController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/profiles/search/{phone}", method = RequestMethod.GET)
+    @RequestMapping(value = "/search/{phone}", method = RequestMethod.GET)
     public ProfileDTO userByPhone(@PathVariable(value = "phone") String phone) {
         ProfileDTO result = profileService.findByPhone(phone);
         return result;

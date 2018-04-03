@@ -29,20 +29,20 @@ public class AccountController {
     @Autowired
     protected UserService userService;
 
-    @RequestMapping(value = "/accounts", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<AccountDTO> accounts(@RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<AccountDTO> result = accountService.findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         return result;
     }
 
-    @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public AccountDTO accountById(@PathVariable(value = "id") Long account_id) {
         AccountDTO result = accountService.findAccount(account_id);
         return result;
     }
 
-    @RequestMapping(value = "/accounts", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> create(@Valid @RequestBody AccountDTO dto) {
 
         Account account = Account.builder()
@@ -55,19 +55,19 @@ public class AccountController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/accounts/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@RequestParam(value = "id", required = false) Long id) {
         accountService.deleteAccount(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/accounts/{id[]}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@RequestParam(value = "id[]", required = false) Long[] ids) {
         accountService.deleteAccount(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/accounts", method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody AccountDTO dto) {
 
         Account account = Account.builder()
@@ -80,7 +80,7 @@ public class AccountController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/accounts/search/{pattern}", method = RequestMethod.GET)
+    @RequestMapping(value = "/search/{pattern}", method = RequestMethod.GET)
     public List<AccountDTO> accountByPattern(@PathVariable(value = "pattern") String pattern, @RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<AccountDTO> result = accountService.findByPattern(pattern, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));

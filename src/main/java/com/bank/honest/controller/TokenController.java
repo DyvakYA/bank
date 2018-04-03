@@ -7,6 +7,7 @@ import com.bank.honest.model.entity.enums.UserRole;
 import com.bank.honest.model.service.UserService;
 import com.bank.honest.security.JWTGenerator;
 import com.bank.honest.security.JWTUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by User on 3/19/2018.
  */
+@Slf4j
 @RestController
 public class TokenController {
 
