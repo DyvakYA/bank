@@ -24,6 +24,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@RequestMapping("/users")
 public class UserController {
 
     final int ITEMS_PER_PAGE = 6;
@@ -34,7 +35,7 @@ public class UserController {
     @Autowired
     protected ProfileService profileService;
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<UserDTO> users(@RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
         List<UserDTO> users = userService.findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
@@ -60,13 +61,13 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public UserDTO user(@PathVariable(value = "id") Long userId) {
         UserDTO result = userService.findUser(userId);
         return result;
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> create(@Valid @RequestBody UserDTO dto) {
         CustomUser user = CustomUser.fromDTO(dto);
 
@@ -75,20 +76,20 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@RequestParam(value = "id", required = false) Long id) {
         userService.deleteUsers(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/users/{id[]}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@RequestParam(value = "id[]", required = false) Long[] ids) {
         if (ids != null && ids.length > 0)
             userService.deleteUsers(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> userUpdate(@Valid @RequestBody CustomUser dto) {
 
         UserRole userRole = (dto.getRole() != UserRole.ADMIN) ? UserRole.USER : UserRole.ADMIN;
@@ -96,7 +97,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/users/search/{phone}", method = RequestMethod.GET)
+    @RequestMapping(value = "/search/{phone}", method = RequestMethod.GET)
     public UserDTO userByPhone(@PathVariable(value = "phone") String phone) {
         UserDTO result = userService.findByPhone(phone);
         return result;

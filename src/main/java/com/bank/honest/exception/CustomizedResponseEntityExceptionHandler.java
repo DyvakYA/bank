@@ -63,6 +63,16 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(value = TokenNotPassValidationException.class)
+    public final ResponseEntity<ErrorDetails> handleTokenNotPassValidationException(TokenNotPassValidationException ex, WebRequest request) {
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .timestamp(new Date())
+                .message(ex.getMessage())
+                .details(request.getDescription(false))
+                .build();
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(value = TokenIsIncorrectException.class)
     public final ResponseEntity<ErrorDetails> handleTokenIsIncorrectException(TokenIsIncorrectException ex, WebRequest request) {
         ErrorDetails errorDetails = ErrorDetails.builder()

@@ -34,7 +34,6 @@ public class UserService {
 
     @Transactional
     public boolean existByPhone(String phone) {
-        System.out.println(phone);
         return userRepository.existsByPhone(phone);
     }
 
@@ -79,7 +78,6 @@ public class UserService {
     @Transactional(readOnly = true)
     public List<UserDTO> findAll(Pageable pageable) {
         List<CustomUser> customUsers = userRepository.findAll(pageable).getContent();
-        System.out.println(customUsers);
         List<UserDTO> result = new ArrayList<>();
         for (CustomUser customUser : customUsers) {
             result.add(customUser.toDTO());

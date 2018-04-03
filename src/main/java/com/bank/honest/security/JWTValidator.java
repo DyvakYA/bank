@@ -1,5 +1,6 @@
 package com.bank.honest.security;
 
+import com.bank.honest.exception.TokenNotPassValidationException;
 import com.bank.honest.model.entity.enums.UserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -31,8 +32,8 @@ public class JWTValidator {
                     .role(UserRole.valueOf((String) body.get("role")))
                     .build();
 
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception cause) {
+            throw new TokenNotPassValidationException("Token not pass validation", cause);
         }
         return jwtUser;
     }

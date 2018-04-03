@@ -18,6 +18,7 @@ import java.util.List;
  * Created by User on 2/11/2018.
  */
 @RestController
+@RequestMapping("/accounts")
 public class AccountController {
 
     final int ITEMS_PER_PAGE = 6;
