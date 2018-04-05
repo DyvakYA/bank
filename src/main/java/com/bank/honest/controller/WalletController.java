@@ -44,8 +44,7 @@ public class WalletController {
         Wallet wallet = Wallet.builder()
                 .name(dto.getName())
                 .number(dto.getNumber())
-                .expired(dto.getExpired())
-                .status(dto.getStatus())
+                .expired(dto.getExpiration())
                 .build();
         walletService.createWallet(wallet);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -70,8 +69,7 @@ public class WalletController {
                 .id(id)
                 .name(dto.getName())
                 .number(dto.getNumber())
-                .expired(dto.getExpired())
-                .status(dto.getStatus())
+                .expired(dto.getExpiration())
                 .build();
         walletService.createWallet(wallet);
         return new ResponseEntity<>(HttpStatus.OK);

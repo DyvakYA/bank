@@ -1,6 +1,5 @@
 package com.bank.honest.model.dto;
 
-import com.bank.honest.model.entity.enums.WalletStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,12 +13,7 @@ import lombok.Setter;
 @Builder
 public class WalletDTO {
 
-    private long id;
     private String name;
     private String number;
-    private Long limit;
-    private String expired;
-    private boolean isBlocked;
-    private boolean smsInform;
-    private WalletStatus status;
+    private String expiration;
 }
