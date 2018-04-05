@@ -45,6 +45,9 @@ public class Wallet {
     @Column(name = "wallet_sms_inform")
     private boolean smsInform;
 
+    @Column(name = "sum")
+    private long sum;
+
     @Column(name = "user_wallet_status")
     private WalletStatus status;
 
@@ -54,14 +57,10 @@ public class Wallet {
 
     public WalletDTO toDTO() {
         return WalletDTO.builder()
-                .id(id)
                 .name(name)
                 .number(number)
-                .limit(limit)
-                .expired(expired)
-                .isBlocked(isBlocked)
-                .smsInform(smsInform)
-                .status(status)
+                .expiration(expired)
+                .sum(sum)
                 .build();
     }
 
@@ -69,8 +68,8 @@ public class Wallet {
         return Wallet.builder()
                 .name(dto.getName())
                 .number(dto.getNumber())
-                .expired(dto.getExpired())
-                .status(dto.getStatus())
+                .expired(dto.getExpiration())
+                .sum(dto.getSum())
                 .build();
     }
 }

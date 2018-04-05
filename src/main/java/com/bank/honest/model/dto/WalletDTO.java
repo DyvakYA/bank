@@ -16,4 +16,5 @@ public class WalletDTO {
     private String name;
     private String number;
     private String expiration;
+    private long sum;
 }
