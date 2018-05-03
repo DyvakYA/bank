@@ -86,4 +86,11 @@ public class AccountController {
         List<AccountDTO> result = accountService.findByPattern(pattern, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         return result;
     }
+
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    public List<AccountDTO> accountsByUser(@PathVariable(value = "id") String id, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        if (page < 0) page = 0;
+        List<AccountDTO> result = accountService.findByUser(id, new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
+        return result;
+    }
 }

@@ -93,6 +93,14 @@ public class AccountService {
             accountRepository.delete(id);
     }
 
+    public List<AccountDTO> findByUser(String id, Pageable pageable) {
+        List<AccountDTO> result = new ArrayList<>();
+        List<Account> accounts = accountRepository.findByUser(id, pageable);
+        for (Account account : accounts)
+            result.add(account.toDTO());
+        return result;
+    }
+
 //    @Transactional(readOnly = true)
 //    public long countByUser(User user) {
 //        return accountRepository.countByUser(user);
