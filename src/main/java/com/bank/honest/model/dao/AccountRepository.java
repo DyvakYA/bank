@@ -24,5 +24,5 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     boolean existsByAccountNumber(@Param("number") String number);
 
     @Query("SELECT c FROM Account c WHERE c.id = :id")
-    List<Account> findByUser(@Param("id")String id, Pageable pageable);
+    List<Account> findByUser(@Param("id")Long id, Pageable pageable);
 }
