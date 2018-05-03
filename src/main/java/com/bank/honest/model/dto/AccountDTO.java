@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class AccountDTO {
-
+    private Long id;
     private String number;
     private long amount;
     private Currency currency;

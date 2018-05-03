@@ -51,6 +51,7 @@ public class Account {
 
     public AccountDTO toDTO() {
         return AccountDTO.builder()
+                .id(id)
                 .number(number)
                 .amount(amount)
                 .currency(currency)
@@ -60,6 +61,7 @@ public class Account {
 
     public static Account fromDTO(AccountDTO dto) {
         return Account.builder()
+                .id(dto.getId())
                 .number(dto.getNumber())
                 .amount(dto.getAmount())
                 .customUser(dto.getCustomUser())
