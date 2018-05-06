@@ -38,7 +38,7 @@ public class Transaction {
     @Column(name = "DATETIME_FIELD", nullable = false, updatable = false)
     private Date date;
 
-    @GeneratedValue(strategy=GenerationType.TABLE)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "transaction_number")
     private String number;
 
