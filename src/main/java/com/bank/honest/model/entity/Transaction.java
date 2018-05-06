@@ -38,6 +38,8 @@ public class Transaction {
     @Column(name = "DATETIME_FIELD", nullable = false, updatable = false)
     private Date date;
 
+    @TableGenerator(name="tab", initialValue=1, allocationSize=100)
+    @GeneratedValue(strategy=GenerationType.TABLE, generator="tab")
     @Column(name = "transaction_number", nullable = false)
     private String number;
 

@@ -112,7 +112,6 @@ public class Application {
                 for(int i = 0; i < 10; i ++){
                     Transaction transaction = Transaction.builder()
                             .date(new Date())
-                            .number("1215G-" + (1*12))
                             .sourceName("123")
                             .destinationName("321")
                             .currency(Currency.BITCOIN)
