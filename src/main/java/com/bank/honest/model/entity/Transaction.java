@@ -39,7 +39,7 @@ public class Transaction {
     private Date date;
 
     @GeneratedValue(strategy=GenerationType.TABLE)
-    @Column(name = "transaction_number", nullable = false)
+    @Column(name = "transaction_number")
     private String number;
 
     @Column(name = "transaction_source_name", nullable = false)
