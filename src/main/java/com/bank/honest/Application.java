@@ -78,7 +78,7 @@ public class Application {
                 productService.createProduct(Currency.EUR, 2, 3, "");
                 productService.createProduct(Currency.BITCOIN, 100500, 100501, "");
 
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 5; i++) {
                     Account account = Account.builder()
                             .number("number" + i)
                             .amount(100500L + i)
@@ -109,7 +109,7 @@ public class Application {
                         .build();
                 accountService.createAccount(account);
 
-                for(int i = 0; i < 10; i ++){
+                for(int i = 0; i < 5; i ++){
                     Transaction transaction = Transaction.builder()
                             .date(new Date())
                             .sourceName("123")
