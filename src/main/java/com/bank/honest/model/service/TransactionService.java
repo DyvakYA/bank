@@ -30,11 +30,13 @@ public class TransactionService {
 
     @Transactional
     public void createTransaction(Transaction transaction) {
-        Account sourceAccount = accountRepository.findAccountByNumber(transaction.getSourceName());
-        Long sourceAccountSum = sourceAccount.getAmount() - transaction.getSum();
-        sourceAccount.setAmount(sourceAccountSum);
-        accountRepository.save(sourceAccount);
-        if(accountRepository.existsByAccountNumber(transaction.getDestinationName()) ){
+        if (accountRepository.existsByAccountNumber(transaction.getSourceName())) {
+            Account sourceAccount = accountRepository.findAccountByNumber(transaction.getSourceName());
+            Long sourceAccountSum = sourceAccount.getAmount() - transaction.getSum();
+            sourceAccount.setAmount(sourceAccountSum);
+            accountRepository.save(sourceAccount);
+        }
+        if (accountRepository.existsByAccountNumber(transaction.getDestinationName())) {
             Account destinationAccount = accountRepository.findAccountByNumber(transaction.getDestinationName());
             Long destinationAccountSum = destinationAccount.getAmount() + transaction.getSum();
             destinationAccount.setAmount(destinationAccountSum);
