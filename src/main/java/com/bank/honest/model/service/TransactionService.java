@@ -1,9 +1,11 @@
 package com.bank.honest.model.service;
 
+import com.bank.honest.model.dao.AccountRepository;
 import com.bank.honest.model.dao.TransactionRepository;
 import com.bank.honest.model.dto.TransactionDTO;
-import com.bank.honest.model.entity.enums.Currency;
+import com.bank.honest.model.entity.Account;
 import com.bank.honest.model.entity.Transaction;
+import com.bank.honest.model.entity.enums.Currency;
 import com.bank.honest.model.entity.enums.TransactionStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -23,8 +25,21 @@ public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    @Autowired
+    private AccountRepository accountRepository;
+
     @Transactional
     public void createTransaction(Transaction transaction) {
+        Account sourceAccount = accountRepository.findAccountByNumber(transaction.getSourceName());
+        Long sourceAccountSum = sourceAccount.getAmount() - transaction.getSum();
+        sourceAccount.setAmount(sourceAccountSum);
+        accountRepository.save(sourceAccount);
+        if(accountRepository.existsByAccountNumber(transaction.getDestinationName()) ){
+            Account destinationAccount = accountRepository.findAccountByNumber(transaction.getDestinationName());
+            Long destinationAccountSum = destinationAccount.getAmount() + transaction.getSum();
+            destinationAccount.setAmount(destinationAccountSum);
+            accountRepository.save(destinationAccount);
+        }
         transactionRepository.save(transaction);
     }
 

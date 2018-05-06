@@ -101,6 +101,10 @@ public class AccountService {
         return result;
     }
 
+    public Account findByNumber(String number) {
+        return accountRepository.findAccountByNumber(number);
+    }
+
 //    @Transactional(readOnly = true)
 //    public long countByUser(User user) {
 //        return accountRepository.countByUser(user);

@@ -48,6 +48,8 @@ public class TransactionController {
         Transaction transaction = Transaction.builder()
                 .date(new Date())
                 .number(dto.getNumber())
+                .sourceName(dto.getSourceName())
+                .destinationName(dto.getDestinationName())
                 .sum(dto.getSum())
                 .currency(dto.getCurrency())
                 .status(dto.getStatus())

@@ -81,7 +81,7 @@ public class Application {
                 for (int i = 0; i < 10; i++) {
                     Account account = Account.builder()
                             .number("number" + i)
-                            .amount(100500 + i)
+                            .amount(100500L + i)
                             .currency(Currency.USD)
                             .customUser(userService.findUser("0938412040"))
                             .build();
@@ -103,7 +103,7 @@ public class Application {
 
                 Account account = Account.builder()
                         .number("Special Account")
-                        .amount(1012)
+                        .amount(1012L)
                         .currency(Currency.BITCOIN)
                         .customUser(userService.findUser("user"))
                         .build();
