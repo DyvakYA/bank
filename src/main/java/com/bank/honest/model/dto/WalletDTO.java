@@ -13,6 +13,7 @@ import lombok.Setter;
 @Builder
 public class WalletDTO {
 
+    private Long id;
     private String name;
     private String number;
     private String expiration;
