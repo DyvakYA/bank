@@ -71,7 +71,7 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public List<CustomUser> findAll() {
+    public List<CustomUser> findAllUsersForAdmin() {
         return userRepository.findAll();
     }
 
@@ -82,6 +82,12 @@ public class UserService {
         for (CustomUser customUser : customUsers) {
             result.add(customUser.toDTO());
         }
+        return result;
+    }
+
+    @Transactional(readOnly = true)
+    public List<CustomUser> findAllUsersForAdmin(Pageable pageable) {
+        List<CustomUser> result = userRepository.findAll(pageable).getContent();
         return result;
     }
 
@@ -142,8 +148,8 @@ public class UserService {
 //    }
 
 //    @Transactional(readOnly = true)
-//    public Map<User, Long> findAll(Pageable pageable) {
-//        List<User> users = userRepository.findAll(pageable).getContent();
+//    public Map<User, Long> findAllUsersForAdmin(Pageable pageable) {
+//        List<User> users = userRepository.findAllUsersForAdmin(pageable).getContent();
 //        Map<User, Long> countByGroup = new HashMap<>();
 //        for (User user : users) {
 //            countByGroup.put(user, Long.valueOf(user.getAccounts().size()));
@@ -167,8 +173,8 @@ public class UserService {
 //    }
 //
 //    @Transactional(readOnly = true)
-//    public List<User> findAll(Pageable pageable) {
-//        return userRepository.findAll(pageable).getContent();
+//    public List<User> findAllUsersForAdmin(Pageable pageable) {
+//        return userRepository.findAllUsersForAdmin(pageable).getContent();
 //    }
 
 
