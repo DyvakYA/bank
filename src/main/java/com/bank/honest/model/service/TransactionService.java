@@ -1,5 +1,6 @@
 package com.bank.honest.model.service;
 
+import com.bank.honest.exception.NotEnoughMoneyException;
 import com.bank.honest.model.dao.AccountRepository;
 import com.bank.honest.model.dao.TransactionRepository;
 import com.bank.honest.model.dto.TransactionDTO;
@@ -32,9 +33,13 @@ public class TransactionService {
     public void createTransaction(Transaction transaction) {
         if (accountRepository.existsByAccountNumber(transaction.getSourceName())) {
             Account sourceAccount = accountRepository.findAccountByNumber(transaction.getSourceName());
-            Long sourceAccountSum = sourceAccount.getAmount() - transaction.getSum();
-            sourceAccount.setAmount(sourceAccountSum);
-            accountRepository.save(sourceAccount);
+            if (sourceAccount.getAmount() < transaction.getSum()) {
+                throw new NotEnoughMoneyException("Not enough money fot transaction");
+            }else {
+                Long sourceAccountSum = sourceAccount.getAmount() - transaction.getSum();
+                sourceAccount.setAmount(sourceAccountSum);
+                accountRepository.save(sourceAccount);
+            }
         }
         if (accountRepository.existsByAccountNumber(transaction.getDestinationName())) {
             Account destinationAccount = accountRepository.findAccountByNumber(transaction.getDestinationName());

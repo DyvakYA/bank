@@ -17,5 +17,6 @@ public class WalletDTO {
     private String name;
     private String number;
     private String expiration;
+    private boolean isBlocked;
     private long sum;
 }
