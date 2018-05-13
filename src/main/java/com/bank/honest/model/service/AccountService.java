@@ -66,20 +66,6 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    @Transactional
-    public boolean createAccount(String number, long amount, CustomUser customUser) {
-        if (accountRepository.existsByAccountNumber(number))
-            return false;
-
-        Account account = Account.builder()
-                .number(number)
-                .amount(amount)
-                .customUser(customUser)
-                .build();
-        accountRepository.save(account);
-        return true;
-    }
-
     @Transactional(readOnly = true)
     public List<AccountDTO> findUserAccounts(String phone) {
         CustomUser user = userRepository.findByPhone(phone);

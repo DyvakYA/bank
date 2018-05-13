@@ -35,64 +35,12 @@ public class UserService {
 
     @Transactional
     public void createUser(CustomUser customUser) {
-
         userRepository.save(customUser);
-
-        Account accountUAH = Account.builder()
-                .customUser(customUser)
-                .number(customUser.getPhone() + "1")
-                .amount(0L)
-                .currency(Currency.UAH)
-                .isBlocked(false)
-                .build();
-        accountRepository.save(accountUAH);
-
-        Account accountUSD = Account.builder()
-                .customUser(customUser)
-                .number(customUser.getPhone() + "2")
-                .amount(0L)
-                .currency(Currency.USD)
-                .isBlocked(false)
-                .build();
-        accountRepository.save(accountUSD);
     }
 
     @Transactional
     public boolean existByPhone(String phone) {
         return userRepository.existsByPhone(phone);
-    }
-
-    @Transactional
-    public boolean createUser(String phone, String passHash, UserRole role) {
-        if (userRepository.existsByPhone(phone))
-            return false;
-
-        CustomUser customUser = CustomUser.builder()
-                .phone(phone)
-                .password(passHash)
-                .role(role)
-                .build();
-        userRepository.save(customUser);
-
-
-        Account accountUAH = Account.builder()
-                .customUser(customUser)
-                .number(customUser.getPhone() + "1")
-                .amount(0L)
-                .currency(Currency.UAH)
-                .isBlocked(false)
-                .build();
-        accountRepository.save(accountUAH);
-
-        Account accountUSD = Account.builder()
-                .customUser(customUser)
-                .number(customUser.getPhone() + "2")
-                .amount(0L)
-                .currency(Currency.USD)
-                .isBlocked(false)
-                .build();
-        accountRepository.save(accountUSD);
-        return true;
     }
 
     @Transactional(readOnly = true)
