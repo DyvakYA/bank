@@ -6,8 +6,6 @@ import com.bank.honest.model.dao.TransactionRepository;
 import com.bank.honest.model.dto.TransactionDTO;
 import com.bank.honest.model.entity.Account;
 import com.bank.honest.model.entity.Transaction;
-import com.bank.honest.model.entity.enums.Currency;
-import com.bank.honest.model.entity.enums.TransactionStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -48,23 +46,6 @@ public class TransactionService {
             accountRepository.save(destinationAccount);
         }
         transactionRepository.save(transaction);
-    }
-
-    @Transactional
-    public boolean createTransaction(String number, Long sum, Currency currency, TransactionStatus status) {
-        if (transactionRepository.existsByNumber(number))
-            return false;
-
-        Transaction transaction = Transaction.builder()
-                .date(new Date())
-                .number(number)
-                .sum(sum)
-                .currency(currency)
-                .status(status)
-                .build();
-        transactionRepository.save(transaction);
-
-        return true;
     }
 
     @Transactional

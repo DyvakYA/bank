@@ -27,22 +27,6 @@ public class ProductService {
     }
 
     @Transactional
-    public boolean createProduct(Currency currency, long buyCourse, long sellCourse, String description) {
-        if (productRepository.existsByName(currency))
-            return false;
-
-        Product product = Product.builder()
-                .currency(currency)
-                .buyCourse(buyCourse)
-                .sellCourse(sellCourse)
-                .description(description)
-                .build();
-        productRepository.save(product);
-
-        return true;
-    }
-
-    @Transactional
     public List<ProductDTO> findAll(Pageable pageable) {
         List<Product> products = productRepository.findAll(pageable).getContent();
         List<ProductDTO> result = new ArrayList<>();

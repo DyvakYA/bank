@@ -22,6 +22,7 @@ public class WalletService {
 
     @Transactional
     public void createWallet(Wallet wallet) {
+        System.out.println(wallet);
         walletRepository.save(wallet);
     }
 

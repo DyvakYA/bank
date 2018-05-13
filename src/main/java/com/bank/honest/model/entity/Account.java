@@ -49,7 +49,7 @@ public class Account {
     @OneToMany(mappedBy="account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Transaction> transactions = new ArrayList<>();
 
-    @OneToMany(mappedBy="account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany( mappedBy="account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Wallet> wallets = new ArrayList<>();
 
     public AccountDTO toDTO() {

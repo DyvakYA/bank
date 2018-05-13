@@ -1,7 +1,9 @@
 package com.bank.honest.controller;
 
 import com.bank.honest.model.dto.WalletDTO;
+import com.bank.honest.model.entity.Account;
 import com.bank.honest.model.entity.Wallet;
+import com.bank.honest.model.service.AccountService;
 import com.bank.honest.model.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +27,9 @@ public class WalletController {
     @Autowired
     protected WalletService walletService;
 
+    @Autowired
+    protected AccountService accountService;
+
     @RequestMapping(method = RequestMethod.GET)
     public List<WalletDTO> wallets(@RequestParam(required = false, defaultValue = "0") Integer page) {
         if (page < 0) page = 0;
@@ -47,6 +52,22 @@ public class WalletController {
                 .expired(dto.getExpiration())
                 .build();
         walletService.createWallet(wallet);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "account/{id}", method = RequestMethod.POST)
+    public ResponseEntity<Void> createWalletForAccount(@PathVariable(value = "id") Long id, @Valid @RequestBody WalletDTO dto) {
+
+        Account account = accountService.findAccount(id);
+        Wallet wallet = Wallet.builder()
+                .name(dto.getName())
+                .number(dto.getNumber())
+                .account(account)
+                .expired(dto.getExpiration())
+                .build();
+        walletService.createWallet(wallet);
+        account.getWallets().add(wallet);
+        accountService.createAccount(account);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -82,7 +103,7 @@ public class WalletController {
         return result;
     }
 
-    @RequestMapping(value = "/account/wallets/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
     public List<WalletDTO> walletsByAccountId(@PathVariable(value = "id") Long id) {
         List<WalletDTO> result = walletService.findWalletsByAccountId(id);
         return result;

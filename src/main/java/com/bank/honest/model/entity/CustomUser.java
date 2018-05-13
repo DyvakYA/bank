@@ -58,11 +58,11 @@ public class CustomUser {
 
     public UserDTO toDTO() {
         return UserDTO.builder()
-                .id(id)
+                //.id(id)
                 .phone(phone)
                 .password(password)
-                .role(role)
-                .profile(profile)
+                //.role(role)
+                //.profile(profile)
                 .build();
     }
 

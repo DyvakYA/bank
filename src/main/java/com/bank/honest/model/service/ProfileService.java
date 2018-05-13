@@ -48,16 +48,6 @@ public class ProfileService {
     }
 
     @Transactional
-    public void createProfile(String email, String first_name, String last_name) {
-        Profile profile = Profile.builder()
-                .email(email)
-                .firstName(first_name)
-                .lastName(last_name)
-                .build();
-        profileRepository.save(profile);
-    }
-
-    @Transactional
     public void deleteProfiles(Long id) {
         profileRepository.delete(id);
     }

@@ -67,9 +67,10 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> create(@Valid @RequestBody UserDTO dto) {
+        System.out.println(dto);
         CustomUser user = CustomUser.fromDTO(dto);
 
-        UserRole userRole = (dto.getRole() != UserRole.ADMIN) ? UserRole.USER : UserRole.ADMIN;
+        //UserRole userRole = (dto.getRole() != UserRole.ADMIN) ? UserRole.USER : UserRole.ADMIN;
         userService.createUser(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

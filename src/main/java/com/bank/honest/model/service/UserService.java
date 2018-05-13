@@ -77,6 +77,16 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
+    public List<UserDTO> findAll() {
+        List<CustomUser> customUsers = userRepository.findAll();
+        List<UserDTO> result = new ArrayList<>();
+        for (CustomUser customUser : customUsers) {
+            result.add(customUser.toDTO());
+        }
+        return result;
+    }
+
+    @Transactional(readOnly = true)
     public List<CustomUser> findAllUsersForAdmin(Pageable pageable) {
         List<CustomUser> result = userRepository.findAll(pageable).getContent();
         return result;

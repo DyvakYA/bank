@@ -27,10 +27,10 @@ public class AccountService {
     @Autowired
     WalletRepository walletRepository;
 
+
     @Transactional(readOnly = true)
-    public AccountDTO findAccount(long account_id) {
-        Account account = accountRepository.findOne(account_id);
-        AccountDTO result = account.toDTO();
+    public Account findAccount(long account_id) {
+        Account result = accountRepository.findOne(account_id);
         return result;
     }
 
@@ -51,6 +51,7 @@ public class AccountService {
 
     @Transactional
     public void createAccount(Account account) {
+        System.out.println(account.getWallets());
         accountRepository.save(account);
     }
 

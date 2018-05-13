@@ -42,8 +42,8 @@ public class AccountController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public AccountDTO accountById(@PathVariable(value = "id") Long account_id) {
-        AccountDTO result = accountService.findAccount(account_id);
-        return result;
+        Account account = accountService.findAccount(account_id);
+        return account.toDTO();
     }
 
     @RequestMapping(method = RequestMethod.POST)
