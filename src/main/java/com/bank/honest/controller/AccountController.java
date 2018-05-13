@@ -4,6 +4,7 @@ import com.bank.honest.model.dto.AccountDTO;
 import com.bank.honest.model.entity.Account;
 import com.bank.honest.model.service.AccountService;
 import com.bank.honest.model.service.UserService;
+import com.bank.honest.model.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -28,6 +29,9 @@ public class AccountController {
 
     @Autowired
     protected UserService userService;
+
+    @Autowired
+    protected WalletService walletService;
 
     @RequestMapping(method = RequestMethod.GET)
     public List<AccountDTO> accounts(@RequestParam(required = false, defaultValue = "0") Integer page) {
@@ -71,12 +75,15 @@ public class AccountController {
     public ResponseEntity<Void> update(@Valid @RequestBody AccountDTO dto) {
 
         Account account = Account.builder()
+                .id(dto.getId())
                 .number(dto.getNumber())
                 .amount(dto.getAmount())
                 .currency(dto.getCurrency())
                 .customUser(dto.getCustomUser())
+                .isBlocked(dto.isBlocked())
                 .build();
         accountService.createAccount(account);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

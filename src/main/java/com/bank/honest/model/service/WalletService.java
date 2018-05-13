@@ -63,7 +63,7 @@ public class WalletService {
 
     @Transactional(readOnly = true)
     public List<WalletDTO> findWalletsByAccountId(Long id) {
-        List<Wallet> wallets = walletRepository.findOneByAccountId(id);
+        List<Wallet> wallets = walletRepository.findWalletsByAccountId(id);
         List<WalletDTO> result = new ArrayList<>();
         for(Wallet wallet: wallets)
             result.add(wallet.toDTO());

@@ -25,5 +25,5 @@ public interface WalletRepository extends JpaRepository<Wallet, Long>{
     List<Wallet> findByPattern(@Param("number") String number, Pageable pageable);
 
     @Query("SELECT w FROM Wallet w JOIN Account a ON w.account=a.id WHERE w.id = :id")
-    List<Wallet> findOneByAccountId(@Param("id")Long id);
+    List<Wallet> findWalletsByAccountId(@Param("id")Long id);
 }

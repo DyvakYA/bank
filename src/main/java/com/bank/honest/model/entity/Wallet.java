@@ -45,9 +45,6 @@ public class Wallet {
     @Column(name = "wallet_sms_inform")
     private boolean smsInform;
 
-    @Column(name = "sum")
-    private long sum;
-
     @Column(name = "user_wallet_status")
     private WalletStatus status;
 
@@ -61,7 +58,6 @@ public class Wallet {
                 .name(name)
                 .number(number)
                 .expiration(expired)
-                .sum(sum)
                 .build();
     }
 
@@ -70,7 +66,6 @@ public class Wallet {
                 .name(dto.getName())
                 .number(dto.getNumber())
                 .expired(dto.getExpiration())
-                .sum(dto.getSum())
                 .build();
     }
 }

@@ -2,9 +2,11 @@ package com.bank.honest.model.service;
 
 import com.bank.honest.model.dao.AccountRepository;
 import com.bank.honest.model.dao.UserRepository;
+import com.bank.honest.model.dao.WalletRepository;
 import com.bank.honest.model.dto.AccountDTO;
 import com.bank.honest.model.entity.Account;
 import com.bank.honest.model.entity.CustomUser;
+import com.bank.honest.model.entity.Wallet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,9 @@ public class AccountService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    WalletRepository walletRepository;
 
     @Transactional(readOnly = true)
     public AccountDTO findAccount(long account_id) {
@@ -46,6 +51,18 @@ public class AccountService {
 
     @Transactional
     public void createAccount(Account account) {
+        accountRepository.save(account);
+    }
+
+    @Transactional
+    public void updateAccount(Account account) {
+        if (account.isBlocked()) {
+            List<Wallet> wallets = walletRepository.findWalletsByAccountId(account.getId());
+            for (Wallet wallet : wallets) {
+                wallet.setBlocked(true);
+                walletRepository.save(wallet);
+            }
+        }
         accountRepository.save(account);
     }
 

@@ -39,6 +39,9 @@ public class Account {
     @Column(name="user_account_currency", nullable = false)
     private Currency currency;
 
+    @Column(name = "account_is_blocked")
+    private boolean isBlocked;
+
     @ManyToOne
     @JoinColumn(name="user_id")
     private CustomUser customUser;

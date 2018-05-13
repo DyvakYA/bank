@@ -82,4 +82,14 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 .build();
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value = NotEnoughMoneyException.class)
+    public final ResponseEntity<ErrorDetails> handleNotEnoughMoneyException(NotEnoughMoneyException ex, WebRequest request) {
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .timestamp(new Date())
+                .message(ex.getMessage())
+                .details(request.getDescription(false))
+                .build();
+        return new ResponseEntity<>(errorDetails, HttpStatus.GONE);
+    }
 }

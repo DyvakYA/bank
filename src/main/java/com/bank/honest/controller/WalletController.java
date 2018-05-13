@@ -82,8 +82,8 @@ public class WalletController {
         return result;
     }
 
-    @RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
-    public List<WalletDTO> walletsqwe(@PathVariable(value = "id") Long id) {
+    @RequestMapping(value = "/account/wallets/{id}", method = RequestMethod.GET)
+    public List<WalletDTO> walletsByAccountId(@PathVariable(value = "id") Long id) {
         List<WalletDTO> result = walletService.findWalletsByAccountId(id);
         return result;
     }
