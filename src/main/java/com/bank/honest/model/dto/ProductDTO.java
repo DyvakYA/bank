@@ -16,8 +16,8 @@ import lombok.Setter;
 public class ProductDTO {
 
     private Currency currency;
-    private long buyCourse;
-    private long sellCourse;
+    private Long buyCourse;
+    private Long sellCourse;
     private String description;
 
 }

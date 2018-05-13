@@ -17,7 +17,7 @@ public class AccountDTO {
 
     private Long id;
     private String number;
-    private long amount;
+    private Long amount;
     private Currency currency;
     private CustomUser customUser;
     private boolean isBlocked;

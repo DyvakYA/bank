@@ -1,5 +1,7 @@
 package com.bank.honest.model.dto;
 
+import com.bank.honest.model.entity.Profile;
+import com.bank.honest.model.entity.enums.UserRole;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,10 +16,10 @@ import lombok.ToString;
 @ToString
 public class UserDTO {
 
-//    private Long id;
+    private Long id;
     private String phone;
     private String password;
-//    private UserRole role;
-//    private Profile profile;
+    private UserRole role;
+    private Profile profile;
 
 }

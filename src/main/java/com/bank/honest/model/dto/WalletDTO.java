@@ -15,6 +15,7 @@ import lombok.ToString;
 @ToString
 public class WalletDTO {
 
+    private Long id;
     private String name;
     private String number;
     private String expiration;

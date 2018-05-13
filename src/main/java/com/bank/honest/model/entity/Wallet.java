@@ -54,7 +54,7 @@ public class Wallet {
 
     public WalletDTO toDTO() {
         return WalletDTO.builder()
-                //.id(id)
+                .id(id)
                 .name(name)
                 .number(number)
                 .expiration(expired)
