@@ -57,11 +57,11 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@RequestParam(value = "id[]", required = false) Long[] ids) {
-        productService.deleteProducts(ids);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
+//    public ResponseEntity<Void> delete(@RequestParam(value = "id[]", required = false) Long[] ids) {
+//        productService.deleteProducts(ids);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody ProductDTO dto) {
