@@ -146,6 +146,11 @@ public class UserService {
         accountRepository.save(accountUSD);
     }
 
+    public CustomUser findUserByAccount(Long id) {
+        CustomUser result = userRepository.findUserByAccount(id);
+        return result;
+    }
+
     //    @Transactional
 //    public void User(long[] toDelete) {
 //        for (long id : toDelete)

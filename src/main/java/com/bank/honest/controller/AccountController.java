@@ -73,7 +73,7 @@ public class AccountController {
                 .number(dto.getNumber())
                 .amount(dto.getAmount())
                 .currency(dto.getCurrency())
-                .customUser(dto.getCustomUser())
+                .customUser(userService.findUserByAccount(dto.getId()))
                 .isBlocked(dto.isBlocked())
                 .build();
         accountService.createAccount(account);
