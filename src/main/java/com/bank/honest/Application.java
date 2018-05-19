@@ -33,14 +33,11 @@ public class Application {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("GET", "POST","PUT", "DELETE");
+                        .allowedOrigins("*")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE");
             }
         };
     }
-
-
-
 
     @Bean
     public CommandLineRunner demo(final UserService userService,
