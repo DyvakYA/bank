@@ -75,11 +75,6 @@ public class TransactionService {
     }
 
     @Transactional
-    public void deleteTransaction(Long id) {
-        transactionRepository.delete(id);
-    }
-
-    @Transactional
     public void deleteTransaction(Long[] toDelete) {
         for (long id : toDelete)
             transactionRepository.delete(id);

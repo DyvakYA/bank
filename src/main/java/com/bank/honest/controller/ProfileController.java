@@ -50,18 +50,12 @@ public class ProfileController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@RequestParam(value = "id", required = false) Long id) {
-        profileService.deleteProfiles(id);
+    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable(value = "id[]") Long[] ids) {
+        if (ids != null && ids.length > 0)
+            profileService.deleteProfiles(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-//    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
-//    public ResponseEntity<Void> delete(@RequestParam(value = "id[]", required = false) Long[] ids) {
-//        if (ids != null && ids.length > 0)
-//            profileService.deleteProfiles(ids);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> userUpdate(@Valid @RequestBody ProfileDTO dto, @RequestParam Long id) {

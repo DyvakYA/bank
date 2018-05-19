@@ -48,11 +48,6 @@ public class ProfileService {
     }
 
     @Transactional
-    public void deleteProfiles(Long id) {
-        profileRepository.delete(id);
-    }
-
-    @Transactional
     public void deleteProfiles(Long[] ids) {
         for (Long id : ids)
         profileRepository.delete(id);

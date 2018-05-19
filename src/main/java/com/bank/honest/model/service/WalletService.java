@@ -32,11 +32,6 @@ public class WalletService {
             walletRepository.delete(id);
     }
 
-    @Transactional
-    public void deleteWallet(Long id) {
-        walletRepository.delete(id);
-    }
-
     @Transactional(readOnly = true)
     public WalletDTO findWallet(long wallet_id) {
         Wallet wallet = walletRepository.findOne(wallet_id);

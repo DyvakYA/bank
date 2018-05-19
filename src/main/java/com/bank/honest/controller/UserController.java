@@ -75,18 +75,12 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@RequestParam(value = "id", required = false) Long id) {
-        userService.deleteUsers(id);
+    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable(value = "id[]") Long[] ids) {
+        if (ids != null && ids.length > 0)
+            userService.deleteUsers(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-//    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
-//    public ResponseEntity<Void> delete(@RequestParam(value = "id[]", required = false) Long[] ids) {
-//        if (ids != null && ids.length > 0)
-//            userService.deleteUsers(ids);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> userUpdate(@Valid @RequestBody CustomUser dto) {

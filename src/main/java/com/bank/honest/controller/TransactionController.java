@@ -58,17 +58,11 @@ public class TransactionController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@RequestParam(value = "id", required = false) Long id) {
-        transactionService.deleteTransaction(id);
+    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable(value = "id[]") Long[] ids) {
+        transactionService.deleteTransaction(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-//    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
-//    public ResponseEntity<Void> delete(@RequestParam(value = "id[]", required = false) Long[] ids) {
-//        transactionService.deleteTransaction(ids);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody TransactionDTO dto) {

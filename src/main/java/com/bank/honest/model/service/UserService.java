@@ -111,11 +111,6 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUsers(Long id) {
-        userRepository.delete(id);
-    }
-
-    @Transactional
     public void registration(RegistrationDTO registrationDTO) {
 
         Profile profile = Profile.builder()

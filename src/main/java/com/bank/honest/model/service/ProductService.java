@@ -49,10 +49,6 @@ public class ProductService {
         return result;
     }
 
-    @Transactional
-    public void deleteProducts(Long id) {
-        productRepository.delete(id);
-    }
 
     @Transactional
     public void deleteProducts(Long[] toDelete) {

@@ -71,17 +71,11 @@ public class WalletController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@RequestParam(value = "id", required = false) Long id) {
-        walletService.deleteWallet(id);
+    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable(value = "id[]") Long[] ids) {
+        walletService.deleteWallets(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-//    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
-//    public ResponseEntity<Void> delete(@RequestParam(value = "id[]", required = false) Long[] ids) {
-//        walletService.deleteWallets(ids);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody WalletDTO dto, @RequestParam Long id) {
