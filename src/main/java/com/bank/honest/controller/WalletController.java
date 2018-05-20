@@ -78,10 +78,10 @@ public class WalletController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@Valid @RequestBody WalletDTO dto, @RequestParam Long id) {
+    public ResponseEntity<Void> update(@Valid @RequestBody WalletDTO dto) {
 
         Wallet wallet = Wallet.builder()
-                .id(id)
+                .id(dto.getId())
                 .name(dto.getName())
                 .number(dto.getNumber())
                 .expired(dto.getExpiration())
