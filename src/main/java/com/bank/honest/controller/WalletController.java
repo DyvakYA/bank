@@ -85,6 +85,7 @@ public class WalletController {
                 .name(dto.getName())
                 .number(dto.getNumber())
                 .expired(dto.getExpiration())
+                .isBlocked(dto.isBlocked())
                 .build();
         walletService.createWallet(wallet);
         return new ResponseEntity<>(HttpStatus.OK);
