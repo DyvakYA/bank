@@ -79,9 +79,16 @@ public class TransactionController {
     }
 
     @RequestMapping(value = "/search/{date}", method = RequestMethod.GET)
-    public List<TransactionDTO> transactionByPattern(@PathVariable(value = "date") String date) throws ParseException {
+    public List<TransactionDTO> transactionByDate(@PathVariable(value = "date") String date) throws ParseException {
         DateFormat format = new SimpleDateFormat("hh:mm:ss");
         List<TransactionDTO> result = transactionService.findTransaction(format.parse(date));
+        return result;
+    }
+
+    @RequestMapping(value = "/search/{from}/{to}", method = RequestMethod.GET)
+    public List<TransactionDTO> transactionByPeriod(@PathVariable(value = "from") String from, @PathVariable(value = "to") String to) throws ParseException {
+        DateFormat format = new SimpleDateFormat("dd-mm-yyyy");
+        List<TransactionDTO> result = transactionService.findTransactionByPeriod(format.parse(from), format.parse(to));
         return result;
     }
 }

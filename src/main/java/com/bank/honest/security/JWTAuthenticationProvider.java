@@ -41,6 +41,7 @@ public class JWTAuthenticationProvider extends AbstractUserDetailsAuthentication
         if (jwtUser == null) {
             throw new TokenIsIncorrectException("JWT Token is incorrect");
         }
+       // if (jwtUser.)
 
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList(jwtUser.getRole().toString());

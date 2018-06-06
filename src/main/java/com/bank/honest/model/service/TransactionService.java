@@ -33,7 +33,7 @@ public class TransactionService {
             Account sourceAccount = accountRepository.findAccountByNumber(transaction.getSourceName());
             if (sourceAccount.getAmount() < transaction.getSum()) {
                 throw new NotEnoughMoneyException("Not enough money fot transaction");
-            }else {
+            } else {
                 Long sourceAccountSum = sourceAccount.getAmount() - transaction.getSum();
                 sourceAccount.setAmount(sourceAccountSum);
                 accountRepository.save(sourceAccount);
@@ -78,5 +78,13 @@ public class TransactionService {
     public void deleteTransaction(Long[] toDelete) {
         for (long id : toDelete)
             transactionRepository.delete(id);
+    }
+
+    public List<TransactionDTO> findTransactionByPeriod(Date from, Date to) {
+        List<TransactionDTO> result = new ArrayList<>();
+        List<Transaction> transactions = transactionRepository.findByPeriod(from, to);
+        for (Transaction transaction : transactions)
+            result.add(transaction.toDTO());
+        return result;
     }
 }

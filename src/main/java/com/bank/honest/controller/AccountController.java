@@ -77,7 +77,7 @@ public class AccountController {
                 .customUser(userService.findUserByAccount(dto.getId()))
                 .isBlocked(dto.isBlocked())
                 .build();
-        accountService.createAccount(account);
+        accountService.updateAccount(account);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
