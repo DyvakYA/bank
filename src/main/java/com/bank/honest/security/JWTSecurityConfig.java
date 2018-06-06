@@ -44,16 +44,10 @@ public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 //.antMatchers(HttpMethod.POST, "/users/registration").permitAll()
 
-
-
-
 //                .antMatchers("/*").hasAnyRole("USER", "ADMIN")
 //                .antMatchers("/users/*").hasRole("ADMIN")
 //                .antMatchers("/register").permitAll()
 //                .anyRequest().authenticated()
-
-
-
 
                 .and()
                 .exceptionHandling()

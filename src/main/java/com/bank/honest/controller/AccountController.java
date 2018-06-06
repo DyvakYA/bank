@@ -55,6 +55,7 @@ public class AccountController {
                 .currency(dto.getCurrency())
                 .customUser(dto.getCustomUser())
                 .build();
+        System.out.println(account);
         accountService.createAccount(account);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
