@@ -92,4 +92,14 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 .build();
         return new ResponseEntity<>(errorDetails, HttpStatus.GONE);
     }
+
+    @ExceptionHandler(value = WrongPasswordException.class)
+    public final ResponseEntity<ErrorDetails> handleWrongPasswordException(WrongPasswordException ex, WebRequest request) {
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .timestamp(new Date())
+                .message(ex.getMessage())
+                .details(request.getDescription(false))
+                .build();
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
 }

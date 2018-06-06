@@ -68,8 +68,8 @@ public class Application {
                         .lastName("Admin")
                         .build();
                 CustomUser admin = CustomUser.builder()
-                        .phone("admin")
-                        .password("admin")
+                        .phone("+38099 999-99-99")
+                        .password("Qwerty12345")
                         .role(UserRole.ADMIN)
                         .profile(adminProfile)
                         .build();
@@ -87,11 +87,11 @@ public class Application {
                 }
 
                 List<Account> accounts = accountService.findAll();
-                System.out.println(accounts);
+                log.info(accounts.toString());
                 for (Account account : accounts) {
                     Wallet wallet = Wallet.builder()
                             .name("Wallet" + account.getNumber())
-                            .number(account.getNumber() + Arrays.asList(accounts).indexOf(account))
+                            .number(account.getNumber() + accounts.indexOf(account))
                             .expired("2100")
                             .status(WalletStatus.TRUE)
                             .limit(100000L)

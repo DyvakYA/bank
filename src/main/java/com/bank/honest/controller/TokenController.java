@@ -2,6 +2,7 @@ package com.bank.honest.controller;
 
 import com.bank.honest.exception.UserAlreadyExistException;
 import com.bank.honest.exception.UserNotFoundException;
+import com.bank.honest.exception.WrongPasswordException;
 import com.bank.honest.model.dto.AuthenticateDTO;
 import com.bank.honest.model.dto.RegistrationDTO;
 import com.bank.honest.model.entity.CustomUser;
@@ -37,7 +38,10 @@ public class TokenController {
     public String generate(@RequestBody AuthenticateDTO authenticateDTO) {
         if (!userService.existByPhone(authenticateDTO.getPhone())) {
             throw new UserNotFoundException("User not found");
-        } else {
+        }
+        if (userService.findByPhone(authenticateDTO.getPhone()).getPassword().equals(authenticateDTO.getPassword())){
+            throw new WrongPasswordException("Wrong password");
+        } else{
             CustomUser user = userService.findUserByPhone(authenticateDTO.getPhone());
             JWTUser jwtUser = JWTUser.builder()
                     .id(user.getId())
@@ -54,7 +58,7 @@ public class TokenController {
 
         if (userService.existByPhone(dto.getPhone())) {
             throw new UserAlreadyExistException("User with this phone number already exist");
-        }else {
+        } else {
             userService.registration(dto);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
