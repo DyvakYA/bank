@@ -80,9 +80,9 @@ public class TransactionService {
             transactionRepository.delete(id);
     }
 
-    public List<TransactionDTO> findTransactionByPeriod(Date from, Date to) {
+    public List<TransactionDTO> findTransactionByPeriod(Date dateFrom, Date dateTo) {
         List<TransactionDTO> result = new ArrayList<>();
-        List<Transaction> transactions = transactionRepository.findByPeriod(from, to);
+        List<Transaction> transactions = transactionRepository.findByPeriod(dateFrom, dateTo);
         for (Transaction transaction : transactions)
             result.add(transaction.toDTO());
         return result;
