@@ -75,11 +75,16 @@ public class Application {
                         .build();
                 userService.createUser(admin);
 
+                Profile userProfile = Profile.builder()
+                        .email("email@gmail.com")
+                        .firstName("John")
+                        .lastName("Dou")
+                        .build();
                 CustomUser user = CustomUser.builder()
                         .phone("+38011 111-11-11")
                         .password("Qwerty12345")
                         .role(UserRole.USER)
-                        .profile(adminProfile)
+                        .profile(userProfile)
                         .build();
                 userService.createUser(user);
 
