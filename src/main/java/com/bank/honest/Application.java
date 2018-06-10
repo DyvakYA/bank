@@ -55,8 +55,8 @@ public class Application {
                 for (Currency currency : currencies) {
                     Product product = Product.builder()
                             .currency(currency)
-                            .sellCourse(1)
-                            .buyCourse(1)
+                            .sellCourse(100)
+                            .buyCourse(120)
                             .description("Currency - " + currency.toString())
                             .build();
                     productService.createProduct(product);
@@ -64,8 +64,8 @@ public class Application {
 
                 Profile adminProfile = Profile.builder()
                         .email("email@gmail.com")
-                        .firstName("Admin")
-                        .lastName("Admin")
+                        .firstName("John")
+                        .lastName("Dou")
                         .build();
                 CustomUser admin = CustomUser.builder()
                         .phone("+38099 999-99-99")
@@ -74,6 +74,14 @@ public class Application {
                         .profile(adminProfile)
                         .build();
                 userService.createUser(admin);
+
+                CustomUser user = CustomUser.builder()
+                        .phone("+38099 999-99-99")
+                        .password("Qwerty12345")
+                        .role(UserRole.USER)
+                        .profile(null)
+                        .build();
+                userService.createUser(user);
 
                 for (Currency currency : currencies) {
                     Account account = Account.builder()
