@@ -4,6 +4,7 @@ import com.bank.honest.model.dto.AccountDTO;
 import com.bank.honest.model.entity.enums.Currency;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,8 +31,8 @@ public class Account {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @SequenceGenerator(name = "hibernateSeq", sequenceName = "HIBERNATE_SEQUENCE")
-    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "hibernateSeq")
+    @GenericGenerator(name = "accountNumberGenerator", strategy = "com.bank.honest.model.entity.generator.AccountNumberGenerator")
+    @GeneratedValue(generator = "accountNumberGenerator")
     @Column(name="user_account_number", nullable = false)
     private String number;
 

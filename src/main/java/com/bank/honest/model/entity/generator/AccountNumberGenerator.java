@@ -12,7 +12,7 @@ import java.util.Random;
 /**
  * Created by User on 6/10/2018.
  */
-public class AccountNumbergenerator implements IdentifierGenerator {
+public class AccountNumberGenerator implements IdentifierGenerator {
 
     @Autowired
     private AccountService accountService;
