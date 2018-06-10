@@ -1,6 +1,7 @@
 package com.bank.honest.controller;
 
 import com.bank.honest.model.dto.AccountDTO;
+import com.bank.honest.model.dto.AmountDTO;
 import com.bank.honest.model.entity.Account;
 import com.bank.honest.model.entity.generator.NumberGeberatorUtil;
 import com.bank.honest.model.service.AccountService;
@@ -70,18 +71,34 @@ public class AccountController {
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody AccountDTO dto) {
 
-        Account account = Account.builder()
-                .id(dto.getId())
-                .number(dto.getNumber())
-                .amount(dto.getAmount())
-                .currency(dto.getCurrency())
-                .customUser(userService.findUserByAccount(dto.getId()))
-                .isBlocked(dto.isBlocked())
-                .build();
+        Account account = accountService.findAccount(dto.getId());
+        account.setAmount(dto.getAmount());
+        account.setBlocked(dto.isBlocked());
+
+//        account = Account.builder()
+//                .id(dto.getId())
+//                .number(dto.getNumber())
+//                .amount(dto.getAmount())
+//                .currency(dto.getCurrency())
+//                .customUser(userService.findUserByAccount(dto.getId()))
+//                .isBlocked(dto.isBlocked())
+//                .build();
         accountService.updateAccount(account);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public ResponseEntity<Void> updateAccountAmount(@Valid @RequestBody AmountDTO dto) {
+
+        Account account = accountService.findAccount(dto.getId());
+        account.setAmount(dto.getAmount());
+        account.setBlocked(dto.isBlocked());
+        accountService.updateAccount(account);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     @RequestMapping(value = "/search/{pattern}", method = RequestMethod.GET)
     public List<AccountDTO> accountByPattern(@PathVariable(value = "pattern") String pattern, @RequestParam(required = false, defaultValue = "0") Integer page) {
