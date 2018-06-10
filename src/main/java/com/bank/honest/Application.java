@@ -79,7 +79,7 @@ public class Application {
                         .phone("+38011 111-11-11")
                         .password("Qwerty12345")
                         .role(UserRole.USER)
-                        .profile(null)
+                        .profile(adminProfile)
                         .build();
                 userService.createUser(user);
 
