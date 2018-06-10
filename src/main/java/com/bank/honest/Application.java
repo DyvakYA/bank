@@ -88,15 +88,19 @@ public class Application {
                         .build();
                 userService.createUser(user);
 
-                for (Currency currency : currencies) {
-                    Account account = Account.builder()
-                            .number(NumberGeberatorUtil.accountNumberGenerator())
-                            .amount(10000L)
-                            .currency(currency)
-                            .isBlocked(false)
-                            .customUser(admin)
-                            .build();
-                    accountService.createAccount(account);
+                List<CustomUser> users = userService.findAllUsers();
+
+                for(CustomUser item : users) {
+                    for (Currency currency : currencies) {
+                        Account account = Account.builder()
+                                .number(NumberGeberatorUtil.accountNumberGenerator())
+                                .amount(10000L)
+                                .currency(currency)
+                                .isBlocked(false)
+                                .customUser(item)
+                                .build();
+                        accountService.createAccount(account);
+                    }
                 }
 
                 List<Account> accounts = accountService.findAll();
@@ -115,8 +119,6 @@ public class Application {
                     log.info(wallet.toString());
                     walletService.createWallet(wallet);
                 }
-
-
             }
         };
     }
