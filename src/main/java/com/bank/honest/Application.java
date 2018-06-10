@@ -55,8 +55,8 @@ public class Application {
                 for (Currency currency : currencies) {
                     Product product = Product.builder()
                             .currency(currency)
-                            .sellCourse(100)
-                            .buyCourse(120)
+                            .sellCourse(100 * currency.getMask())
+                            .buyCourse(120 * currency.getMask())
                             .description("Currency - " + currency.toString())
                             .build();
                     productService.createProduct(product);
