@@ -33,7 +33,7 @@ public class Account {
 
     @GenericGenerator(name = "accountNumberGenerator", strategy = "model.entity.generator.AccountNumberGenerator")
     @GeneratedValue(generator = "accountNumberGenerator")
-    @Column(name="user_account_number")
+    @Column(name="user_account_number", nullable = false)
     private String number;
 
     @Column(name="user_account_amount", nullable = true)

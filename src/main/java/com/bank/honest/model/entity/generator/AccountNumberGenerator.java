@@ -1,6 +1,7 @@
 package com.bank.honest.model.entity.generator;
 
 import com.bank.honest.model.service.AccountService;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
@@ -12,6 +13,7 @@ import java.util.Random;
 /**
  * Created by User on 6/10/2018.
  */
+@Slf4j
 public class AccountNumberGenerator implements IdentifierGenerator {
 
     @Autowired
@@ -24,7 +26,7 @@ public class AccountNumberGenerator implements IdentifierGenerator {
     public Serializable generate(SharedSessionContractImplementor s, Object o)
             throws HibernateException {
 
-        System.out.println("Generator started");
+        log.info("Generator started");
 
         String number = String.format("%05d", r.nextLong());
         while (accountService.existByNumber(number))

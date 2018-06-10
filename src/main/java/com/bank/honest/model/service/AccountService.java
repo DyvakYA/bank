@@ -51,7 +51,6 @@ public class AccountService {
 
     @Transactional
     public void createAccount(Account account) {
-        System.out.println(account.getWallets());
         accountRepository.save(account);
     }
 

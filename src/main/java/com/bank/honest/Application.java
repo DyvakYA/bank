@@ -14,7 +14,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -77,7 +76,6 @@ public class Application {
 
                 for (Currency currency : currencies) {
                     Account account = Account.builder()
-                            .number("000001" + Arrays.asList(currencies).indexOf(currency))
                             .amount(10000L)
                             .currency(currency)
                             .isBlocked(false)
