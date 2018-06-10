@@ -4,6 +4,7 @@ import com.bank.honest.model.entity.*;
 import com.bank.honest.model.entity.enums.Currency;
 import com.bank.honest.model.entity.enums.UserRole;
 import com.bank.honest.model.entity.enums.WalletStatus;
+import com.bank.honest.model.entity.generator.NumberGeberatorUtil;
 import com.bank.honest.model.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -76,6 +77,7 @@ public class Application {
 
                 for (Currency currency : currencies) {
                     Account account = Account.builder()
+                            .number(NumberGeberatorUtil.accountNumberGenerator())
                             .amount(10000L)
                             .currency(currency)
                             .isBlocked(false)
@@ -88,8 +90,8 @@ public class Application {
                 log.info(accounts.toString());
                 for (Account account : accounts) {
                     Wallet wallet = Wallet.builder()
-                            .name("Wallet" + account.getNumber())
-                            .number(account.getNumber() + accounts.indexOf(account))
+                            .name(userService.findUserByAccount(account.getId()).getProfile().getEmail() + "_" + account.getNumber())
+                            .number(NumberGeberatorUtil.cardNumberGenerator())
                             .expired("2100")
                             .status(WalletStatus.TRUE)
                             .limit(100000L)
@@ -97,7 +99,7 @@ public class Application {
                             .smsInform(true)
                             .account(account)
                             .build();
-                    System.out.println(wallet);
+                    log.info(wallet.toString());
                     walletService.createWallet(wallet);
                 }
 

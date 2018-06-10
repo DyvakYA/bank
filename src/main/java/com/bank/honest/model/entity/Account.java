@@ -4,7 +4,6 @@ import com.bank.honest.model.dto.AccountDTO;
 import com.bank.honest.model.entity.enums.Currency;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,15 +14,16 @@ import java.util.List;
  */
 
 @Entity
-@Table(name="user_account")
+@Table(name = "user_account")
 @Builder
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Setter
 @Getter
 @EqualsAndHashCode
-@ToString(exclude={"id", "transactions","wallets"})
+@ToString(exclude = {"id", "transactions", "wallets"})
 @JsonIgnoreProperties({"transactions", "wallets", "customUser"})
+
 public class Account {
 
     @Id
@@ -31,28 +31,26 @@ public class Account {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @GenericGenerator(name = "accountNumberGenerator", strategy = "model.entity.generator.AccountNumberGenerator")
-    @GeneratedValue(generator = "accountNumberGenerator")
-    @Column(name="user_account_number", nullable = false)
+    @Column(name = "user_account_number", nullable = false, unique = true)
     private String number;
 
-    @Column(name="user_account_amount", nullable = true)
+    @Column(name = "user_account_amount", nullable = true)
     private Long amount;
 
-    @Column(name="user_account_currency", nullable = false)
+    @Column(name = "user_account_currency", nullable = false)
     private Currency currency;
 
     @Column(name = "account_is_blocked")
     private boolean isBlocked;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private CustomUser customUser;
 
-    @OneToMany(mappedBy="account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Transaction> transactions = new ArrayList<>();
 
-    @OneToMany( mappedBy="account", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.ALL})
     private List<Wallet> wallets = new ArrayList<>();
 
     public AccountDTO toDTO() {

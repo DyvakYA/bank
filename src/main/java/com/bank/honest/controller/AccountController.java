@@ -2,6 +2,7 @@ package com.bank.honest.controller;
 
 import com.bank.honest.model.dto.AccountDTO;
 import com.bank.honest.model.entity.Account;
+import com.bank.honest.model.entity.generator.NumberGeberatorUtil;
 import com.bank.honest.model.service.AccountService;
 import com.bank.honest.model.service.UserService;
 import com.bank.honest.model.service.WalletService;
@@ -50,7 +51,7 @@ public class AccountController {
     public ResponseEntity<Void> create(@Valid @RequestBody AccountDTO dto) {
 
         Account account = Account.builder()
-                .number(dto.getNumber())
+                .number(NumberGeberatorUtil.accountNumberGenerator())
                 .amount(dto.getAmount())
                 .currency(dto.getCurrency())
                 .customUser(dto.getCustomUser())

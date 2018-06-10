@@ -33,5 +33,6 @@ public class AccountNumberGenerator implements IdentifierGenerator {
             number = String.format("%05d", r.nextLong());
         return number;
     }
+
 }
 
