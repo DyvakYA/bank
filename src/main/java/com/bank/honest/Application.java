@@ -76,7 +76,7 @@ public class Application {
                 userService.createUser(admin);
 
                 CustomUser user = CustomUser.builder()
-                        .phone("+38099 999-99-99")
+                        .phone("+38011 111-11-11")
                         .password("Qwerty12345")
                         .role(UserRole.USER)
                         .profile(null)
