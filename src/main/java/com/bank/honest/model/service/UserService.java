@@ -129,7 +129,6 @@ public class UserService {
 
         Account accountUAH = Account.builder()
                 .customUser(user)
-                .number(user.getPhone() + "1")
                 .amount(0L)
                 .currency(Currency.UAH)
                 .isBlocked(false)
@@ -138,7 +137,6 @@ public class UserService {
 
         Account accountUSD = Account.builder()
                 .customUser(user)
-                .number(user.getPhone() + "2")
                 .amount(0L)
                 .currency(Currency.USD)
                 .isBlocked(false)

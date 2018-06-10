@@ -104,6 +104,10 @@ public class AccountService {
         return accountRepository.findAccountByNumber(number);
     }
 
+    public boolean existByNumber(String number) {
+        return accountRepository.existsByAccountNumber(number);
+    }
+
 //    @Transactional(readOnly = true)
 //    public long countByUser(User user) {
 //        return accountRepository.countByUser(user);

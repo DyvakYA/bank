@@ -30,6 +30,8 @@ public class Account {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @SequenceGenerator(name = "hibernateSeq", sequenceName = "HIBERNATE_SEQUENCE")
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "hibernateSeq")
     @Column(name="user_account_number", nullable = false)
     private String number;
 
