@@ -103,9 +103,9 @@ public class Application {
                 log.info(accounts.toString());
                 for (Account account : accounts) {
                     Wallet wallet = Wallet.builder()
-                            .name(userService.findUserByAccount(account.getId()).getProfile().getEmail() + "_" + account.getNumber())
+                            .name(userService.findUserByAccount(account.getId()).getId() + "_" + account.getNumber())
                             .number(NumberGeberatorUtil.cardNumberGenerator())
-                            .expired("2100")
+                            .expired("21/12")
                             .status(WalletStatus.TRUE)
                             .limit(100000L)
                             .isBlocked(false)
