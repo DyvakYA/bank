@@ -107,7 +107,7 @@ public class Application {
                 log.info(accounts.toString());
                 for (Account account : accounts) {
                     Wallet wallet = Wallet.builder()
-                            .name(userService.findUserByAccount(account.getId()).getId() + "_" + account.getNumber())
+                            .name(account.getNumber() + userService.findUserByAccount(account.getId()).getId())
                             .number(NumberGeberatorUtil.cardNumberGenerator())
                             .expired("21/12")
                             .status(WalletStatus.TRUE)
