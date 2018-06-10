@@ -31,7 +31,7 @@ public class Account {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @GenericGenerator(name = "accountNumberGenerator", strategy = "com.bank.honest.model.entity.generator.AccountNumberGenerator")
+    @GenericGenerator(name = "accountNumberGenerator", strategy = "model.entity.generator.AccountNumberGenerator")
     @GeneratedValue(generator = "accountNumberGenerator")
     @Column(name="user_account_number")
     private String number;
