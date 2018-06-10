@@ -10,6 +10,7 @@ import com.bank.honest.model.entity.CustomUser;
 import com.bank.honest.model.entity.Profile;
 import com.bank.honest.model.entity.enums.Currency;
 import com.bank.honest.model.entity.enums.UserRole;
+import com.bank.honest.model.entity.generator.NumberGeberatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -128,6 +129,7 @@ public class UserService {
         userRepository.save(user);
 
         Account accountUAH = Account.builder()
+                .number(NumberGeberatorUtil.accountNumberGenerator())
                 .customUser(user)
                 .amount(0L)
                 .currency(Currency.UAH)
@@ -136,6 +138,7 @@ public class UserService {
         accountRepository.save(accountUAH);
 
         Account accountUSD = Account.builder()
+                .number(NumberGeberatorUtil.accountNumberGenerator())
                 .customUser(user)
                 .amount(0L)
                 .currency(Currency.USD)

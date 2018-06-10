@@ -33,7 +33,7 @@ public class Account {
     @Column(name = "user_account_number", nullable = false)
     private String number;
 
-    @Column(name = "user_account_amount", nullable = true)
+    @Column(name = "user_account_amount")
     private Long amount;
 
     @Column(name = "user_account_currency", nullable = false)
