@@ -24,6 +24,8 @@ public class AccountNumberGenerator implements IdentifierGenerator {
     public Serializable generate(SharedSessionContractImplementor s, Object o)
             throws HibernateException {
 
+        System.out.println("Generator started");
+
         String number = String.format("%05d", r.nextLong());
         while (accountService.existByNumber(number))
             number = String.format("%05d", r.nextLong());
