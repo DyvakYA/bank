@@ -3,7 +3,6 @@ package com.bank.honest.controller;
 import com.bank.honest.model.dto.WalletDTO;
 import com.bank.honest.model.entity.Account;
 import com.bank.honest.model.entity.Wallet;
-import com.bank.honest.model.entity.generator.NumberGeberatorUtil;
 import com.bank.honest.model.service.AccountService;
 import com.bank.honest.model.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +61,7 @@ public class WalletController {
         Account account = accountService.findAccount(id);
         Wallet wallet = Wallet.builder()
                 .name(dto.getName())
-                .number(NumberGeberatorUtil.cardNumberGenerator())
+                .number(dto.getNumber())
                 .account(account)
                 .expired(dto.getExpiration())
                 .build();
