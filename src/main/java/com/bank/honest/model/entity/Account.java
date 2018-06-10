@@ -23,7 +23,6 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString(exclude = {"id", "transactions", "wallets"})
 @JsonIgnoreProperties({"transactions", "wallets", "customUser"})
-
 public class Account {
 
     @Id
@@ -31,7 +30,7 @@ public class Account {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "user_account_number", nullable = false, unique = true)
+    @Column(name = "user_account_number", nullable = false)
     private String number;
 
     @Column(name = "user_account_amount", nullable = true)

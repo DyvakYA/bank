@@ -43,9 +43,7 @@ public class TokenController {
         if (!userService.findByPhone(authenticateDTO.getPhone()).getPassword().equals(authenticateDTO.getPassword())){
             throw new WrongPasswordException("Wrong password");
         } else{
-            System.out.println(SecurityContextHolder.getContext().getAuthentication());
             SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
-            System.out.println(SecurityContextHolder.getContext().getAuthentication());
             CustomUser user = userService.findUserByPhone(authenticateDTO.getPhone());
             JWTUser jwtUser = JWTUser.builder()
                     .id(user.getId())
