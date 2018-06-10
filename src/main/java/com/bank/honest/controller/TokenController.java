@@ -39,7 +39,7 @@ public class TokenController {
         if (!userService.existByPhone(authenticateDTO.getPhone())) {
             throw new UserNotFoundException("User not found");
         }
-        if (userService.findByPhone(authenticateDTO.getPhone()).getPassword().equals(authenticateDTO.getPassword())){
+        if (!userService.findByPhone(authenticateDTO.getPhone()).getPassword().equals(authenticateDTO.getPassword())){
             throw new WrongPasswordException("Wrong password");
         } else{
             CustomUser user = userService.findUserByPhone(authenticateDTO.getPhone());

@@ -43,6 +43,16 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(value = NotEnoughMoneyException.class)
+    public final ResponseEntity<ErrorDetails> handleNotEnoughMoneyException(NotEnoughMoneyException ex, WebRequest request) {
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .timestamp(new Date())
+                .message(ex.getMessage())
+                .details(request.getDescription(false))
+                .build();
+        return new ResponseEntity<>(errorDetails, HttpStatus.GONE);
+    }
+
     @ExceptionHandler(value = UserAlreadyExistException.class)
     public final ResponseEntity<ErrorDetails> handleUserAlreadyExistException(UserAlreadyExistException ex, WebRequest request) {
         ErrorDetails errorDetails = ErrorDetails.builder()
@@ -81,16 +91,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 .details(request.getDescription(false))
                 .build();
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(value = NotEnoughMoneyException.class)
-    public final ResponseEntity<ErrorDetails> handleNotEnoughMoneyException(NotEnoughMoneyException ex, WebRequest request) {
-        ErrorDetails errorDetails = ErrorDetails.builder()
-                .timestamp(new Date())
-                .message(ex.getMessage())
-                .details(request.getDescription(false))
-                .build();
-        return new ResponseEntity<>(errorDetails, HttpStatus.GONE);
     }
 
     @ExceptionHandler(value = WrongPasswordException.class)
