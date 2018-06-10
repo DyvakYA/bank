@@ -33,7 +33,7 @@ public class Account {
 
     @GenericGenerator(name = "accountNumberGenerator", strategy = "com.bank.honest.model.entity.generator.AccountNumberGenerator")
     @GeneratedValue(generator = "accountNumberGenerator")
-    @Column(name="user_account_number", nullable = false)
+    @Column(name="user_account_number")
     private String number;
 
     @Column(name="user_account_amount", nullable = true)
