@@ -94,6 +94,7 @@ public class AccountController {
         Account account = accountService.findAccount(dto.getId());
         account.setAmount(dto.getAmount());
         account.setBlocked(dto.isBlocked());
+        System.out.println(account);
         accountService.updateAccount(account);
 
         return new ResponseEntity<>(HttpStatus.OK);

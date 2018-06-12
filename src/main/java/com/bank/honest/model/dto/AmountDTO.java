@@ -14,5 +14,5 @@ public class AmountDTO {
 
     private Long id;
     private Long amount;
-    private boolean blocked;
+    private boolean isBlocked;
 }
