@@ -56,12 +56,11 @@ public class AccountService {
 
     @Transactional
     public void updateAccount(Account account) {
-        System.out.println(account.isBlocked());
         if (account.isBlocked()) {
             List<Wallet> wallets = walletRepository.findWalletsByAccountId(account.getId());
-            System.out.println(wallets);
             for (Wallet wallet : wallets) {
                 wallet.setBlocked(true);
+                System.out.println(wallet);
                 walletRepository.save(wallet);
             }
         }

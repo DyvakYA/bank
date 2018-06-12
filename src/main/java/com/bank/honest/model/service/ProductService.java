@@ -26,7 +26,7 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<ProductDTO> findAll(Pageable pageable) {
         List<Product> products = productRepository.findAll(pageable).getContent();
         List<ProductDTO> result = new ArrayList<>();

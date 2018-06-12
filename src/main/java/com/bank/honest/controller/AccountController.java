@@ -90,11 +90,9 @@ public class AccountController {
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResponseEntity<Void> updateAccountAmount(@Valid @RequestBody AmountDTO dto) {
-        System.out.println(dto);
         Account account = accountService.findAccount(dto.getId());
         account.setAmount(dto.getAmount());
         account.setBlocked(dto.isBlocked());
-        System.out.println(account);
         accountService.updateAccount(account);
         return new ResponseEntity<>(HttpStatus.OK);
     }
