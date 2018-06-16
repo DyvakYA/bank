@@ -30,7 +30,7 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id", nullable = false)
-    private long id;
+    private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")

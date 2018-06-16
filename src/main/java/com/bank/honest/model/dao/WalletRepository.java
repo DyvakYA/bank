@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * Created by User on 2/18/2018.
  */
-@Repository
 public interface WalletRepository extends JpaRepository<Wallet, Long> {
 
     //    @Query("SELECT w FROM Wallet w INNER JOIN Account a ON a.id=w.account_id WHERE a.number=:number")

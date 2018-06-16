@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * Created by User on 2/21/2018.
  */
-@Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
     @Query("SELECT t FROM Transaction t where t.date = :date")

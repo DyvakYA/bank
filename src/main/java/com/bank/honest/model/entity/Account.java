@@ -21,7 +21,7 @@ import java.util.List;
 @Setter
 @Getter
 @EqualsAndHashCode
-@ToString(exclude = {"id", "transactions", "wallets"})
+@ToString(exclude = {"id", "transactions", "wallets", "customUser"})
 @JsonIgnoreProperties({"transactions", "wallets", "customUser"})
 public class Account {
 
@@ -49,7 +49,7 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Transaction> transactions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "account", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Wallet> wallets = new ArrayList<>();
 
     public AccountDTO toDTO() {
@@ -59,6 +59,7 @@ public class Account {
                 .amount(amount)
                 .currency(currency)
                 .customUser(customUser)
+                .isBlocked(isBlocked)
                 .build();
     }
 

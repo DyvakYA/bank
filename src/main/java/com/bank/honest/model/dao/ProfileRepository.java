@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * Created by User on 2/10/2018.
  */
-@Repository
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
     @Query("SELECT p FROM Profile p JOIN CustomUser c ON p.id=c.profile WHERE c.phone = :phone")

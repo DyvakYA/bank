@@ -18,14 +18,14 @@ import javax.persistence.*;
 @Setter
 @Getter
 @EqualsAndHashCode
-@ToString(exclude = "id")
+@ToString(exclude = {"id","account"})
 @JsonIgnoreProperties({"account"})
 public class Wallet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id", nullable = false)
-    private long id;
+    private Long id;
 
     @Column(name = "wallet_name", nullable = false)
     private String name;
@@ -57,6 +57,7 @@ public class Wallet {
                 .id(id)
                 .name(name)
                 .number(number)
+                .isBlocked(isBlocked)
                 .expiration(expired)
                 .build();
     }

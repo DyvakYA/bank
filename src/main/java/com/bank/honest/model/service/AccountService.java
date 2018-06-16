@@ -54,17 +54,17 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    @Transactional
+    @Transactional()
     public void updateAccount(Account account) {
         if (account.isBlocked()) {
             List<Wallet> wallets = walletRepository.findWalletsByAccountId(account.getId());
             for (Wallet wallet : wallets) {
                 wallet.setBlocked(true);
-                System.out.println(wallet);
-                walletRepository.save(wallet);
+                walletRepository.saveAndFlush(wallet);
             }
+            account.setWallets(wallets);
+            accountRepository.save(account);
         }
-        accountRepository.save(account);
     }
 
     @Transactional(readOnly = true)

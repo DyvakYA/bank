@@ -1,7 +1,7 @@
 package com.bank.honest.model.dto;
 
-import com.bank.honest.model.entity.enums.Currency;
 import com.bank.honest.model.entity.CustomUser;
+import com.bank.honest.model.entity.enums.Currency;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

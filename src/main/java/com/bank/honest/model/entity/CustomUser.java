@@ -29,7 +29,7 @@ public class CustomUser {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id", nullable = false)
-    private long id;
+    private Long id;
 
     @Column(name="user_phone", nullable = false)
     @NotNull(message = "Not null")

@@ -24,7 +24,7 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name="user_email")
     @Email

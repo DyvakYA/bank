@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 //    @Query("SELECT c FROM Account c WHERE c.user = :user")
 //    List<Account> findByUser(@Param("user") CustomUser customUser, Pageable pageable);

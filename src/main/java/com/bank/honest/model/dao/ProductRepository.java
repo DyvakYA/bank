@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 /**
  * Created by User on 2/11/2018.
  */
-@Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("SELECT CASE WHEN COUNT(u) > 0 THEN true ELSE false END FROM Product u WHERE u.currency = :currency")

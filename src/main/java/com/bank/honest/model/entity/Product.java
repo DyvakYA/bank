@@ -24,7 +24,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id", nullable = false)
-    private long id;
+    private Long id;
 
     @Column(name="product_name", nullable = false)
     private Currency currency;
