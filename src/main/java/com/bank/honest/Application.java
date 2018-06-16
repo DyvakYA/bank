@@ -18,8 +18,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import java.util.List;
 import java.util.TimeZone;
 
-@SpringBootApplication
 @Slf4j
+@SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {

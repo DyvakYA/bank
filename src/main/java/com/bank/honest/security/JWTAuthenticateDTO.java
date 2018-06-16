@@ -1,4 +1,4 @@
-package com.bank.honest.model.dto;
+package com.bank.honest.security;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @Builder
 @ToString
-public class AuthenticateDTO {
+public class JWTAuthenticateDTO {
 
     private String phone;
     private String password;
