@@ -18,7 +18,7 @@ public class JWTValidator {
 
 
     public JWTUser validate(String token) {
-
+        System.out.println(token);
         JWTUser jwtUser = null;
         try {
             Claims body = Jwts.parser()
@@ -31,6 +31,7 @@ public class JWTValidator {
                     .id(Long.parseLong((String) body.get("userId")))
                     .role(UserRole.valueOf((String) body.get("role")))
                     .build();
+            System.out.println(jwtUser);
 
         } catch (Exception cause) {
             throw new TokenNotPassValidationException("Token not pass validation", cause);
