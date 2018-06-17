@@ -99,10 +99,15 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public UserDTO findUser(Long userId) {
+    public UserDTO findUserDto(Long userId) {
         CustomUser user = userRepository.findOne(userId);
         UserDTO result = user.toDTO();
         return result;
+    }
+
+    @Transactional(readOnly = true)
+    public CustomUser findUser(Long userId) {
+        return userRepository.findOne(userId);
     }
 
     @Transactional(readOnly = true)

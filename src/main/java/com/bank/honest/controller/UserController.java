@@ -49,7 +49,7 @@ public class UserController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public UserDTO user(@PathVariable(value = "id") Long userId) {
-        UserDTO result = userService.findUser(userId);
+        UserDTO result = userService.findUserDto(userId);
         return result;
     }
 

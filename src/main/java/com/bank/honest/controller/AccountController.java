@@ -3,6 +3,7 @@ package com.bank.honest.controller;
 import com.bank.honest.model.dto.AccountDTO;
 import com.bank.honest.model.dto.AmountDTO;
 import com.bank.honest.model.entity.Account;
+import com.bank.honest.model.entity.CustomUser;
 import com.bank.honest.model.entity.generator.NumberGeberatorUtil;
 import com.bank.honest.model.service.AccountService;
 import com.bank.honest.model.service.UserService;
@@ -86,6 +87,23 @@ public class AccountController {
         accountService.updateAccount(account);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "user/{id}", method = RequestMethod.POST)
+    public ResponseEntity<Void> createWalletForAccount(@PathVariable(value = "id") Long id, @Valid @RequestBody AccountDTO dto) {
+
+        CustomUser user = userService.findUser(id);
+        Account account = Account.builder()
+                .number(dto.getNumber())
+                .amount(dto.getAmount())
+                .currency(dto.getCurrency())
+                .customUser(user)
+                .isBlocked(false)
+                .build();
+        accountService.createAccount(account);
+        user.getAccounts().add(account);
+        userService.createUser(user);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
