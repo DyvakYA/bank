@@ -1,6 +1,7 @@
 package com.bank.honest.security;
 
 import com.bank.honest.exception.TokenIsIncorrectException;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
@@ -15,6 +16,7 @@ import java.util.List;
 /**
  * Created by User on 3/19/2018.
  */
+@Log4j
 @Component
 public class JWTAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
@@ -36,8 +38,10 @@ public class JWTAuthenticationProvider extends AbstractUserDetailsAuthentication
         JWTAuthenticationToken jwtAuthenticationToken = (JWTAuthenticationToken) usernamePasswordAuthenticationToken;
 
         String token = jwtAuthenticationToken.getToken();
-
+        log.debug(token);
         JWTUser jwtUser = validator.validate(token);
+        log.debug(jwtUser);
+
         if (jwtUser == null) {
             throw new TokenIsIncorrectException("JWT Token is incorrect");
         }
