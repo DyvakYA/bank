@@ -30,7 +30,7 @@ public class JWTAuthenticationTokenFilter extends AbstractAuthenticationProcessi
                                                 HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
 
-        String header = request.getHeader("Authorization");
+        String header = request.getHeader("X-Authorization");
         System.out.println("**************************************************");
         System.out.println("Header: " + header);
 
