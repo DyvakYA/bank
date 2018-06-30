@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
 
 /**
  * Created by User on 3/18/2018.
@@ -30,14 +31,14 @@ public class JWTAuthenticationTokenFilter extends AbstractAuthenticationProcessi
                                                 HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
 
-        System.out.println(request.getHeaderNames().toString());
-
-        while (request.getHeaderNames().hasMoreElements()) {
-
-            System.out.println(request.getHeaders(request.getHeaderNames().nextElement()));
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String headerName = headerNames.nextElement();
+            System.out.print("Header Name: <em>" + headerName);
+            String headerValue = request.getHeader(headerName);
+            System.out.print("</em>, Header Value: <em>" + headerValue);
+            System.out.println("</em><br/>");
         }
-
-        System.out.println(request.toString());
 
 
         String header = request.getHeader("authorization");
