@@ -30,8 +30,8 @@ public class JWTAuthenticationTokenFilter extends AbstractAuthenticationProcessi
                                                 HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
 
-        System.out.println(request.getHeaderNames());
-        System.out.println(request.getAttributeNames());
+        System.out.println(request.getHeaderNames().toString());
+        System.out.println(request.getAttributeNames().toString());
         System.out.println(request.toString());
 
 
