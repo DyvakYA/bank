@@ -38,8 +38,7 @@ public class Application {
                         .allowedOrigins("*")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("Content-Type", "content-type", "x-requested-with", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "authorization", "x-app-id", "Origin","Accept", "X-Requested-With", "Access-Control-Request-Method", "Access-Control-Request-Headers")
-                        .allowCredentials(true)
-                        .exposedHeaders("authorization");
+                        .allowCredentials(true);
             }
         };
     }

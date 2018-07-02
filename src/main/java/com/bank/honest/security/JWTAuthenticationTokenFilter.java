@@ -34,10 +34,10 @@ public class JWTAuthenticationTokenFilter extends AbstractAuthenticationProcessi
         Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String headerName = headerNames.nextElement();
-            System.out.print("Header Name:" + headerName);
+            System.out.print("Header Name:" + headerName + " ");
             String headerValue = request.getHeader(headerName);
             System.out.println("Header Value:" + headerValue);
-            System.out.println("*****");
+
         }
 
 
