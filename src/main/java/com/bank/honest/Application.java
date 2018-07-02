@@ -37,6 +37,7 @@ public class Application {
                 registry.addMapping("/**")
                         .allowedOrigins("*")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("authorization")
                         .exposedHeaders("authorization");
             }
         };
