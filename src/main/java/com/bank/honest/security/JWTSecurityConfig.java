@@ -28,12 +28,12 @@ public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
     JWTAuthenticationEntryPoint entryPoint;
 
     @Bean
-    public AuthenticationManager authenticationManager(){
+    public AuthenticationManager authenticationManager() {
         return new ProviderManager(Collections.singletonList(authenticationProvider));
     }
 
     @Bean
-    public JWTAuthenticationTokenFilter authenticationFilter(){
+    public JWTAuthenticationTokenFilter authenticationFilter() {
         JWTAuthenticationTokenFilter filter = new JWTAuthenticationTokenFilter();
         filter.setAuthenticationManager(authenticationManager());
         filter.setAuthenticationSuccessHandler(new JWTSuccessHandler());
@@ -49,69 +49,25 @@ public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "*/users/*").authenticated()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-//                .antMatchers("/*").hasAnyRole("USER", "ADMIN")
-//                .antMatchers("/users/*").hasRole("ADMIN")
-//                .antMatchers("/register").permitAll()
-//                .anyRequest().authenticated()
-
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(entryPoint)
+
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
                 .and()
-                .logout()
-                .permitAll()
+                .logout().permitAll()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout")
                 .invalidateHttpSession(true);
 
 
-                //We filter the api/login requests
-                http.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-                http.headers().cacheControl();
-//
-//
-//
-//
-//                        new JWTLoginFilter("/login", authenticationManager()),
-//                        UsernamePasswordAuthenticationFilter.class)
-//
-//                //Add filter other requests to check the presence of JWT in header
-//                .addFilterBefore(new JWTAuthenticationTokenFilter(),
-//                        UsernamePasswordAuthenticationFilter.class);
+        //We filter the api/login requests
+        http.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.headers().cacheControl();
+
+
     }
 
-
-//
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf()
-//                    .disable()
-//                .authorizeRequests()
-//                .antMatchers("/")
-//                    .hasAnyRole("USER", "ADMIN")
-//                .antMatchers("/admin/*")
-//                    .hasRole("ADMIN")
-//                .antMatchers("/register")
-//                    .permitAll()
-//                .and()
-//        .exceptionHandling()
-//                .accessDeniedPage("/unauthorized")
-//                .and()
-//        .formLogin()
-//                .loginPage("/login")
-//                .loginProcessingUrl("/j_spring_security_check")
-//                .failureUrl("/login?error")
-//                .usernameParameter("j_login")
-//                .passwordParameter("j_password")
-//                .permitAll()
-//                .and()
-//        .logout()
-//                .permitAll()
-//                .logoutUrl("/logout")
-//                .logoutSuccessUrl("/login?logout")
-//                .invalidateHttpSession(true);
-//    }
 }
