@@ -42,7 +42,8 @@ public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests()
+        http.cors().and()
+                .csrf().disable().authorizeRequests()
                 .antMatchers("/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
 //                .antMatchers(HttpMethod.POST, "*/users/*").hasRole("ADMIN")
