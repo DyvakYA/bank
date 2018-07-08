@@ -45,8 +45,8 @@ public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
-                .antMatchers(HttpMethod.POST, "*/users/*").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "*/users/*").authenticated()
+//                .antMatchers(HttpMethod.POST, "*/users/*").hasRole("ADMIN")
+//                .antMatchers(HttpMethod.GET, "*/users/*").authenticated()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                 .and()

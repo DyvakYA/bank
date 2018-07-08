@@ -41,7 +41,7 @@ public class JWTAuthenticationTokenFilter extends AbstractAuthenticationProcessi
         }
 
 
-        String header = request.getHeader("Authorization");
+        String header = request.getHeader("authorization");
         System.out.println("**************************************************");
         System.out.println("Header: " + header);
 
