@@ -40,7 +40,7 @@ public class UserService {
     }
 
     @Transactional
-    public boolean existByPhone(String phone) {
+    public boolean existByPhoneNumber(String phone) {
         return userRepository.existsByPhone(phone);
     }
 

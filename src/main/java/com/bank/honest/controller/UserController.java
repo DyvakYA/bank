@@ -1,7 +1,5 @@
 package com.bank.honest.controller;
 
-import com.bank.honest.exception.UserAlreadyExistException;
-import com.bank.honest.model.dto.PhoneNumberCheckDTO;
 import com.bank.honest.model.dto.UserDTO;
 import com.bank.honest.model.entity.CustomUser;
 import com.bank.honest.model.entity.enums.UserRole;
@@ -37,14 +35,6 @@ public class UserController {
         if (page < 0) page = 0;
         List<UserDTO> users = userService.findAll(new PageRequest(page, ITEMS_PER_PAGE, Sort.Direction.DESC, "id"));
         return users;
-    }
-
-    @RequestMapping(value = "/check", method = RequestMethod.POST)
-    public ResponseEntity<Void> numberCheck(@Valid @RequestBody PhoneNumberCheckDTO dto) {
-        if (userService.existByPhone(dto.getPhone())) {
-            throw new UserAlreadyExistException("User with this phone number already exist");
-        }
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

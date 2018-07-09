@@ -60,7 +60,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 .message(ex.getMessage())
                 .details(request.getDescription(false))
                 .build();
-        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorDetails, HttpStatus.LOCKED);
     }
 
     @ExceptionHandler(value = TokenIsMissingException.class)
@@ -101,5 +101,15 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 .details(request.getDescription(false))
                 .build();
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = WalletNumberAlreadyExist.class)
+    public final ResponseEntity<ErrorDetails> walletNumberAlreadyExistException(WalletNumberAlreadyExist ex, WebRequest request) {
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .timestamp(new Date())
+                .message(ex.getMessage())
+                .details(request.getDescription(false))
+                .build();
+        return new ResponseEntity<>(errorDetails, HttpStatus.LOCKED);
     }
 }

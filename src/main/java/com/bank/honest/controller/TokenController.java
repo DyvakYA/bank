@@ -31,7 +31,7 @@ public class TokenController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String generate(@RequestBody JWTAuthenticateDTO authenticateDTO) {
-        if (!userService.existByPhone(authenticateDTO.getPhone())) {
+        if (!userService.existByPhoneNumber(authenticateDTO.getPhone())) {
             throw new UserNotFoundException("User not found");
         }
         if (!userService.findByPhone(authenticateDTO.getPhone()).getPassword().equals(authenticateDTO.getPassword())){

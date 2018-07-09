@@ -64,4 +64,9 @@ public class WalletService {
             result.add(wallet.toDTO());
         return result;
     }
+
+    @Transactional(readOnly = true)
+    public boolean existByWalletNumber(String number) {
+        return walletRepository.existsByWalletNumber(number);
+    }
 }

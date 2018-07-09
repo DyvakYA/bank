@@ -26,4 +26,7 @@ public interface WalletRepository extends JpaRepository<Wallet, Long> {
 
     @Query("SELECT w FROM Wallet w JOIN Account a ON w.account=a.id WHERE a.id = :id")
     List<Wallet> findWalletsByAccountId(@Param("id") Long id);
+
+    @Query(value = "SELECT CASE WHEN COUNT(w) > 0 THEN 'true' ELSE 'false' END FROM Wallet w WHERE w.number = :number")
+    boolean existsByWalletNumber(@Param("number") String number);
 }

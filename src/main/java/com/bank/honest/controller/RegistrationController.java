@@ -25,7 +25,7 @@ public class RegistrationController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ResponseEntity<Void> registration(@Valid @RequestBody RegistrationDTO dto) {
 
-        if (userService.existByPhone(dto.getPhone())) {
+        if (userService.existByPhoneNumber(dto.getPhone())) {
             throw new UserAlreadyExistException("User with this phone number already exist");
         } else {
             userService.registration(dto);
