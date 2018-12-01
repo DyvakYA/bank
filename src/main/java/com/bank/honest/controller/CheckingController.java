@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/checking")
-public class ChakingController {
+public class CheckingController {
 
     @Autowired
     private UserService userService;
