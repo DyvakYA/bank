@@ -20,8 +20,9 @@
 *.rar
 
 # Packages
+.settings/
+.classpath/
 .idea/
-.gradle/
 build
 *.iml
 #*.jar

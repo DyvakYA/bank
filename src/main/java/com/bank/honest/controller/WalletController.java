@@ -55,6 +55,27 @@ public class WalletController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity<Void> update(@Valid @RequestBody WalletDTO dto) {
+
+        Wallet wallet = Wallet.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .number(dto.getNumber())
+                .expired(dto.getExpiration())
+                .isBlocked(dto.isBlocked())
+                .build();
+        walletService.createWallet(wallet);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable(value = "id[]") Long[] ids) {
+        walletService.deleteWallets(ids);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
     @RequestMapping(value = "account/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> createWalletForAccount(@PathVariable(value = "id") Long id, @Valid @RequestBody WalletDTO dto) {
 
@@ -71,25 +92,6 @@ public class WalletController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id[]}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@PathVariable(value = "id[]") Long[] ids) {
-        walletService.deleteWallets(ids);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@Valid @RequestBody WalletDTO dto) {
-
-        Wallet wallet = Wallet.builder()
-                .id(dto.getId())
-                .name(dto.getName())
-                .number(dto.getNumber())
-                .expired(dto.getExpiration())
-                .isBlocked(dto.isBlocked())
-                .build();
-        walletService.createWallet(wallet);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 
     @RequestMapping(value = "/search/{account_number}", method = RequestMethod.GET)
     public List<WalletDTO> walletByPattern(@PathVariable(value = "account_number") String account_number, @RequestParam(required = false, defaultValue = "0") Integer page) {
