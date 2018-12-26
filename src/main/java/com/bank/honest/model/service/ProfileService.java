@@ -50,12 +50,12 @@ public class ProfileService {
     @Transactional
     public void deleteProfiles(Long[] ids) {
         for (Long id : ids)
-        profileRepository.delete(id);
+            profileRepository.delete(id);
     }
 
     @Transactional(readOnly = true)
     public ProfileDTO findByPhone(String phone) {
-        Profile profile = profileRepository.findByPhone(phone);
+        Profile profile = profileRepository.findProfileByUserPhone(phone);
         return profile.toDTO();
     }
 }

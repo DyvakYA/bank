@@ -26,15 +26,20 @@ public class Profile {
     @Column(name = "id")
     private Long id;
 
-    @Column(name="user_email")
+    @Column(name = "user_phone")
     @Email
     private String email;
 
-    @Column(name="user_firstname")
+    @Column(name = "user_firstname")
     private String firstName;
 
-    @Column(name="user_lastname")
+    @Column(name = "user_lastname")
     private String lastName;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    @MapsId
+    private CustomUser customUser;
 
     public ProfileDTO toDTO() {
         return ProfileDTO.builder()

@@ -76,14 +76,14 @@ public class AccountController {
         account.setAmount(dto.getAmount());
         account.setBlocked(dto.isBlocked());
 
-//        account = Account.builder()
-//                .id(dto.getId())
-//                .number(dto.getNumber())
-//                .amount(dto.getAmount())
-//                .currency(dto.getCurrency())
-//                .customUser(userService.findUserByAccount(dto.getId()))
-//                .isBlocked(dto.isBlocked())
-//                .build();
+        account = Account.builder()
+                .id(dto.getId())
+                .number(dto.getNumber())
+                .amount(dto.getAmount())
+                .currency(dto.getCurrency())
+                .customUser(userService.findUserByAccount(dto.getId()))
+                .isBlocked(dto.isBlocked())
+                .build();
         accountService.updateAccount(account);
 
         return new ResponseEntity<>(HttpStatus.OK);

@@ -2,8 +2,8 @@ package com.bank.honest.model.service;
 
 import com.bank.honest.model.dao.ProductRepository;
 import com.bank.honest.model.dto.ProductDTO;
-import com.bank.honest.model.entity.enums.Currency;
 import com.bank.honest.model.entity.Product;
+import com.bank.honest.model.entity.enums.Currency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -44,7 +44,7 @@ public class ProductService {
     }
 
     public ProductDTO findProduct(String name) {
-        Product product = productRepository.findByName(Currency.valueOf(name));
+        Product product = productRepository.findProductByCurrency(Currency.valueOf(name));
         ProductDTO result = product.toDTO();
         return result;
     }

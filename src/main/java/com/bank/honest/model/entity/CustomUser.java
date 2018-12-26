@@ -7,6 +7,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.List;
 @Setter
 @Getter
 @EqualsAndHashCode
-@ToString(exclude = {"id","accounts"})
+@ToString(exclude = {"id", "accounts"})
 @JsonIgnoreProperties({"accounts"})
 public class CustomUser {
     @Id
@@ -31,29 +32,31 @@ public class CustomUser {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name="user_phone", nullable = false)
-    @NotNull(message = "Not null")
+    @Column(name = "user_phone", nullable = false)
+    @NotNull(message = "{user.phone.not_null}")
+    @NotBlank(message = "{user.phone.not_empty}")
     private String phone;
 
-    @Column(name="user_password", nullable = false)
+    @Column(name = "user_password", nullable = false)
     @NotNull(message = "not null")
-    @Size(min = 5, max = 50)
+    @Size(min = 5, max = 50, message = "{user.password.between.invalid_range}")
     private String password;
 
     @Enumerated(EnumType.STRING)
     @Valid
     private UserRole role;
 
-    @OneToMany(mappedBy="customUser", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "customUser", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Account> accounts = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_profile_id")
+    @JoinColumn(name = "user_profile_id")
     private Profile profile;
 
     @PreRemove
-    public void nullableContacts(){
-        accounts.forEach(c->c.setCustomUser(null));
+    public void nullableContacts() {
+        System.out.println("SET CUSTOM USER TO NULL");
+        accounts.forEach(c -> c.setCustomUser(null));
     }
 
     public UserDTO toDTO() {

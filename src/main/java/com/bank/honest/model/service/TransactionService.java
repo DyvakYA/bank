@@ -68,7 +68,7 @@ public class TransactionService {
     @Transactional
     public List<TransactionDTO> findTransaction(Date date) {
         List<TransactionDTO> result = new ArrayList<>();
-        List<Transaction> transactions = transactionRepository.findByDate(date);
+        List<Transaction> transactions = transactionRepository.findTransactionsByDate(date);
         for (Transaction transaction : transactions)
             result.add(transaction.toDTO());
         return result;
@@ -82,7 +82,7 @@ public class TransactionService {
 
     public List<TransactionDTO> findTransactionByPeriod(Date dateFrom, Date dateTo) {
         List<TransactionDTO> result = new ArrayList<>();
-        List<Transaction> transactions = transactionRepository.findByPeriod(dateFrom, dateTo);
+        List<Transaction> transactions = transactionRepository.findTransactionsByPeriod(dateFrom, dateTo);
         for (Transaction transaction : transactions)
             result.add(transaction.toDTO());
         return result;

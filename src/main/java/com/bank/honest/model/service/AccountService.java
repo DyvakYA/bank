@@ -79,7 +79,7 @@ public class AccountService {
     @Transactional(readOnly = true)
     public List<AccountDTO> findByPattern(String pattern, Pageable pageable) {
         List<AccountDTO> result = new ArrayList<>();
-        List<Account> accounts = accountRepository.findByPattern(pattern, pageable);
+        List<Account> accounts = accountRepository.findAccountByPattern(pattern, pageable);
         for (Account account : accounts)
             result.add(account.toDTO());
         return result;
@@ -93,7 +93,7 @@ public class AccountService {
 
     public List<AccountDTO> findByUser(Long id, Pageable pageable) {
         List<AccountDTO> result = new ArrayList<>();
-        List<Account> accounts = accountRepository.findByUser(id, pageable);
+        List<Account> accounts = accountRepository.findByCustomUser(id);
         for (Account account : accounts)
             result.add(account.toDTO());
         return result;

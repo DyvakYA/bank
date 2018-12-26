@@ -50,7 +50,7 @@ public class WalletService {
     @Transactional(readOnly = true)
     public List<WalletDTO> findWallet(String account_number, Pageable pageable) {
         List<WalletDTO> result = new ArrayList<>();
-        List<Wallet> wallets = walletRepository.findByPattern(account_number, pageable);
+        List<Wallet> wallets = walletRepository.findWalletByNumber(account_number, pageable);
         for (Wallet wallet : wallets)
             result.add(wallet.toDTO());
         return result;
@@ -60,7 +60,7 @@ public class WalletService {
     public List<WalletDTO> findWalletsByAccountId(Long id) {
         List<Wallet> wallets = walletRepository.findWalletsByAccountId(id);
         List<WalletDTO> result = new ArrayList<>();
-        for(Wallet wallet: wallets)
+        for (Wallet wallet : wallets)
             result.add(wallet.toDTO());
         return result;
     }

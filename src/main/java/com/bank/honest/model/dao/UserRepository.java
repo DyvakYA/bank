@@ -15,6 +15,6 @@ public interface UserRepository extends JpaRepository<CustomUser, Long> {
     @Query("SELECT u FROM CustomUser u where u.phone = :phone")
     CustomUser findByPhone(@Param("phone") String phone);
 
-    @Query("SELECT u FROM CustomUser u JOIN Account a ON a.customUser=u.id WHERE a.id = :id")
-    CustomUser findUserByAccount(@Param("id") Long id);
+   // @Query("SELECT u FROM CustomUser u JOIN u.accounts a ON a.customUser=u.id WHERE a.id = :id")
+    CustomUser findUserByAccounts(@Param("id") Long id);
 }

@@ -21,10 +21,10 @@ public interface WalletRepository extends JpaRepository<Wallet, Long> {
 //    ON Orders.CustomerID=Customers.CustomerID
 //    Where Customers.CustomerId = 3;
 
-    @Query("SELECT w FROM Wallet w JOIN Account a ON w.account=a.id WHERE a.number = :number")
-    List<Wallet> findByPattern(@Param("number") String number, Pageable pageable);
+   //@Query("SELECT w FROM Wallet w JOIN Account a ON w.account=a.id WHERE a.number = :number")
+    List<Wallet> findWalletByNumber(@Param("number") String number, Pageable pageable);
 
-    @Query("SELECT w FROM Wallet w JOIN Account a ON w.account=a.id WHERE a.id = :id")
+    //@Query("SELECT w FROM Wallet w JOIN w.account a ON w.account=a.id WHERE a.id = :id")
     List<Wallet> findWalletsByAccountId(@Param("id") Long id);
 
     @Query(value = "SELECT CASE WHEN COUNT(w) > 0 THEN 'true' ELSE 'false' END FROM Wallet w WHERE w.number = :number")

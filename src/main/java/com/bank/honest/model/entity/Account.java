@@ -21,7 +21,7 @@ import java.util.List;
 @Setter
 @Getter
 @EqualsAndHashCode
-@ToString(exclude = {"id", "transactions", "wallets", "customUser"})
+@ToString(exclude = {"transactions", "wallets", "customUser"})
 @JsonIgnoreProperties({"transactions", "wallets", "customUser"})
 public class Account {
 
@@ -52,6 +52,7 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Wallet> wallets = new ArrayList<>();
 
+
     public AccountDTO toDTO() {
         return AccountDTO.builder()
                 .id(id)
@@ -65,7 +66,6 @@ public class Account {
 
     public static Account fromDTO(AccountDTO dto) {
         return Account.builder()
-                .id(dto.getId())
                 .number(dto.getNumber())
                 .amount(dto.getAmount())
                 .customUser(dto.getCustomUser())
