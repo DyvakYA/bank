@@ -38,7 +38,6 @@ public class Profile {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    @MapsId
     private CustomUser customUser;
 
     public ProfileDTO toDTO() {

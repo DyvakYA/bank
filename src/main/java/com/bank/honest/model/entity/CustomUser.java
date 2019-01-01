@@ -47,7 +47,7 @@ public class CustomUser {
     private UserRole role;
 
     @OneToMany(mappedBy = "customUser", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Account> accounts = new ArrayList<>();
+    private List<Account> accounts;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_profile_id")

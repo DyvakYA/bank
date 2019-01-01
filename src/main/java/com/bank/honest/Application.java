@@ -22,13 +22,10 @@ import java.util.TimeZone;
 
 @Slf4j
 @SpringBootApplication
-@EnableJpaRepositories(
-        entityManagerFactoryRef = "entityManagerFactory",
-        basePackages = {"com.bank.honest.model.dao"})
+@EnableJpaRepositories
 public class Application {
 
     public static void main(String[] args) {
-        log.info("START SPRING BOOT APPLICATION");
         TimeZone.setDefault(TimeZone.getTimeZone("Etc/UTC"));
         SpringApplication.run(Application.class, args);
     }

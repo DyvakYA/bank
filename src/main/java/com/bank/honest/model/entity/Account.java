@@ -42,8 +42,8 @@ public class Account {
     @Column(name = "account_is_blocked")
     private boolean isBlocked;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = true)
     private CustomUser customUser;
 
     @OneToMany(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})

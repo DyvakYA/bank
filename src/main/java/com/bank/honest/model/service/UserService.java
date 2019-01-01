@@ -158,7 +158,7 @@ public class UserService {
     }
 
     public CustomUser findUserByAccount(Long id) {
-        CustomUser result = userRepository.findUserByAccounts(id);
+        CustomUser result = userRepository.findCustomUserByAccounts(id);
         return result;
     }
 

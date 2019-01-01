@@ -1,11 +1,9 @@
 package com.bank.honest.model.dao;
 
 import com.bank.honest.model.entity.CustomUser;
-import com.bank.honest.model.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 public interface UserRepository extends JpaRepository<CustomUser, Long> {
 
@@ -15,6 +13,8 @@ public interface UserRepository extends JpaRepository<CustomUser, Long> {
     @Query("SELECT u FROM CustomUser u where u.phone = :phone")
     CustomUser findByPhone(@Param("phone") String phone);
 
-   // @Query("SELECT u FROM CustomUser u JOIN u.accounts a ON a.customUser=u.id WHERE a.id = :id")
-    CustomUser findUserByAccounts(@Param("id") Long id);
+    //@Query("SELECT u FROM CustomUser u JOIN u.accounts a ON a.customUser.id=u.id WHERE a.id = :id")
+    //@Query("SELECT u FROM CustomUser u WHERE u.accounts.id = :id")
+    @Query("FROM CustomUser AS u LEFT JOIN u.accounts AS a WHERE a.id = :id")
+    CustomUser findCustomUserByAccounts(@Param("id") Long id);
 }
