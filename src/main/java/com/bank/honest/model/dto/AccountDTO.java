@@ -5,6 +5,7 @@ import com.bank.honest.model.entity.enums.Currency;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Created by User on 2/11/2018.
@@ -13,6 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@ToString
 public class AccountDTO {
 
     private Long id;

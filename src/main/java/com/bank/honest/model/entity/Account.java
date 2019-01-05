@@ -42,7 +42,7 @@ public class Account {
     @Column(name = "account_is_blocked")
     private boolean isBlocked;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne //(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = true)
     private CustomUser customUser;
 

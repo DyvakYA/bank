@@ -7,6 +7,7 @@ import com.bank.honest.model.dto.AccountDTO;
 import com.bank.honest.model.entity.Account;
 import com.bank.honest.model.entity.CustomUser;
 import com.bank.honest.model.entity.Wallet;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Service
 public class AccountService {
+
+    private static final Logger log = Logger.getLogger(AccountService.class);
 
     @Autowired
     AccountRepository accountRepository;
@@ -41,11 +45,14 @@ public class AccountService {
 
     @Transactional(readOnly = true)
     public List<AccountDTO> findAll(Pageable pageable) {
+        log.info("START ACCOUNT SERVICE GET ALL");
         List<Account> accounts = accountRepository.findAll(pageable).getContent();
+        log.info(accounts);
         List<AccountDTO> result = new ArrayList<>();
         for (Account account : accounts) {
             result.add(account.toDTO());
         }
+        log.info(result);
         return result;
     }
 
