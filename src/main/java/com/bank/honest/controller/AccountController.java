@@ -8,6 +8,7 @@ import com.bank.honest.model.entity.generator.NumberGeberatorUtil;
 import com.bank.honest.model.service.AccountService;
 import com.bank.honest.model.service.UserService;
 import com.bank.honest.model.service.WalletService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -24,6 +25,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/accounts")
 public class AccountController {
+
+    private static final Logger log = Logger.getLogger(AccountController.class);
 
     final int ITEMS_PER_PAGE = 6;
 
@@ -72,10 +75,12 @@ public class AccountController {
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody AccountDTO dto) {
 
+        log.info(dto);
         Account account = accountService.findAccount(dto.getId());
         account.setAmount(dto.getAmount());
         account.setBlocked(dto.isBlocked());
 
+        log.info(account);
         account = Account.builder()
                 .id(dto.getId())
                 .number(dto.getNumber())

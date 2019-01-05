@@ -64,6 +64,7 @@ public class AccountService {
     @Transactional()
     public void updateAccount(Account account) {
 
+        log.info("ACCOUNT SERVICE UPDATE ACCOUNT AMOUNT");
         List<Wallet> wallets = walletRepository.findWalletsByAccountId(account.getId());
         for (Wallet wallet : wallets) {
             wallet.setBlocked(account.isBlocked());
